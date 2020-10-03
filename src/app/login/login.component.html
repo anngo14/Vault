@@ -1,0 +1,29 @@
+<mat-card class='login-card' [class.mat-elevation-z3]="true">
+    <br>
+    <mat-card-header class='login-card-header'>
+        <mat-card-title id='login-card-title'>Sign in</mat-card-title>
+        <mat-card-subtitle id='login-card-subtitle'>Use your email and password</mat-card-subtitle>
+    </mat-card-header>
+    <div class='spacer'></div>
+    <mat-card-content class='login-content'>
+        <mat-form-field appearance='outline' class='login-email-input'>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email">
+        </mat-form-field><br>
+        <mat-form-field appearance='outline' class='login-pwd-input'>
+            <mat-label>Password</mat-label>
+            <input matInput type={{textAttribute}} placeholder="Password">
+            <mat-icon *ngIf='show; else notShow' matSuffix (click)='toggleShow()'>visibility</mat-icon>
+            <ng-template #notShow>
+                <mat-icon matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
+            </ng-template>
+        </mat-form-field><br>
+        <div class='button-row-1'>
+            <a href="#" class='login-link'>Create Account</a>
+            <button mat-flat-button color='primary'>Login</button>
+        </div><br>
+        <div class='button-row-2'>
+            <a href="#" class='login-link'>Forgot Password?</a>
+        </div>
+    </mat-card-content>
+</mat-card>
