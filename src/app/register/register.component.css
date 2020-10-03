@@ -1,0 +1,42 @@
+.register-card{
+    width: 25em;
+    height: 30em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.register-card-header{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.spacer{
+    height: 2em;
+}
+#register-card-title{
+    font-size: 20pt;
+}
+#register-card-subtitle{
+    font-size: 16pt;
+}
+.register-content{
+    display: flex;
+    flex-direction: column;
+}
+.button-row-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.button-row-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.register-link{
+    text-decoration: none;
+}
+a:visited{
+    color: blue;
+}
