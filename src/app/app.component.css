@@ -1,0 +1,30 @@
+.app-toolbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.toolbar-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.main-container{
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%;
+}
+.sidenav{
+    width: 15em;
+}
+.sidenav-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}
+.sidenav-buttons{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
