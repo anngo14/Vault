@@ -19,11 +19,11 @@
             </ng-template>
         </mat-form-field><br>
         <div class='button-row-1'>
-            <a href="#" class='login-link'>Create Account</a>
+            <span (click)='redirectToLogin()' class='login-link'>Create Account</span>
             <button mat-flat-button color='primary'>Login</button>
         </div><br>
         <div class='button-row-2'>
-            <a href="#" class='login-link'>Forgot Password?</a>
+            <span class='login-link'>Forgot Password?</span>
         </div>
     </mat-card-content>
 </mat-card>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   show: boolean = true;
   show2: boolean = true;
   
-  constructor() { }
+  constructor(private r: Router) { }
 
   ngOnInit() {
   }
@@ -24,5 +25,8 @@ export class RegisterComponent implements OnInit {
   toggleShow2(){
     this.show2 = !this.show2;
     this.textAttribute2 = this.show2 ? "password" : "text";
+  }
+  redirectToLogin(){
+    this.r.navigate(['/login']);
   }
 }

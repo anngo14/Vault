@@ -1,3 +1,6 @@
+#title{
+    cursor: pointer;
+}
 .app-toolbar{
     display: flex;
     flex-direction: row;

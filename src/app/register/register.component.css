@@ -35,8 +35,6 @@
     justify-content: flex-end;
 }
 .register-link{
-    text-decoration: none;
-}
-a:visited{
     color: blue;
+    cursor: pointer;
 }

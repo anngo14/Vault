@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   textAttribute: string = "password";
   show: boolean = true;
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private r: Router) { }
 
   ngOnInit() {
     //this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#202124';
@@ -17,5 +18,8 @@ export class LoginComponent implements OnInit {
   toggleShow(){
     this.show = !this.show;
     this.textAttribute = this.show ? "password" : "text";
+  }
+  redirectToLogin(){
+    this.r.navigate(['/register']);
   }
 }
