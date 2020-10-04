@@ -16,4 +16,7 @@ export class AppComponent {
   redirectToLogin(){
     this.r.navigate(['/login']);
   }
+  redirectToHome(){
+    this.r.navigate(['/home']);
+  }
 }
