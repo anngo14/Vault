@@ -35,20 +35,24 @@
     cursor: pointer;
 }
 .pwd-content-container{
+    padding: 2em;
 }
 .pwd-content{
     width: 18em;
 }
 .list-content{
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
 }
 .list-content-header{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
     justify-content: space-between;
+}
+.small-spacer{
+    width: 2em;
 }
 .list-content-primary{
     display: flex;

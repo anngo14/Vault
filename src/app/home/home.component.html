@@ -33,22 +33,24 @@
                                     <mat-label>Username</mat-label>
                                     <input type="text" matInput>
                                 </mat-form-field>
-                                <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
-                                    <mat-icon>info</mat-icon>
-                                </button>
+                                <div class='small-spacer'></div>
+                                <div class='list-content-primary'>
+                                    <mat-form-field class='pwd-content'>
+                                        <mat-label>Password</mat-label>
+                                        <input matInput readonly>
+                                        <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                        <ng-template #notShow>
+                                            <mat-icon matSuffix>visibility_off</mat-icon>
+                                        </ng-template>
+                                    </mat-form-field>
+                                    <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                        <mat-icon>content_copy</mat-icon>
+                                    </button>
+                                </div>
                             </div>
-                            <div class='list-content-primary'>
-                                <mat-form-field class='pwd-content'>
-                                    <input matInput readonly>
-                                    <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
-                                    <ng-template #notShow>
-                                        <mat-icon matSuffix>visibility_off</mat-icon>
-                                    </ng-template>
-                                </mat-form-field>
-                                <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
-                                    <mat-icon>content_copy</mat-icon>
-                                </button>
-                            </div>
+                            <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                <mat-icon>info</mat-icon>
+                            </button>
                         </div>
                     </div>
                 </div>
