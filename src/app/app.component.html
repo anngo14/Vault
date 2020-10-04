@@ -5,13 +5,23 @@
         </button>
         <span id='title'>Vault</span>
     </div>
-    <button mat-icon-button [matMenuTriggerFor]='userMenu'>
-        <mat-icon>account_circle</mat-icon>
-    </button>
+    <div class='toolbar-action-buttons'>
+        <button mat-icon-button *ngIf='badgeVisibility; else hideBadge'>
+            <mat-icon matBadge={{notifications}} matBadgeColor='warn'>notifications</mat-icon>
+        </button>
+        <ng-template #hideBadge>
+            <button mat-icon-button>
+                <mat-icon>notifications_off</mat-icon>
+            </button>
+        </ng-template>
+        <button mat-icon-button [matMenuTriggerFor]='userMenu'>
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </div>
 </mat-toolbar>
 <mat-menu #userMenu='matMenu'>
     <button mat-menu-item>Account Settings</button>
-    <button mat-menu-item>Log out</button>
+    <button mat-menu-item (click)='redirectToLogin()'>Log out</button>
 </mat-menu>
 <mat-drawer-container class='main-container'>
     <mat-drawer #drawer mode="side" class='sidenav'>
@@ -27,7 +37,6 @@
         </div>
     </mat-drawer>
     <mat-drawer-content class='container-content'>
-        <app-login></app-login>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

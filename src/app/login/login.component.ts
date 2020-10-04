@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.show = !this.show;
     this.textAttribute = this.show ? "password" : "text";
   }
-  redirectToLogin(){
+  redirectToRegister(){
     this.r.navigate(['/register']);
   }
 }

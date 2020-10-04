@@ -14,12 +14,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HomeComponent } from './home/home.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatListModule,
+    MatTooltipModule,
     BrowserAnimationsModule
   ],
   providers: [],
