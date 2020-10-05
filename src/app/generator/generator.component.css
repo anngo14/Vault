@@ -1,16 +1,15 @@
 .generator-card{
     width: 90%;
     position: absolute;
-    top: 15%;
+    margin-top: 5em;
     left: 50%;
-    transform: translate(-50%, -15%);
+    transform: translateX(-50%);
 }
 .card-header-container{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-
 .generator-header{
     display: flex;
     flex-direction: row;
