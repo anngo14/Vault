@@ -19,13 +19,18 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { GeneratorComponent } from './generator/generator.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    GeneratorComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatExpansionModule,
     MatListModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatSelectModule,
     BrowserAnimationsModule
   ],
   providers: [],

@@ -1,0 +1,78 @@
+<mat-card class='generator-card'>
+    <mat-card-header>
+        <div class='card-header-container'>
+            <div class='card-header'>
+                <mat-icon mat-card-avatar>vpn_key</mat-icon>
+            </div>
+            <div class='card-subheader'>
+                <mat-card-title>Generator</mat-card-title>
+                <mat-card-subtitle>generate a new password</mat-card-subtitle>
+            </div>
+        </div>
+    </mat-card-header>
+    <div class='generator-container'>
+        <div class='generator-header'>
+            <mat-form-field appearance='outline' id='generator-label'>
+                <mat-label>Label</mat-label>
+                <input type="text" matInput required>
+            </mat-form-field>
+            <div class='spacer'></div>
+            <mat-form-field appearance='outline' id='generator-length'>
+                <mat-label>Length</mat-label>
+                <mat-select [(value)]='length' required>
+                    <mat-option *ngFor='let l of lengths' [value]='l'>{{l}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class='spacer'></div>
+            <mat-checkbox>Alphabetical (A-Z)</mat-checkbox>
+            <div class='spacer'></div>
+            <mat-checkbox>Numerical (0-9)</mat-checkbox>
+            <div class='spacer'></div>
+            <mat-checkbox>Special Characters (!,@,#,$)</mat-checkbox>
+        </div>
+        <div class='generator-subheader'>
+            <mat-form-field appearance='outline' class='generator-pwd-label'>
+                <mat-label>Username</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <div class='spacer'></div>
+            <mat-form-field appearance='outline' class='generator-pwd-label'>
+                <mat-label>Password</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <div class='spacer'></div>
+            <button mat-flat-button color='primary' id='generate-btn'>GENERATE</button>
+        </div>
+        <div class='pwd-details'>
+            <div>
+                <span>Date Created: </span>
+                <span id='pwd-detail'>Today's Date</span>
+            </div>
+            <div class='spacer'></div>
+            <div>
+                <span>Password Strength: </span>
+                <span id='pwd-detail'>Strong</span>
+            </div>
+        </div>
+        <div class='pwd-notification-container'>
+            <button mat-icon-button matTooltip='Notifications Off' [matTooltipPosition]="'above'">
+                <mat-icon>notifications_none</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip='Notifications On' [matTooltipPosition]="'above'">
+                <mat-icon>notifications_active</mat-icon>
+            </button>
+            <div class='spacer'></div>
+            <div class='pwd-notification-interval'>
+                <span>Refresh Password Interval: </span>
+                <mat-form-field id='pwd-interval'>
+                    <mat-select [(value)]='interval'>
+                        <mat-option *ngFor='let i of intervals' [value]='i'>{{i}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class='generator-save-row'>
+            <button mat-flat-button color='accent' id='save-btn'>SAVE</button>
+        </div>
+    </div>   
+</mat-card>

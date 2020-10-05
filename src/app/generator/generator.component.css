@@ -1,0 +1,63 @@
+.generator-card{
+    width: 90%;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+}
+.card-header-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.generator-header{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+#generator-label{
+    width: 25em;
+}
+#generator-length{
+    width: 7em;
+}
+.spacer{
+    width: 1em;
+}
+.generator-subheader{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.generator-pwd-label{
+    width: 30em;
+}
+#generate-btn{
+    height: 4.9em;
+}
+.pwd-details{
+    display: flex;
+    flex-direction: row;
+}
+#pwd-detail{
+    font-weight: 600;
+}
+.pwd-notification-container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+#pwd-interval{
+    width: 7em;
+    text-align: center;
+}
+.generator-save-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+#save-btn{
+    width: 10em;
+    height: 3em;
+}

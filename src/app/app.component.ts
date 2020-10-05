@@ -19,4 +19,7 @@ export class AppComponent {
   redirectToHome(){
     this.r.navigate(['/home']);
   }
+  redirectToGenerator(){
+    this.r.navigate(['/generator']);
+  }
 }
