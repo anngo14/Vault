@@ -11,6 +11,15 @@
         </div>
     </mat-card-header>
     <div class='generator-container'>
+        <div class='generator-category'>
+            <span>Password Type: </span>
+            <mat-form-field id='pwd-type-select'>
+                <mat-label>Category</mat-label>
+                <mat-select>
+                    <mat-option *ngFor='let t of pwdTypes' [value]='t'>{{t}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <div class='generator-header'>
             <mat-form-field appearance='outline' id='generator-label'>
                 <mat-label>Label</mat-label>
@@ -29,6 +38,12 @@
             <mat-checkbox>Numerical (0-9)</mat-checkbox>
             <div class='spacer'></div>
             <mat-checkbox>Special Characters (!,@,#,$)</mat-checkbox>
+        </div>
+        <div>
+            <mat-form-field appearance='outline' id='website-input'>
+                <mat-label>Website</mat-label>
+                <input type="text" matInput>
+            </mat-form-field>
         </div>
         <div class='generator-subheader'>
             <mat-form-field appearance='outline' class='generator-pwd-label'>

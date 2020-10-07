@@ -10,7 +10,8 @@ export class GeneratorComponent implements OnInit {
   length: number;
   lengths: number[] = [];
   interval: string = "";
-  intervals: string[] = ["-", "Monthly", "Yearly", "Weekly", "Daily", "Custom"];
+  intervals: string[] = ["-", "Monthly", "Yearly", "Weekly", "Daily", "Never", "Custom"];
+  pwdTypes: string[] = ["-", "Personal", "Secret", "Other"]
 
   constructor() { 
     for(let i = 0; i < 32; i++){
