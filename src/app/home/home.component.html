@@ -7,64 +7,220 @@
         <mat-icon>search</mat-icon>
     </button>
 </div>
-<div class='pwd-list-container'>
-    <div class='pwd-list'>
-        <mat-accordion >
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span>Website Title</span>
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <span>Last Updated</span>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class='pwd-container'>
-                    <div class='pwd-header'>
-                        <button mat-icon-button>
-                            <mat-icon>public</mat-icon>
-                        </button>
-                        <span id='pwd-url'>Website URL Link</span>
-                    </div>
-                    <div class='pwd-subheader'>
-                        <span>Saved Accounts</span>
-                        <div class='smaller-spacer'></div>
-                        <mat-icon>lock</mat-icon>
-                    </div>
-                    <div class='pwd-content-container'>
-                        <div class='list-content'>
-                            <div class='list-content-header'>
-                                <mat-form-field class='pwd-content'>
-                                    <mat-label>Username</mat-label>
-                                    <input type="text" matInput readonly>
-                                </mat-form-field>
-                                <div class='small-spacer'></div>
-                                <div class='list-content-primary'>
+<div class='safe-container'>
+    <div class='pwd-header'>
+        <span>Personal</span>
+        <button mat-icon-button>
+            <mat-icon>lock</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>lock_open</mat-icon>
+        </button>
+    </div>
+    <div class='pwd-list-container'>
+        <div class='pwd-list'>
+            <mat-accordion >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>Website Title</span>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <span>Last Updated</span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class='pwd-container'>
+                        <div class='pwd-header'>
+                            <button mat-icon-button>
+                                <mat-icon>public</mat-icon>
+                            </button>
+                            <span id='pwd-url'>Website URL Link</span>
+                        </div>
+                        <div class='pwd-subheader'>
+                            <span>Saved Accounts</span>
+                            <div class='smaller-spacer'></div>
+                            <mat-icon>lock</mat-icon>
+                        </div>
+                        <div class='pwd-content-container'>
+                            <div class='list-content'>
+                                <div class='list-content-header'>
                                     <mat-form-field class='pwd-content'>
-                                        <mat-label>Password</mat-label>
-                                        <input matInput readonly>
-                                        <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
-                                        <ng-template #notShow>
-                                            <mat-icon matSuffix>visibility_off</mat-icon>
-                                        </ng-template>
+                                        <mat-label>Username</mat-label>
+                                        <input type="text" matInput readonly>
                                     </mat-form-field>
-                                    <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
-                                        <mat-icon>content_copy</mat-icon>
+                                    <div class='small-spacer'></div>
+                                    <div class='list-content-primary'>
+                                        <mat-form-field class='pwd-content'>
+                                            <mat-label>Password</mat-label>
+                                            <input matInput readonly>
+                                            <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                            <ng-template #notShow>
+                                                <mat-icon matSuffix>visibility_off</mat-icon>
+                                            </ng-template>
+                                        </mat-form-field>
+                                        <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <mat-icon>content_copy</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                        <mat-icon>info</mat-icon>
+                                    </button>
+                                    <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
+                                        <mat-icon>remove_circle_outline</mat-icon>
                                     </button>
                                 </div>
                             </div>
-                            <div>
-                                <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
-                                    <mat-icon>info</mat-icon>
-                                </button>
-                                <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
-                                    <mat-icon>remove_circle_outline</mat-icon>
-                                </button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+<div class='safe-container'>
+    <div class='pwd-header'>
+        <span>Secret</span>
+        <button mat-icon-button>
+            <mat-icon>lock</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>lock_open</mat-icon>
+        </button>
+    </div>
+    <div class='pwd-list-container'>
+        <div class='pwd-list'>
+            <mat-accordion >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>Website Title</span>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <span>Last Updated</span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class='pwd-container'>
+                        <div class='pwd-header'>
+                            <button mat-icon-button>
+                                <mat-icon>public</mat-icon>
+                            </button>
+                            <span id='pwd-url'>Website URL Link</span>
+                        </div>
+                        <div class='pwd-subheader'>
+                            <span>Saved Accounts</span>
+                            <div class='smaller-spacer'></div>
+                            <mat-icon>lock</mat-icon>
+                        </div>
+                        <div class='pwd-content-container'>
+                            <div class='list-content'>
+                                <div class='list-content-header'>
+                                    <mat-form-field class='pwd-content'>
+                                        <mat-label>Username</mat-label>
+                                        <input type="text" matInput readonly>
+                                    </mat-form-field>
+                                    <div class='small-spacer'></div>
+                                    <div class='list-content-primary'>
+                                        <mat-form-field class='pwd-content'>
+                                            <mat-label>Password</mat-label>
+                                            <input matInput readonly>
+                                            <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                            <ng-template #notShow>
+                                                <mat-icon matSuffix>visibility_off</mat-icon>
+                                            </ng-template>
+                                        </mat-form-field>
+                                        <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <mat-icon>content_copy</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                        <mat-icon>info</mat-icon>
+                                    </button>
+                                    <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
+                                        <mat-icon>remove_circle_outline</mat-icon>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
     </div>
 </div>
+<div class='safe-container'>
+    <div class='pwd-header'>
+        <span>Other</span>
+        <button mat-icon-button>
+            <mat-icon>lock</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>lock_open</mat-icon>
+        </button>
+    </div>
+    <div class='pwd-list-container'>
+        <div class='pwd-list'>
+            <mat-accordion >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>Website Title</span>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <span>Last Updated</span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class='pwd-container'>
+                        <div class='pwd-header'>
+                            <button mat-icon-button>
+                                <mat-icon>public</mat-icon>
+                            </button>
+                            <span id='pwd-url'>Website URL Link</span>
+                        </div>
+                        <div class='pwd-subheader'>
+                            <span>Saved Accounts</span>
+                            <div class='smaller-spacer'></div>
+                            <mat-icon>lock</mat-icon>
+                        </div>
+                        <div class='pwd-content-container'>
+                            <div class='list-content'>
+                                <div class='list-content-header'>
+                                    <mat-form-field class='pwd-content'>
+                                        <mat-label>Username</mat-label>
+                                        <input type="text" matInput readonly>
+                                    </mat-form-field>
+                                    <div class='small-spacer'></div>
+                                    <div class='list-content-primary'>
+                                        <mat-form-field class='pwd-content'>
+                                            <mat-label>Password</mat-label>
+                                            <input matInput readonly>
+                                            <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                            <ng-template #notShow>
+                                                <mat-icon matSuffix>visibility_off</mat-icon>
+                                            </ng-template>
+                                        </mat-form-field>
+                                        <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <mat-icon>content_copy</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                        <mat-icon>info</mat-icon>
+                                    </button>
+                                    <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
+                                        <mat-icon>remove_circle_outline</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+

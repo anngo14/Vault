@@ -13,9 +13,18 @@
     height: 4.3em;
     width: 5em;
 }
+.safe-container{
+    height: 15em;
+}
+.pwd-header{
+    font-size: 18pt;
+    padding-left: 10em;
+    padding-bottom: 1em;
+}
 .pwd-list-container{
     display: flex;
     justify-content: center;
+    padding-bottom: 2em;
 }
 .pwd-list{
     width: 75%;
