@@ -14,10 +14,16 @@
     width: 5em;
 }
 .safe-container{
-    height: 15em;
+    display: flex;
+    flex-direction: column;
 }
-.pwd-header{
+.safe-category-container{
+}
+.pwd-category-header{
     font-size: 18pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding-left: 10em;
     padding-bottom: 1em;
 }
