@@ -71,3 +71,10 @@
     max-width: 25em;
     word-wrap: break-word;
 }
+.notify-menu-empty{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 8em;
+}

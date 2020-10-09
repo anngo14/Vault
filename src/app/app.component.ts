@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title: string = "Vault";
-  notifications: number = 2;
+  notifications: number = 3;
   badgeVisibility: boolean = true;
+  notify: boolean = true;
 
   constructor(private r: Router) {}
 
@@ -21,5 +22,9 @@ export class AppComponent {
   }
   redirectToGenerator(){
     this.r.navigate(['/generator']);
+  }
+  clearAllNotifications(){
+    this.notifications = 0;
+    this.badgeVisibility = false;
   }
 }

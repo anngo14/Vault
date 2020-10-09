@@ -6,12 +6,12 @@
         <span id='title'>Vault</span>
     </div>
     <div class='toolbar-action-buttons'>
-        <button mat-icon-button *ngIf='badgeVisibility; else hideBadge' [matMenuTriggerFor]='notifyMenu'>
+        <button mat-icon-button *ngIf='badgeVisibility && notify; else hideBadge' [matMenuTriggerFor]='notifyMenu'>
             <mat-icon matBadge={{notifications}} matBadgeColor='warn'>notifications</mat-icon>
         </button>
         <ng-template #hideBadge>
             <button mat-icon-button [matMenuTriggerFor]='notifyMenu'>
-                <mat-icon>notifications_off</mat-icon>
+                <mat-icon>notifications</mat-icon>
             </button>
         </ng-template>
         <button mat-icon-button [matMenuTriggerFor]='userMenu'>
@@ -26,12 +26,15 @@
 <mat-menu #notifyMenu='matMenu'>
     <div class='notify-menu-header'>
         <span>Notifications</span>
-        <button mat-icon-button>
+        <button mat-icon-button (click)='clearAllNotifications()'>
             <mat-icon>clear_all</mat-icon>
         </button>
     </div>
     <mat-divider></mat-divider>
     <div class='notify-menu-content'>
+        <div *ngIf='notifications === 0' class='notify-menu-empty'>
+            <span class='notify-menu-empty-text'>No New Notifications</span>
+        </div>
         <div class='notify-menu-item' mat-menu-item>
             <mat-icon class='notify-menu-icon'>warning</mat-icon>
             <span class='notify-menu-text'>Account Name for Website password has expired. <br> A password refresh is suggested</span>
