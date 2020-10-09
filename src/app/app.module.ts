@@ -22,8 +22,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { GeneratorComponent } from './generator/generator.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
-import {MatDividerModule} from '@angular/material/divider';
-
 
 @NgModule({
   declarations: [
@@ -50,7 +48,6 @@ import {MatDividerModule} from '@angular/material/divider';
     MatTooltipModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatDividerModule,
     BrowserAnimationsModule
   ],
   providers: [],
