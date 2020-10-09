@@ -23,7 +23,7 @@
         <div class='generator-header'>
             <mat-form-field appearance='outline' id='generator-label'>
                 <mat-label>Label</mat-label>
-                <input type="text" matInput required>
+                <input type="text" matInput>
             </mat-form-field>
             <div class='spacer'></div>
             <mat-form-field appearance='outline' id='generator-length'>
@@ -70,12 +70,17 @@
             </div>
         </div>
         <div class='pwd-notification-container'>
-            <button mat-icon-button matTooltip='Notifications Off' [matTooltipPosition]="'above'">
-                <mat-icon>notifications_none</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip='Notifications On' [matTooltipPosition]="'above'">
-                <mat-icon>notifications_active</mat-icon>
-            </button>
+            <div>
+                <span>Notifications: </span>
+                <button mat-icon-button matTooltip='Turn Notifications Off' *ngIf='notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
+                    <mat-icon>notifications_none</mat-icon>
+                </button>
+                <ng-template #showBell>
+                    <button mat-icon-button matTooltip='Turn Notifications On' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
+                        <mat-icon>notifications_active</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
             <div class='spacer'></div>
             <div class='pwd-notification-interval'>
                 <span>Refresh Password Interval: </span>

@@ -10,8 +10,9 @@ export class GeneratorComponent implements OnInit {
   length: number;
   lengths: number[] = [];
   interval: string = "";
+  notify: boolean = true;
   intervals: string[] = ["-", "Monthly", "Yearly", "Weekly", "Daily", "Never", "Custom"];
-  pwdTypes: string[] = ["-", "Personal", "Secret", "Other"]
+  pwdTypes: string[] = ["-", "Personal", "Secret", "Other"];
 
   constructor() { 
     for(let i = 0; i < 32; i++){
@@ -22,4 +23,7 @@ export class GeneratorComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleNotify(){
+    this.notify = !this.notify;
+  }
 }

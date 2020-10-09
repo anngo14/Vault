@@ -59,7 +59,9 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
+    justify-content: flex-start;
 }
+
 #pwd-interval{
     width: 7em;
     text-align: center;
