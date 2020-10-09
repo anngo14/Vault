@@ -6,11 +6,11 @@
         <span id='title'>Vault</span>
     </div>
     <div class='toolbar-action-buttons'>
-        <button mat-icon-button *ngIf='badgeVisibility; else hideBadge'>
+        <button mat-icon-button *ngIf='badgeVisibility; else hideBadge' [matMenuTriggerFor]='notifyMenu'>
             <mat-icon matBadge={{notifications}} matBadgeColor='warn'>notifications</mat-icon>
         </button>
         <ng-template #hideBadge>
-            <button mat-icon-button>
+            <button mat-icon-button [matMenuTriggerFor]='notifyMenu'>
                 <mat-icon>notifications_off</mat-icon>
             </button>
         </ng-template>
@@ -22,6 +22,29 @@
 <mat-menu #userMenu='matMenu'>
     <button mat-menu-item>Account Settings</button>
     <button mat-menu-item (click)='redirectToLogin()'>Log out</button>
+</mat-menu>
+<mat-menu #notifyMenu='matMenu'>
+    <div class='notify-menu-header'>
+        <span>Notifications</span>
+        <button mat-icon-button>
+            <mat-icon>clear_all</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class='notify-menu-content'>
+        <div class='notify-menu-item' mat-menu-item>
+            <mat-icon class='notify-menu-icon'>warning</mat-icon>
+            <span class='notify-menu-text'>Account Name for Website password has expired. <br> A password refresh is suggested</span>
+        </div>
+        <div class='notify-menu-item' mat-menu-item>
+            <mat-icon class='notify-menu-icon'>warning</mat-icon>
+            <span class='notify-menu-text'>Account Name for Website password has expired. <br> A password refresh is suggested</span>
+        </div>
+        <div class='notify-menu-item' mat-menu-item>
+            <mat-icon class='notify-menu-icon'>warning</mat-icon>
+            <span class='notify-menu-text'>Account Name for Website password has expired. <br> A password refresh is suggested</span>
+        </div>
+    </div>
 </mat-menu>
 <mat-drawer-container class='main-container'>
     <mat-drawer #drawer mode="side" class='sidenav'>
@@ -39,4 +62,3 @@
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
-

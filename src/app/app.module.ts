@@ -22,6 +22,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { GeneratorComponent } from './generator/generator.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatTooltipModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatDividerModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule
   ],
   providers: [],

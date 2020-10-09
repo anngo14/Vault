@@ -1,3 +1,6 @@
+::ng-deep.mat-menu-panel {
+    max-width: none !important;
+}
 #title{
     cursor: pointer;
 }
@@ -35,4 +38,36 @@
     margin-top: 2em;
     display: flex;
     flex-direction: column;
+}
+.footer{
+    padding: 1em;
+}
+.notify-menu-header{
+    width: 30em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1em;
+}
+.notify-menu-content{
+    display: flex;
+    flex-direction: column;
+    min-height: 8em;
+    max-height: 30em;
+    overflow-y: auto;
+}
+.notify-menu-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 8em;
+}
+.notify-menu-icon{
+    font-size: 20pt;
+}
+.notify-menu-text{
+    padding-left: 1em;
+    max-width: 25em;
+    word-wrap: break-word;
 }
