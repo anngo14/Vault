@@ -48,6 +48,9 @@
 #generate-btn{
     height: 4.9em;
 }
+#entropy-btn{
+    height: 4.9em;
+}
 .pwd-details{
     display: flex;
     flex-direction: row;
@@ -61,7 +64,6 @@
     align-items: baseline;
     justify-content: flex-start;
 }
-
 #pwd-interval{
     width: 7em;
     text-align: center;

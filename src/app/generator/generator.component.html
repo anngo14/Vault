@@ -15,7 +15,7 @@
             <span>Password Type: </span>
             <mat-form-field id='pwd-type-select'>
                 <mat-label>Category</mat-label>
-                <mat-select>
+                <mat-select [(value)]='category'>
                     <mat-option *ngFor='let t of pwdTypes' [value]='t'>{{t}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -23,7 +23,7 @@
         <div class='generator-header'>
             <mat-form-field appearance='outline' id='generator-label'>
                 <mat-label>Label</mat-label>
-                <input type="text" matInput>
+                <input type="text" matInput [(ngModel)]='label'>
             </mat-form-field>
             <div class='spacer'></div>
             <mat-form-field appearance='outline' id='generator-length'>
@@ -33,40 +33,51 @@
                 </mat-select>
             </mat-form-field>
             <div class='spacer'></div>
-            <mat-checkbox>Alphabetical (A-Z)</mat-checkbox>
+            <mat-checkbox [(ngModel)]='Alpha'>Alphabetical (A-Z)</mat-checkbox>
             <div class='spacer'></div>
-            <mat-checkbox>Numerical (0-9)</mat-checkbox>
+            <mat-checkbox [(ngModel)]='Numerical'>Numerical (0-9)</mat-checkbox>
             <div class='spacer'></div>
-            <mat-checkbox>Special Characters (!,@,#,$)</mat-checkbox>
+            <mat-checkbox [(ngModel)]='Special'>Special Characters (!,@,#,$)</mat-checkbox>
         </div>
         <div>
             <mat-form-field appearance='outline' id='website-input'>
                 <mat-label>Website</mat-label>
-                <input type="text" matInput>
+                <input type="text" matInput [(ngModel)]='link'>
             </mat-form-field>
         </div>
         <div class='generator-subheader'>
             <mat-form-field appearance='outline' class='generator-pwd-label'>
                 <mat-label>Username</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]='user'>
             </mat-form-field>
             <div class='spacer'></div>
             <mat-form-field appearance='outline' class='generator-pwd-label'>
                 <mat-label>Password</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]='pwd'>
             </mat-form-field>
             <div class='spacer'></div>
-            <button mat-flat-button color='primary' id='generate-btn'>GENERATE</button>
+            <button mat-flat-button color='primary' id='generate-btn' *ngIf='length === undefined || (Alpha === false && Numerical === false && Special === false); else showGenerate' disabled>GENERATE</button>
+            <ng-template #showGenerate>
+                <button mat-flat-button color='primary' id='generate-btn' (click)='generatePassword()'>GENERATE</button>
+            </ng-template>
+            <div class='spacer'></div>
+            <button mat-flat-button color='accent' id='entropy-btn' *ngIf='pwd.length === 0; else showEntropy' disabled>CHECK PASSWORD</button>
+            <ng-template #showEntropy>
+                <button mat-flat-button color='accent' id='entropy-btn' (click)='calculateEntropy()'>CHECK PASSWORD</button>
+            </ng-template>
         </div>
         <div class='pwd-details'>
             <div>
                 <span>Date Created: </span>
-                <span id='pwd-detail'>Today's Date</span>
+                <span id='pwd-detail'>{{today}}</span>
             </div>
             <div class='spacer'></div>
             <div>
                 <span>Password Strength: </span>
-                <span id='pwd-detail'>Strong</span>
+                <span id='pwd-detail' *ngIf='pwd.length !== 0; else defaultEntropy'>{{strength}}</span>
+                <ng-template #defaultEntropy>
+                    <span id='pwd-detail'>N/A</span>
+                </ng-template>
             </div>
         </div>
         <div class='pwd-notification-container'>
@@ -85,6 +96,7 @@
             <div class='pwd-notification-interval'>
                 <span>Refresh Password Interval: </span>
                 <mat-form-field id='pwd-interval'>
+                    <mat-label>Interval</mat-label>
                     <mat-select [(value)]='interval'>
                         <mat-option *ngFor='let i of intervals' [value]='i'>{{i}}</mat-option>
                     </mat-select>

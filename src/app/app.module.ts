@@ -24,6 +24,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSelectModule,
     MatDividerModule,
     MatSlideToggleModule,
+    FormsModule,
     BrowserAnimationsModule
   ],
   providers: [],
