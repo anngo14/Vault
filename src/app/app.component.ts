@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { notification } from './models/notification';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title: string = "Vault";
-  notifications: number = 3;
-  badgeVisibility: boolean = true;
-  notify: boolean = true;
+  notifications: notification[] = [ 
+    {
+      account: "Account Name",
+      website: "Website"
+    }
+];
 
   constructor(private r: Router) {}
 
@@ -24,7 +28,6 @@ export class AppComponent {
     this.r.navigate(['/generator']);
   }
   clearAllNotifications(){
-    this.notifications = 0;
-    this.badgeVisibility = false;
+    this.notifications = [];
   }
 }
