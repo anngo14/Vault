@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UnlockComponent } from '../unlock/unlock.component';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  show: boolean = true;
-  constructor() { }
+  showPwd: boolean = true;
+  personalLock: boolean = true;
+  secretLock: boolean = true;
+  otherLock: boolean = true;
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
+  unlockCategory(c: string){
+    console.log(c);
+    const dialogRef = this.dialog.open(UnlockComponent, {
+      data: { category: c}
+    });
 
+
+  }
 }

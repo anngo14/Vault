@@ -1,0 +1,23 @@
+.unlock-header-container{
+    display: flex;
+    flex-direction: column;
+}
+#unlock-header{
+    font-size: 20pt;
+}
+#unlock-subheader{
+    font-size: 12pt;
+    font-weight: 200;
+}
+.spacer{
+    height: 2em;
+}
+.pwd-input{
+    width: 100%;
+}
+.btn-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

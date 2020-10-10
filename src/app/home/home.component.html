@@ -11,12 +11,14 @@
     <div class='safe-category-container'>
         <div class='pwd-category-header'>
             <span>Personal</span>
-            <button mat-icon-button>
+            <button mat-icon-button *ngIf='personalLock; else personalOpen' (click)='unlockCategory("Personal")'>
                 <mat-icon>lock</mat-icon>
             </button>
-            <button mat-icon-button>
-                <mat-icon>lock_open</mat-icon>
-            </button>
+            <ng-template #personalOpen>
+                <button mat-icon-button>
+                    <mat-icon>lock_open</mat-icon>
+                </button>
+            </ng-template>
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
@@ -54,7 +56,7 @@
                                             <mat-form-field class='pwd-content'>
                                                 <mat-label>Password</mat-label>
                                                 <input matInput readonly>
-                                                <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
                                                 <ng-template #notShow>
                                                     <mat-icon matSuffix>visibility_off</mat-icon>
                                                 </ng-template>
@@ -83,12 +85,14 @@
     <div class='safe-category-container'>
         <div class='pwd-category-header'>
             <span>Secret</span>
-            <button mat-icon-button>
+            <button mat-icon-button *ngIf='secretLock; else secretOpen' (click)='unlockCategory("Secret")'>
                 <mat-icon>lock</mat-icon>
             </button>
-            <button mat-icon-button>
-                <mat-icon>lock_open</mat-icon>
-            </button>
+            <ng-template #secretOpen>
+                <button mat-icon-button>
+                    <mat-icon>lock_open</mat-icon>
+                </button>
+            </ng-template>
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
@@ -126,7 +130,7 @@
                                             <mat-form-field class='pwd-content'>
                                                 <mat-label>Password</mat-label>
                                                 <input matInput readonly>
-                                                <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
                                                 <ng-template #notShow>
                                                     <mat-icon matSuffix>visibility_off</mat-icon>
                                                 </ng-template>
@@ -155,12 +159,14 @@
     <div class='safe-category-container'>
         <div class='pwd-category-header'>
             <span>Other</span>
-            <button mat-icon-button>
+            <button mat-icon-button *ngIf='otherLock; else otherOpen' (click)='unlockCategory("Other")'>
                 <mat-icon>lock</mat-icon>
             </button>
-            <button mat-icon-button>
-                <mat-icon>lock_open</mat-icon>
-            </button>
+            <ng-template #otherOpen>
+                <button mat-icon-button>
+                    <mat-icon>lock_open</mat-icon>
+                </button>
+            </ng-template>
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
@@ -198,7 +204,7 @@
                                             <mat-form-field class='pwd-content'>
                                                 <mat-label>Password</mat-label>
                                                 <input matInput readonly>
-                                                <mat-icon *ngIf='show; else notShow' matSuffix>visibility</mat-icon>
+                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
                                                 <ng-template #notShow>
                                                     <mat-icon matSuffix>visibility_off</mat-icon>
                                                 </ng-template>

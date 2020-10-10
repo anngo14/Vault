@@ -25,6 +25,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UnlockComponent } from './unlock/unlock.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    UnlockComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,11 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatSlideToggleModule,
     FormsModule,
+    MatDialogModule,
     BrowserAnimationsModule
+  ],
+  entryComponents: [
+    UnlockComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,13 @@
+<div class='unlock-header-container'>
+    <span id='unlock-header'>Unlock {{data.category}} Passwords</span>
+    <span id='unlock-subheader'>Master password is needed to view or edit the passwords in this category</span>
+</div>
+<div class='spacer'></div>
+<mat-form-field appearance='outline' class='pwd-input'>
+    <mat-label>Enter your Master Password</mat-label>
+    <input type="password" matInput>
+</mat-form-field>
+<div class='btn-row'>
+    <button mat-stroked-button [mat-dialog-close]='cancel'>Cancel</button>
+    <button mat-stroked-button color='primary'>Confirm</button>
+</div>
