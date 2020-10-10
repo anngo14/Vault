@@ -1,0 +1,70 @@
+<div class='detailed-header'>
+    <span>More Information</span>
+</div>
+<div class='vertical-spacer'></div>
+<div class='detailed-pwd'>
+    <mat-form-field class='pwd-content'>
+        <mat-label>Username</mat-label>
+        <input type="text" matInput>
+    </mat-form-field>
+    <div class='small-spacer'></div>
+    <div class='pwd-content-row'>
+        <mat-form-field class='pwd-content'>
+            <mat-label>Password</mat-label>
+            <input matInput>
+            <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
+            <ng-template #notShow>
+                <mat-icon matSuffix>visibility_off</mat-icon>
+            </ng-template>
+        </mat-form-field>
+        <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'above'">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+    </div>
+</div>
+<div>
+    <span>Password Created On: </span>
+    <span id='pwd-creation-date'>Date Created</span>
+</div>
+<div class='vertical-spacer'></div>
+<div class='pwd-history-header'>
+    <span>Recent Password History</span>
+    <div class='vertical-spacer'></div>
+    <div>
+        <div class='pwd-list-item'>
+            <span>10/01/2020</span>
+            <span>Old Password</span>
+            <span></span>
+        </div>
+        <div class='pwd-list-item'>
+            <span>10/01/2020</span>
+            <span>Old Password</span>
+            <span></span>
+
+        </div>
+        <div class='pwd-list-item'>
+            <span>10/01/2020</span>
+            <span>Old Password</span>
+            <span></span>
+
+        </div>
+        <div class='pwd-list-item'>
+            <span>10/01/2020</span>
+            <span>Old Password</span>
+            <span></span>
+
+        </div>
+        <div class='pwd-list-item'>
+            <span>10/01/2020</span>
+            <span>Old Password</span>
+            <span></span>
+
+        </div>
+    </div>
+</div>
+<div class='vertical-spacer'></div>
+<div class='vertical-spacer'></div>
+<div class='btn-row'>
+    <button mat-stroked-button [mat-dialog-close]='cancel'>Cancel</button>
+    <button mat-stroked-button color='primary'>Save</button>
+</div>

@@ -1,0 +1,38 @@
+.detailed-header{
+    font-size: 20pt;
+}
+.detailed-pwd{
+    display: flex;
+    flex-direction: row;
+}
+.pwd-content-row{
+    display: flex;
+    flex-direction: row;
+}
+.pwd-content{
+    width: 20em;
+}
+.small-spacer{
+    width: 1em;
+}
+.vertical-spacer{
+    height: 1em;
+}
+#pwd-creation-date{
+    font-weight: 600;
+}
+.pwd-history-header{
+    font-size: 14pt;
+}
+.pwd-list-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40em;
+    padding: 0 1em;
+}
+.btn-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

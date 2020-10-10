@@ -27,6 +27,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UnlockComponent } from './unlock/unlock.component';
+import { DetailedComponent } from './detailed/detailed.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UnlockComponent } from './unlock/unlock.component';
     RegisterComponent,
     HomeComponent,
     GeneratorComponent,
-    UnlockComponent
+    UnlockComponent,
+    DetailedComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { UnlockComponent } from './unlock/unlock.component';
     BrowserAnimationsModule
   ],
   entryComponents: [
-    UnlockComponent
+    UnlockComponent,
+    DetailedComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

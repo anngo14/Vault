@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DetailedComponent } from '../detailed/detailed.component';
 import { UnlockComponent } from '../unlock/unlock.component';
 
 @Component({
@@ -19,11 +20,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   unlockCategory(c: string){
-    console.log(c);
     const dialogRef = this.dialog.open(UnlockComponent, {
       data: { category: c}
     });
-
-
+  }
+  openDetailed(){
+    const dialogRef = this.dialog.open(DetailedComponent, {
+      
+    });
   }
 }
