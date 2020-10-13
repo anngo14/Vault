@@ -1,9 +1,13 @@
 .detailed-header{
     font-size: 20pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .detailed-pwd{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .pwd-content-row{
     display: flex;
@@ -18,8 +22,20 @@
 .vertical-spacer{
     height: 1em;
 }
+.pwd-button-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.pwd-button{
+    width: 15em;
+}
 #pwd-creation-date{
     font-weight: 600;
+}
+#refresh-input{
+    width: 5em;
+    text-align: center;
 }
 .pwd-history-header{
     font-size: 14pt;
