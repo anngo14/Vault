@@ -1,0 +1,47 @@
+#main-header{
+    font-size: 20pt;
+}
+.vertical-spacer{
+    height: 1em;
+}
+.pwd-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.button-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.spacer{
+    width: 1em;
+}
+.pwd-content{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.pwd-details{
+    display: flex;
+    flex-direction: row;
+}
+#pwd-detail{
+    font-weight: 600;
+}
+.pwd-notification-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 4em;
+}
+#pwd-interval{
+    width: 7em;
+    text-align: center;
+}
+#generate-btn{
+    height: 4.9em;
+}
+#entropy-btn{
+    height: 4.9em;
+}

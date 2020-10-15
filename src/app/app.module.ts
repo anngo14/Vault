@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UnlockComponent } from './unlock/unlock.component';
 import { DetailedComponent } from './detailed/detailed.component';
+import { AddAccountComponent } from './add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DetailedComponent } from './detailed/detailed.component';
     HomeComponent,
     GeneratorComponent,
     UnlockComponent,
-    DetailedComponent
+    DetailedComponent,
+    AddAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { DetailedComponent } from './detailed/detailed.component';
   ],
   entryComponents: [
     UnlockComponent,
-    DetailedComponent
+    DetailedComponent,
+    AddAccountComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

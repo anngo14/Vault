@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AddAccountComponent } from '../add-account/add-account.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { UnlockComponent } from '../unlock/unlock.component';
 
@@ -36,6 +37,12 @@ export class HomeComponent implements OnInit {
     detailedDialogRef.afterClosed().subscribe(result => {
   
     });
+  }
+  openAccount(){
+    const accountDialogRef = this.dialog.open(AddAccountComponent, {
+
+    });
+    
   }
   toggleCategory(c: string){
     if(c === "Personal"){

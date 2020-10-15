@@ -17,8 +17,6 @@
     display: flex;
     flex-direction: column;
 }
-.safe-category-container{
-}
 .pwd-category-header{
     font-size: 18pt;
     display: flex;
