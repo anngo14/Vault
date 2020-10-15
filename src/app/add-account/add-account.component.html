@@ -53,8 +53,8 @@
 <div class='pwd-notification-container'>
     <div>
         <span>Notifications: </span>
-        <button mat-icon-button matTooltip='Turn Notifications Off' *ngIf='notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
-            <mat-icon>notifications_none</mat-icon>
+        <button mat-icon-button matTooltip='Mute Notifications' *ngIf='notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
+            <mat-icon>notifications_off</mat-icon>
         </button>
         <ng-template #showBell>
             <button mat-icon-button matTooltip='Turn Notifications On' [matTooltipPosition]="'above'" (click)='toggleNotify()'>

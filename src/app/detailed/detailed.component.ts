@@ -14,6 +14,7 @@ export class DetailedComponent implements OnInit {
   username: string = "";
   pwd: string = "";
   refresh: boolean = false;
+  notify: boolean = true;
   today: string = "";
   strength: string = "N/A";
   alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -30,6 +31,9 @@ export class DetailedComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleNotify(){
+    this.notify = !this.notify;
+  }
   toggleShow(){
     this.showPwd = !this.showPwd;
     if(this.showPwd){
