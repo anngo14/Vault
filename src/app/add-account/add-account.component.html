@@ -47,10 +47,7 @@
     <div class='spacer'></div>
     <div>
         <span>Password Strength: </span>
-        <span id='pwd-detail' *ngIf='pwd.length !== 0; else defaultEntropy'>{{strength}}</span>
-        <ng-template #defaultEntropy>
-            <span id='pwd-detail'>N/A</span>
-        </ng-template>
+        <span id='pwd-detail'>{{strength}}</span>
     </div>
 </div>
 <div class='pwd-notification-container'>
@@ -77,6 +74,6 @@
     </div>
 </div>
 <div class='button-row'>
-    <button mat-stroked-button>Cancel</button>
+    <button mat-stroked-button (click)='cancel()'>Cancel</button>
     <button mat-stroked-button color='primary'>Save</button>
 </div>
