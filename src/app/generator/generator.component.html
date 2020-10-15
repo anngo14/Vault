@@ -93,7 +93,7 @@
                 </ng-template>
             </div>
             <div class='spacer'></div>
-            <div class='pwd-notification-interval'>
+            <div class='pwd-notification-interval' *ngIf='notify'>
                 <span>Refresh Password Interval: </span>
                 <mat-form-field id='pwd-interval'>
                     <mat-label>Interval</mat-label>

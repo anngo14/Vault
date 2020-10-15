@@ -10,7 +10,7 @@ import { UnlockComponent } from '../unlock/unlock.component';
 })
 export class HomeComponent implements OnInit {
 
-  showPwd: boolean = true;
+  showPwd: boolean = false;
   personalLock: boolean = true;
   secretLock: boolean = true;
   otherLock: boolean = true;
@@ -45,5 +45,8 @@ export class HomeComponent implements OnInit {
     } else{
       this.otherLock = !this.otherLock;
     }
+  }
+  toggleShow(){
+    this.showPwd = !this.showPwd;
   }
 }

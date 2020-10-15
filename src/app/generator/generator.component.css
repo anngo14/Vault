@@ -61,8 +61,8 @@
 .pwd-notification-container{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    justify-content: flex-start;
+    align-items: center;
+    min-height: 4em;
 }
 #pwd-interval{
     width: 7em;

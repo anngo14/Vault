@@ -44,6 +44,11 @@
     flex-direction: row;
     align-items: center;
 }
+.pwd-subheader-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .pwd-subheader{
     font-size: 16pt;
     padding: 1em;
