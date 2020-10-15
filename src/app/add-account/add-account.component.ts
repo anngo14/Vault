@@ -13,7 +13,7 @@ export class AddAccountComponent implements OnInit {
   Alpha: boolean = false;
   Numerical: boolean = false;
   Special: boolean = false;
-  label: string = "";
+  user: string = "";
   pwd: string = "";
   notify: boolean = true;
   interval: string = "";

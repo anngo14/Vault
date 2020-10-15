@@ -3,7 +3,7 @@
 </div>
 <div class='vertical-spacer'></div>
 <div class='pwd-header'>
-    <mat-form-field appearance='outline'>
+    <mat-form-field appearance='outline' id='account-select'>
         <mat-label>Length</mat-label>
         <mat-select [(value)]='length' required>
             <mat-option *ngFor='let l of lengths' [value]='l'>{{l}}</mat-option>
@@ -17,14 +17,17 @@
     <mat-checkbox [(ngModel)]='Special'>Special Characters (!,@,#,$)</mat-checkbox>
 </div>
 <div class='pwd-content'>
-    <mat-form-field appearance='outline'>
+    <mat-form-field appearance='outline' id='account-input'>
         <mat-label>Username</mat-label>
-        <input type="text" matInput [(ngModel)]='label'>
+        <input type="text" matInput [(ngModel)]='user'>
     </mat-form-field>
-    <mat-form-field appearance='outline'> 
+    <div class='spacer'></div>
+    <mat-form-field appearance='outline' id='account-input'> 
         <mat-label>Password</mat-label>
         <input type="text" matInput [(ngModel)]='pwd'>
     </mat-form-field>
+</div>
+<div class='pwd-btn-row'>
     <button mat-flat-button color='primary' id='generate-btn' *ngIf='length === undefined || (Alpha === false && Numerical === false && Special === false); else showGenerate' disabled>GENERATE</button>
     <ng-template #showGenerate>
         <button mat-flat-button color='primary' id='generate-btn' (click)='generatePassword()'>GENERATE</button>
@@ -35,6 +38,7 @@
         <button mat-flat-button color='accent' id='entropy-btn' (click)='calculateEntropy()'>CHECK PASSWORD</button>
     </ng-template>
 </div>
+<div class='vertical-spacer'></div>
 <div class='pwd-details'>
     <div>
         <span>Date Created: </span>

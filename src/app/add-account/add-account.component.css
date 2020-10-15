@@ -4,6 +4,12 @@
 .vertical-spacer{
     height: 1em;
 }
+#account-select{
+    width: 7em;
+}
+#account-input{
+    width: 30em;
+}
 .pwd-header{
     display: flex;
     flex-direction: row;
@@ -40,8 +46,12 @@
     text-align: center;
 }
 #generate-btn{
-    height: 4.9em;
+    width: 12em;
 }
 #entropy-btn{
-    height: 4.9em;
+    width: 12em;
+}
+.pwd-btn-row{
+    display: flex;
+    flex-direction: row;
 }
