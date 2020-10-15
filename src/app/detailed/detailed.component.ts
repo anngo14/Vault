@@ -30,4 +30,7 @@ export class DetailedComponent implements OnInit {
   copyToClipboard(){
     
   }
+  cancel(){
+    this.detailedRef.close(false);
+  }
 }

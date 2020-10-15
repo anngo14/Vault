@@ -20,13 +20,30 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   unlockCategory(c: string){
-    const dialogRef = this.dialog.open(UnlockComponent, {
+    const unlockDialogRef = this.dialog.open(UnlockComponent, {
       data: { category: c}
+    });
+    unlockDialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.toggleCategory(c);
+      }
     });
   }
   openDetailed(){
-    const dialogRef = this.dialog.open(DetailedComponent, {
+    const detailedDialogRef = this.dialog.open(DetailedComponent, {
       
     });
+    detailedDialogRef.afterClosed().subscribe(result => {
+  
+    });
+  }
+  toggleCategory(c: string){
+    if(c === "Personal"){
+      this.personalLock = !this.personalLock;
+    } else if(c === "Secret"){
+      this.secretLock = !this.secretLock;
+    } else{
+      this.otherLock = !this.otherLock;
+    }
   }
 }

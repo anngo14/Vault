@@ -13,4 +13,10 @@ export class UnlockComponent implements OnInit {
   ngOnInit() {
   }
 
+  cancel(){
+    this.unlockRef.close(false);
+  }
+  confirm(){
+    this.unlockRef.close(true);
+  }
 }

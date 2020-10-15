@@ -15,15 +15,15 @@
                 <mat-icon>lock</mat-icon>
             </button>
             <ng-template #personalOpen>
-                <button mat-icon-button>
+                <button mat-icon-button (click)='toggleCategory("Personal")'>
                     <mat-icon>lock_open</mat-icon>
                 </button>
             </ng-template>
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
-                <mat-accordion >
-                    <mat-expansion-panel>
+                <mat-accordion>
+                    <mat-expansion-panel [disabled]='personalLock'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>Website Title</span>
@@ -89,7 +89,7 @@
                 <mat-icon>lock</mat-icon>
             </button>
             <ng-template #secretOpen>
-                <button mat-icon-button>
+                <button mat-icon-button (click)='toggleCategory("Secret")'>
                     <mat-icon>lock_open</mat-icon>
                 </button>
             </ng-template>
@@ -97,7 +97,7 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion >
-                    <mat-expansion-panel>
+                    <mat-expansion-panel [disabled]='secretLock'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>Website Title</span>
@@ -163,7 +163,7 @@
                 <mat-icon>lock</mat-icon>
             </button>
             <ng-template #otherOpen>
-                <button mat-icon-button>
+                <button mat-icon-button (click)='toggleCategory("Other")'>
                     <mat-icon>lock_open</mat-icon>
                 </button>
             </ng-template>
@@ -171,7 +171,7 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion >
-                    <mat-expansion-panel>
+                    <mat-expansion-panel [disabled]='otherLock'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>Website Title</span>
