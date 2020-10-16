@@ -26,9 +26,9 @@
         <mat-form-field class='pwd-content'>
             <mat-label>Password</mat-label>
             <input matInput type={{textAttribute}} [(ngModel)]='pwd'>
-            <mat-icon *ngIf='showPwd; else notShow' matSuffix (click)='toggleShow()'>visibility</mat-icon>
+            <mat-icon *ngIf='showPwd; else notShow' matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
             <ng-template #notShow>
-                <mat-icon matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
+                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
             </ng-template>
         </mat-form-field>
     </div>

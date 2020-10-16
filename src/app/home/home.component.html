@@ -58,18 +58,16 @@
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content' *ngIf='!showPwd; else notShow'>
+                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
                                                 <mat-label>Password</mat-label>
                                                 <input matInput readonly value={{pwd}} type='password'>
                                                 <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
                                             </mat-form-field>
-                                            <ng-template #notShow>
-                                                <mat-form-field class='pwd-content'>
-                                                    <mat-label>Password</mat-label>
-                                                    <input type="text" matInput readonly value={{pwd}}>
-                                                    <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
-                                                </mat-form-field>
-                                            </ng-template>
+                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                                <mat-label>Password</mat-label>
+                                                <input type="text" matInput readonly value={{pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
+                                            </mat-form-field>
                                             <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard()'>
                                                 <mat-icon>content_copy</mat-icon>
                                             </button>
@@ -142,13 +140,15 @@
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content'>
+                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly>
-                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
-                                                <ng-template #notShow1>
-                                                    <mat-icon matSuffix>visibility_off</mat-icon>
-                                                </ng-template>
+                                                <input matInput readonly value={{pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                                            </mat-form-field>
+                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                                <mat-label>Password</mat-label>
+                                                <input type="text" matInput readonly value={{pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
                                             </mat-form-field>
                                             <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
                                                 <mat-icon>content_copy</mat-icon>
@@ -221,13 +221,15 @@
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content'>
+                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly>
-                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix>visibility</mat-icon>
-                                                <ng-template #notShow2>
-                                                    <mat-icon matSuffix>visibility_off</mat-icon>
-                                                </ng-template>
+                                                <input matInput readonly value={{pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                                            </mat-form-field>
+                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                                <mat-label>Password</mat-label>
+                                                <input type="text" matInput readonly value={{pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
                                             </mat-form-field>
                                             <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
                                                 <mat-icon>content_copy</mat-icon>
