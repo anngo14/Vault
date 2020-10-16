@@ -29,6 +29,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { UnlockComponent } from './unlock/unlock.component';
 import { DetailedComponent } from './detailed/detailed.component';
 import { AddAccountComponent } from './add-account/add-account.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { AddAccountComponent } from './add-account/add-account.component';
     MatSlideToggleModule,
     FormsModule,
     MatDialogModule,
+    MatSnackBarModule,
+    ClipboardModule,
     BrowserAnimationsModule
   ],
   entryComponents: [

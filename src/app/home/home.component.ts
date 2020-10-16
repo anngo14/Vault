@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClipboardService } from 'ngx-clipboard';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { UnlockComponent } from '../unlock/unlock.component';
@@ -12,11 +14,12 @@ import { UnlockComponent } from '../unlock/unlock.component';
 export class HomeComponent implements OnInit {
 
   showPwd: boolean = false;
+  pwd: string = "test";
   personalLock: boolean = true;
   secretLock: boolean = true;
   otherLock: boolean = true;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService) { }
 
   ngOnInit() {
   }
@@ -55,5 +58,14 @@ export class HomeComponent implements OnInit {
   }
   toggleShow(){
     this.showPwd = !this.showPwd;
+  }
+  copyToClipboard(){
+    this.cb.copyFromContent(this.pwd);
+    this.openSnackbar();
+  }
+  openSnackbar(){
+    this.snackBar.open("Copied to Clipboard", null, {
+      duration: 1000
+    });
   }
 }

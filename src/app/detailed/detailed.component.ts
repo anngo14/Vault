@@ -1,6 +1,8 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-detailed',
@@ -23,7 +25,7 @@ export class DetailedComponent implements OnInit {
   special = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '~', '<', '>', ',', '.', '/', '?', ':', ';'];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  constructor(public detailedRef: MatDialogRef<DetailedComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+  constructor(public detailedRef: MatDialogRef<DetailedComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private cb: ClipboardService) { 
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
   }
@@ -43,7 +45,13 @@ export class DetailedComponent implements OnInit {
     }
   }
   copyToClipboard(){
-    
+    this.cb.copyFromContent(this.pwd);
+    this.openSnackbar();
+  }
+  openSnackbar(){
+    this.snackBar.open("Copied to Clipboard", null, {
+      duration: 1000
+    });
   }
   refreshPassword(){
     let containsLower = false;

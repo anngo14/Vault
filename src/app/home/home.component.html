@@ -58,15 +58,19 @@
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content'>
+                                            <mat-form-field class='pwd-content' *ngIf='!showPwd; else notShow'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly>
-                                                <mat-icon *ngIf='showPwd; else notShow' matSuffix (click)='toggleShow()'>visibility</mat-icon>
-                                                <ng-template #notShow>
-                                                    <mat-icon matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
-                                                </ng-template>
+                                                <input matInput readonly value={{pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
                                             </mat-form-field>
-                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <ng-template #notShow>
+                                                <mat-form-field class='pwd-content'>
+                                                    <mat-label>Password</mat-label>
+                                                    <input type="text" matInput readonly value={{pwd}}>
+                                                    <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
+                                                </mat-form-field>
+                                            </ng-template>
+                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard()'>
                                                 <mat-icon>content_copy</mat-icon>
                                             </button>
                                         </div>
