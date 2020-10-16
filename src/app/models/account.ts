@@ -8,6 +8,6 @@ export interface account{
     notify: boolean,
     created: string,
     refresh: boolean,
-    interval: number
+    interval: number,
     history: changeHistory[]
 }

@@ -123,10 +123,15 @@
                                 </button>
                                 <span id='pwd-url'>Website URL Link</span>
                             </div>
-                            <div class='pwd-subheader'>
-                                <span>Saved Accounts</span>
-                                <div class='smaller-spacer'></div>
-                                <mat-icon>vpn_key</mat-icon>
+                            <div class='pwd-subheader-container'>
+                                <div class='pwd-subheader'>
+                                    <span>Saved Accounts</span>
+                                    <div class='smaller-spacer'></div>
+                                    <mat-icon>vpn_key</mat-icon>
+                                </div>
+                                <div>
+                                    <button mat-stroked-button color='primary' [disabled]='secretLock' (click)='openAccount()'>Add Account</button>
+                                </div>
                             </div>
                             <div class='pwd-content-container'>
                                 <div class='list-content'>
@@ -151,10 +156,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" [disabled]='secretLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" [disabled]='secretLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>
@@ -197,10 +202,15 @@
                                 </button>
                                 <span id='pwd-url'>Website URL Link</span>
                             </div>
-                            <div class='pwd-subheader'>
-                                <span>Saved Accounts</span>
-                                <div class='smaller-spacer'></div>
-                                <mat-icon>vpn_key</mat-icon>
+                            <div class='pwd-subheader-container'>
+                                <div class='pwd-subheader'>
+                                    <span>Saved Accounts</span>
+                                    <div class='smaller-spacer'></div>
+                                    <mat-icon>vpn_key</mat-icon>
+                                </div>
+                                <div>
+                                    <button mat-stroked-button color='primary' [disabled]='otherLock' (click)='openAccount()'>Add Account</button>
+                                </div>
                             </div>
                             <div class='pwd-content-container'>
                                 <div class='list-content'>
@@ -225,10 +235,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'">
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" [disabled]='otherLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'">
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" [disabled]='otherLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>

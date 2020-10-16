@@ -9,19 +9,19 @@ export class GeneratorComponent implements OnInit {
 
   length: number;
   lengths: number[] = [];
-  interval: string = "";
+  interval: number;
   category: string = "";
   Alpha: boolean = false;
   Numerical: boolean = false;
   Special: boolean = false;
   notify: boolean = true;
+  refresh: boolean = true;
   label: string = "";
   link: string = "";
   user: string = "";
   pwd: string = "";
   today: string = "";
   strength: string = "";
-  intervals: string[] = ["-", "Monthly", "Yearly", "Weekly", "Daily"];
   pwdTypes: string[] = ["-", "Personal", "Secret", "Other"];
   alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   alphaUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
