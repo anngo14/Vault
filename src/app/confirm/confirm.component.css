@@ -1,0 +1,25 @@
+.confirm-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.confirm-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18pt;
+    font-weight: 200;
+}
+#confirm-header{
+    font-size: 22pt;
+    font-weight: 400;
+}
+.vertical-spacer{
+    height: 1em;
+}
+.btn-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

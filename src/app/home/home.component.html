@@ -77,7 +77,7 @@
                                         <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed()' [disabled]='personalLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" [disabled]='personalLock'>
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm()' [disabled]='personalLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>

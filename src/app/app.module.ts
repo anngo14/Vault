@@ -31,6 +31,7 @@ import { DetailedComponent } from './detailed/detailed.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     GeneratorComponent,
     UnlockComponent,
     DetailedComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import { ClipboardModule } from 'ngx-clipboard';
   entryComponents: [
     UnlockComponent,
     DetailedComponent,
-    AddAccountComponent
+    AddAccountComponent,
+    ConfirmComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

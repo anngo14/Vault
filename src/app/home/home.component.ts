@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { AddAccountComponent } from '../add-account/add-account.component';
+import { ConfirmComponent } from '../confirm/confirm.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { UnlockComponent } from '../unlock/unlock.component';
 
@@ -66,6 +67,11 @@ export class HomeComponent implements OnInit {
   openSnackbar(){
     this.snackBar.open("Copied to Clipboard", null, {
       duration: 1000
+    });
+  }
+  openConfirm(){
+    const confirmRef = this.dialog.open(ConfirmComponent, {
+      
     });
   }
 }

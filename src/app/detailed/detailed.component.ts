@@ -15,7 +15,7 @@ export class DetailedComponent implements OnInit {
   textAttribute: string = "password";
   username: string = "";
   pwd: string = "";
-  refresh: boolean = false;
+  refresh: boolean = true;
   notify: boolean = true;
   today: string = "";
   strength: string = "N/A";
@@ -46,10 +46,10 @@ export class DetailedComponent implements OnInit {
   }
   copyToClipboard(){
     this.cb.copyFromContent(this.pwd);
-    this.openSnackbar();
+    this.openSnackbar("Copied to Clipboard");
   }
-  openSnackbar(){
-    this.snackBar.open("Copied to Clipboard", null, {
+  openSnackbar(msg: string){
+    this.snackBar.open(msg, null, {
       duration: 1000
     });
   }
@@ -80,6 +80,7 @@ export class DetailedComponent implements OnInit {
       this.pwd += available[randomIndex];
     }
     this.calculateEntropy();
+    this.openSnackbar("Password Refreshed")
   }
   calculateEntropy(){
     let containsLower = false;
