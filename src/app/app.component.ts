@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DetailedComponent } from './detailed/detailed.component';
+import { account } from './models/account';
 import { notification } from './models/notification';
 
 @Component({
@@ -16,7 +19,7 @@ export class AppComponent {
     }
 ];
 
-  constructor(private r: Router) {}
+  constructor(public dialog: MatDialog, private r: Router) {}
 
   redirectToLogin(){
     this.r.navigate(['/login']);
@@ -29,5 +32,10 @@ export class AppComponent {
   }
   clearAllNotifications(){
     this.notifications = [];
+  }
+  openDetailed(a: account){
+    const detailedRef = this.dialog.open(DetailedComponent, {
+      data: a
+    });
   }
 }

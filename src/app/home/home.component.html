@@ -23,21 +23,18 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion>
-                    <mat-expansion-panel [disabled]='personalLock'>
+                    <mat-expansion-panel [disabled]='personalLock' *ngFor='let p of personalTest'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <span>Website Title</span>
+                                <span>{{p.label}}</span>
                             </mat-panel-title>
-                            <mat-panel-description>
-                                <span>Last Updated</span>
-                            </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
                                 <button mat-icon-button>
                                     <mat-icon>public</mat-icon>
                                 </button>
-                                <span id='pwd-url'>Website URL Link</span>
+                                <span id='pwd-url' (click)='openLink(p.website)'>{{p.website}}</span>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
@@ -46,44 +43,43 @@
                                     <mat-icon>vpn_key</mat-icon>
                                 </div>
                                 <div>
-                                    <button mat-stroked-button color='primary' [disabled]='personalLock' (click)='openAccount()'>Add Account</button>
+                                    <button mat-stroked-button color='primary' [disabled]='personalLock' (click)='openAccount(p)'>Add Account</button>
                                 </div>
                             </div>
                             <div class='pwd-content-container'>
-                                <div class='list-content'>
+                                <div class='list-content' *ngFor='let a of p.accounts'>
                                     <div class='list-content-header'>
                                         <mat-form-field class='pwd-content'>
                                             <mat-label>Username</mat-label>
-                                            <input type="text" matInput readonly>
+                                            <input type="text" matInput readonly value={{a.user}}>
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='!a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly value={{pwd}} type='password'>
-                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                                                <input matInput readonly value={{a.pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'>visibility</mat-icon>
                                             </mat-form-field>
-                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input type="text" matInput readonly value={{pwd}}>
-                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
+                                                <input type="text" matInput readonly value={{a.pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'> visibility_off</mat-icon>
                                             </mat-form-field>
-                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard()'>
+                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard(a)' [disabled]='personalLock'>
                                                 <mat-icon>content_copy</mat-icon>
                                             </button>
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed()' [disabled]='personalLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='personalLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm()' [disabled]='personalLock'>
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(p, a)' [disabled]='personalLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
@@ -104,22 +100,19 @@
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
-                <mat-accordion >
-                    <mat-expansion-panel [disabled]='secretLock'>
+                <mat-accordion>
+                    <mat-expansion-panel [disabled]='secretLock' *ngFor='let s of secretTest'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <span>Website Title</span>
+                                <span>{{s.label}}</span>
                             </mat-panel-title>
-                            <mat-panel-description>
-                                <span>Last Updated</span>
-                            </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
                                 <button mat-icon-button>
                                     <mat-icon>public</mat-icon>
                                 </button>
-                                <span id='pwd-url'>Website URL Link</span>
+                                <span id='pwd-url' (click)='openLink(s.website)'>{{s.website}}</span>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
@@ -128,38 +121,38 @@
                                     <mat-icon>vpn_key</mat-icon>
                                 </div>
                                 <div>
-                                    <button mat-stroked-button color='primary' [disabled]='secretLock' (click)='openAccount()'>Add Account</button>
+                                    <button mat-stroked-button color='primary' [disabled]='secretLock' (click)='openAccount(s)'>Add Account</button>
                                 </div>
                             </div>
                             <div class='pwd-content-container'>
-                                <div class='list-content'>
+                                <div class='list-content' *ngFor='let a of s.accounts'>
                                     <div class='list-content-header'>
                                         <mat-form-field class='pwd-content'>
                                             <mat-label>Username</mat-label>
-                                            <input type="text" matInput readonly>
+                                            <input type="text" matInput readonly value={{a.user}}>
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='!a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly value={{pwd}} type='password'>
-                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                                                <input matInput readonly value={{a.pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'>visibility</mat-icon>
                                             </mat-form-field>
-                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input type="text" matInput readonly value={{pwd}}>
-                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
+                                                <input type="text" matInput readonly value={{a.pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'> visibility_off</mat-icon>
                                             </mat-form-field>
-                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard(a)' [disabled]='secretLock'>
                                                 <mat-icon>content_copy</mat-icon>
                                             </button>
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" [disabled]='secretLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='secretLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" [disabled]='secretLock'>
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(s, a)' [disabled]='secretLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>
@@ -186,21 +179,18 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion >
-                    <mat-expansion-panel [disabled]='otherLock'>
+                    <mat-expansion-panel [disabled]='otherLock' *ngFor='let o of otherTest'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <span>Website Title</span>
+                                <span>{{o.label}}</span>
                             </mat-panel-title>
-                            <mat-panel-description>
-                                <span>Last Updated</span>
-                            </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
                                 <button mat-icon-button>
                                     <mat-icon>public</mat-icon>
                                 </button>
-                                <span id='pwd-url'>Website URL Link</span>
+                                <span id='pwd-url' (click)='openLink(o.website)'>{{o.website}}</span>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
@@ -209,38 +199,38 @@
                                     <mat-icon>vpn_key</mat-icon>
                                 </div>
                                 <div>
-                                    <button mat-stroked-button color='primary' [disabled]='otherLock' (click)='openAccount()'>Add Account</button>
+                                    <button mat-stroked-button color='primary' [disabled]='otherLock' (click)='openAccount(o)'>Add Account</button>
                                 </div>
                             </div>
                             <div class='pwd-content-container'>
-                                <div class='list-content'>
+                                <div class='list-content' *ngFor='let a of o.accounts'>
                                     <div class='list-content-header'>
                                         <mat-form-field class='pwd-content'>
                                             <mat-label>Username</mat-label>
-                                            <input type="text" matInput readonly>
+                                            <input type="text" matInput readonly value={{a.user}}>
                                         </mat-form-field>
                                         <div class='small-spacer'></div>
                                         <div class='list-content-primary'>
-                                            <mat-form-field class='pwd-content' *ngIf='!showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='!a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input matInput readonly value={{pwd}} type='password'>
-                                                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                                                <input matInput readonly value={{a.pwd}} type='password'>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'>visibility</mat-icon>
                                             </mat-form-field>
-                                            <mat-form-field class='pwd-content' *ngIf='showPwd'>
+                                            <mat-form-field class='pwd-content' *ngIf='a.showPwd'>
                                                 <mat-label>Password</mat-label>
-                                                <input type="text" matInput readonly value={{pwd}}>
-                                                <mat-icon matSuffix (click)='toggleShow()'> visibility_off</mat-icon>
+                                                <input type="text" matInput readonly value={{a.pwd}}>
+                                                <mat-icon matSuffix (click)='toggleShow(a)'> visibility_off</mat-icon>
                                             </mat-form-field>
-                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'">
+                                            <button mat-icon-button matTooltip='Copy to Clipboard' [matTooltipPosition]="'right'" (click)='copyToClipboard(a)' [disabled]='otherLock'>
                                                 <mat-icon>content_copy</mat-icon>
                                             </button>
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" [disabled]='otherLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='otherLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" [disabled]='otherLock'>
+                                        <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(o, a)' [disabled]='otherLock'>
                                             <mat-icon>remove_circle_outline</mat-icon>
                                         </button>
                                     </div>

@@ -58,7 +58,7 @@
 #pwd-url{
     font-size: 15pt;
     color: blue;
-    cursor: pointer;
+    text-decoration: none;
 }
 .pwd-content-container{
     padding: 2em;

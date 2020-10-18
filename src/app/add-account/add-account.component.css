@@ -51,6 +51,10 @@
 #entropy-btn{
     width: 12em;
 }
+#refresh-input{
+    width: 5em;
+    text-align: center;
+}
 .pwd-btn-row{
     display: flex;
     flex-direction: row;

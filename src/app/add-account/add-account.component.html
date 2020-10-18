@@ -19,12 +19,12 @@
 <div class='pwd-content'>
     <mat-form-field appearance='outline' id='account-input'>
         <mat-label>Username</mat-label>
-        <input type="text" matInput [(ngModel)]='user'>
+        <input type="text" matInput [(ngModel)]='account.user'>
     </mat-form-field>
     <div class='spacer'></div>
     <mat-form-field appearance='outline' id='account-input'> 
         <mat-label>Password</mat-label>
-        <input type="text" matInput [(ngModel)]='pwd'>
+        <input type="text" matInput [(ngModel)]='account.pwd'>
     </mat-form-field>
 </div>
 <div class='pwd-btn-row'>
@@ -33,7 +33,7 @@
         <button mat-flat-button color='primary' id='generate-btn' (click)='generatePassword()'>GENERATE</button>
     </ng-template>
     <div class='spacer'></div>
-    <button mat-flat-button color='accent' id='entropy-btn' *ngIf='pwd.length === 0; else showEntropy' disabled>CHECK PASSWORD</button>
+    <button mat-flat-button color='accent' id='entropy-btn' *ngIf='account.pwd.length === 0; else showEntropy' disabled>CHECK PASSWORD</button>
     <ng-template #showEntropy>
         <button mat-flat-button color='accent' id='entropy-btn' (click)='calculateEntropy()'>CHECK PASSWORD</button>
     </ng-template>
@@ -52,8 +52,8 @@
 </div>
 <div class='pwd-notification-container'>
     <div>
-        <span>Notifications: </span>
-        <button mat-icon-button matTooltip='Mute Notifications' *ngIf='notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
+        <span>Notifications:</span>
+        <button mat-icon-button matTooltip='Mute Notifications' *ngIf='account.notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
             <mat-icon>notifications_off</mat-icon>
         </button>
         <ng-template #showBell>
@@ -62,18 +62,19 @@
             </button>
         </ng-template>
     </div>
-    <div class='spacer'></div>
-    <div class='pwd-notification-interval' *ngIf='notify'>
-        <span>Refresh Password Interval: </span>
-        <mat-form-field id='pwd-interval'>
-            <mat-label>Interval</mat-label>
-            <mat-select [(value)]='interval'>
-                <mat-option *ngFor='let i of intervals' [value]='i'>{{i}}</mat-option>
-            </mat-select>
+</div>
+<div>
+    <span>Automatic Refresh: </span>
+    <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
+    <div>
+        <span>Refresh Interval: </span>
+        <mat-form-field id='refresh-input'>
+            <input type="number" matInput [(ngModel)]='account.interval'>
         </mat-form-field>
+        <span>days</span>
     </div>
 </div>
 <div class='button-row'>
     <button mat-stroked-button (click)='cancel()'>Cancel</button>
-    <button mat-stroked-button color='primary'>Save</button>
+    <button mat-stroked-button color='primary' (click)='save()'>Save</button>
 </div>

@@ -3,10 +3,10 @@
     <span>This action cannot be undone</span>
 </div>
 <div class='confirm-img'>
-    <img src="assets/img/warning.png" height='128px' width='128px'>
+    <img src="assets/img/warning.png" atl='warning icon' height='128px' width='128px'>
 </div>
 <div class='vertical-spacer'></div>
 <div class='btn-row'>
     <button mat-stroked-button (click)='cancel()'>Cancel</button>
-    <button mat-stroked-button color='warn'>Delete</button>
+    <button mat-stroked-button color='warn' (click)='delete()'>Delete</button>
 </div>

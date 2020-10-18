@@ -15,4 +15,7 @@ export class ConfirmComponent implements OnInit {
   cancel(){
     this.confirmRef.close(false);
   }
+  delete(){
+    this.confirmRef.close(true);
+  }
 }
