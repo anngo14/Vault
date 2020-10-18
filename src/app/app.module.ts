@@ -32,6 +32,7 @@ import { AddAccountComponent } from './add-account/add-account.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
     UnlockComponent,
     DetailedComponent,
     AddAccountComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -59,6 +59,7 @@
     font-size: 15pt;
     color: blue;
     text-decoration: none;
+    cursor: pointer;
 }
 .pwd-content-container{
     padding: 2em;

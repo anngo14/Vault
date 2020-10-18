@@ -30,6 +30,9 @@ export class AppComponent {
   redirectToGenerator(){
     this.r.navigate(['/generator']);
   }
+  redirectToSettings(){
+    this.r.navigate(['/settings']);
+  }
   clearAllNotifications(){
     this.notifications = [];
   }

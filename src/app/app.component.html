@@ -20,7 +20,7 @@
     </div>
 </mat-toolbar>
 <mat-menu #userMenu='matMenu'>
-    <button mat-menu-item>Account Settings</button>
+    <button mat-menu-item (click)='redirectToSettings()'>Account Settings</button>
     <button mat-menu-item (click)='redirectToLogin()'>Log out</button>
 </mat-menu>
 <mat-menu #notifyMenu='matMenu'>

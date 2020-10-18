@@ -170,9 +170,7 @@ export class HomeComponent implements OnInit {
     }
   }
   toggleShow(a: account){
-    if(!this.personalLock){
-      a.showPwd = !a.showPwd;
-    } 
+    a.showPwd = !a.showPwd;
   }
   copyToClipboard(a: account){
     this.cb.copyFromContent(a.pwd);
