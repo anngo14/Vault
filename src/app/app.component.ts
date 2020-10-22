@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DetailedComponent } from './detailed/detailed.component';
 import { account } from './models/account';
-import { notification } from './models/notification';
+import { notifications } from './models/notifications';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,60 @@ import { notification } from './models/notification';
 })
 export class AppComponent {
   title: string = "Vault";
-  notifications: notification[] = [ 
+  notifications: notifications[] = [
     {
-      account: "Account Name",
-      website: "Website"
+      label: "Website",
+      account: 
+      {
+        user: "Account",
+        pwd: "password",
+        strength: 120,
+        showPwd: false,
+        notify: true,
+        created: "October 1, 2020",
+        refresh: true,
+        interval: 30,
+        history: [
+          {
+            date: "October 10, 2020",
+            pwd: "password"
+          },
+          {
+            date: "October 5, 2020",
+            pwd: "test"
+          },
+          {
+            date: "October 1, 2020",
+            pwd: "pwd"
+          }
+        ]
+      }
+    }, 
+    {
+      label: "Gmail",
+      account: 
+      {
+        user: "user",
+        pwd: "test",
+        strength: 120,
+        showPwd: false,
+        notify: true,
+        created: "October 5, 2020",
+        refresh: true,
+        interval: 30,
+        history: [
+          {
+            date: "October 7, 2020",
+            pwd: "test"
+          },
+          {
+            date: "October 5, 2020",
+            pwd: "pwd"
+          }
+        ]
+      }
     }
-];
+  ];
 
   constructor(public dialog: MatDialog, private r: Router) {}
 

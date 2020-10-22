@@ -37,7 +37,7 @@
         </div>
         <div class='notify-menu-item' mat-menu-item *ngFor='let n of notifications'>
             <mat-icon class='notify-menu-icon'>warning</mat-icon>
-            <span class='notify-menu-text'>{{n.account}} for {{n.website}} password has expired. <br> A password refresh is suggested</span>
+            <span class='notify-menu-text'>{{n.account.user}} for {{n.label}} password has expired. <br> A password refresh is suggested</span>
         </div>
     </div>
 </mat-menu>

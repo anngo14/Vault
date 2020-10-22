@@ -1,0 +1,49 @@
+.settings-card{
+    width: 90%;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.card-header-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.subheader{
+    font-size: 18pt;
+    padding-left: 1em;
+    padding-bottom: 1em;
+}
+.notifications-content{
+    padding-left: 2em;
+    padding-bottom: 1em;
+    font-size: 12pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.password-content{
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    padding-bottom: 1em;
+}
+.vertical-spacer{
+    height: 1em;
+}
+#password-input{
+    width: 30em;
+}
+#password-submit{
+    width: 10em;
+}
+.account-content{
+    display: flex;
+    flex-direction: row;
+    padding-left: 2em;
+    padding-bottom: 1em;
+}
+#delete-btn{
+    width: 10em;
+}

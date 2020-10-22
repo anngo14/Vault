@@ -1,1 +1,48 @@
-<p>settings works!</p>
+<mat-card class='settings-card'>
+    <mat-card-header>
+        <div class='card-header-container'>
+            <div>
+                <mat-icon mat-card-avatar>settings</mat-icon>
+            </div>
+            <div>
+                <mat-card-title>Settings</mat-card-title>
+                <mat-card-subtitle>change account settings</mat-card-subtitle>
+            </div>
+        </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <div class='vertical-spacer'></div>
+    <div class='subheader'>
+        <span>Notifications</span>
+    </div>
+    <div class='notifications-content'>
+        <span>All Notifications: &nbsp;</span>
+        <mat-slide-toggle></mat-slide-toggle>
+    </div>
+    <div class='subheader'>
+        <span>Master Password</span>
+    </div>
+    <div class='password-content'>
+        <span>Change Master Password</span>
+        <div class='vertical-spacer'></div>
+        <mat-form-field appearance='outline' id='password-input'>
+            <mat-label>Enter your Current Master Password</mat-label>
+            <input type="password" matInput>
+        </mat-form-field>
+        <mat-form-field appearance='outline' id='password-input'>
+            <mat-label>Enter a New Master Password</mat-label>
+            <input type="password" matInput>
+        </mat-form-field>
+        <mat-form-field appearance='outline' id='password-input'>
+            <mat-label>Confirm New Master Password</mat-label>
+            <input type="password" matInput>
+        </mat-form-field>
+        <button mat-stroked-button color='primary' id='password-submit'>SUBMIT</button>
+    </div>
+    <div class='subheader'>
+        <span>Account</span>
+    </div>
+    <div class='account-content'>
+        <button mat-flat-button color='warn' id='delete-btn'>Delete Account</button>
+    </div>
+</mat-card>
