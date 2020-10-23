@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DetailedComponent } from './detailed/detailed.component';
-import { account } from './models/account';
 import { notifications } from './models/notifications';
 
 @Component({
@@ -84,9 +82,14 @@ export class AppComponent {
   clearAllNotifications(){
     this.notifications = [];
   }
-  openDetailed(a: account){
-    const detailedRef = this.dialog.open(DetailedComponent, {
-      data: a
-    });
+  ignore(n: notifications){
+    this.closeNotification(n);
+  }
+  refresh(n: notifications){
+    this.closeNotification(n);
+  }
+  closeNotification(n: notifications){
+    let index = this.notifications.indexOf(n);
+    this.notifications.splice(index, 1);
   }
 }

@@ -35,9 +35,20 @@
         <div *ngIf='notifications.length === 0' class='notify-menu-empty'>
             <span class='notify-menu-empty-text'>No New Notifications</span>
         </div>
-        <div class='notify-menu-item' mat-menu-item *ngFor='let n of notifications'>
+        <div class='notify-menu-item' *ngFor='let n of notifications'>
             <mat-icon class='notify-menu-icon'>warning</mat-icon>
-            <span class='notify-menu-text'>{{n.account.user}} for {{n.label}} password has expired. <br> A password refresh is suggested</span>
+            <div class='spacer'></div>
+            <div class='spacer'></div>
+            <div class='notify-menu-text'>
+                <span>"{{n.account.user}}" for {{n.label}} has an expired password.</span>
+                <span>A password refresh is suggested.</span>
+            </div>
+            <div class='spacer'></div>
+            <div style='flex: 1 1 auto'></div>
+            <div class='notify-menu-btn'>
+                <button mat-stroked-button color='warn' (click)='ignore(n)'>Ignore</button>
+                <button mat-stroked-button color='primary' (click)='refresh(n)'>Refresh</button>
+            </div>
         </div>
     </div>
 </mat-menu>

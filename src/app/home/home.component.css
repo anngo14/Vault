@@ -84,6 +84,9 @@
 .smaller-spacer{
     width: 0.25em;
 }
+.vertical-spacer{
+    height: 5em;
+}
 .list-content-primary{
     display: flex;
     flex-direction: row;

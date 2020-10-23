@@ -17,7 +17,7 @@
     </div>
     <div class='notifications-content'>
         <span>All Notifications: &nbsp;</span>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]='notify'></mat-slide-toggle>
     </div>
     <div class='subheader'>
         <span>Master Password</span>
@@ -43,6 +43,8 @@
         <span>Account</span>
     </div>
     <div class='account-content'>
-        <button mat-flat-button color='warn' id='delete-btn'>Delete Account</button>
+        <span>Delete Account</span>
+        <div class='vertical-spacer'></div>
+        <button mat-flat-button color='warn' id='delete-btn'>Delete</button>
     </div>
 </mat-card>

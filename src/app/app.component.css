@@ -43,7 +43,7 @@
     padding: 1em;
 }
 .notify-menu-header{
-    width: 30em;
+    width: 40em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -56,18 +56,21 @@
     min-height: 8em;
     max-height: 30em;
     overflow-y: auto;
+    max-width: 40em;
 }
 .notify-menu-item{
     display: flex;
     flex-direction: row;
     align-items: center;
     min-height: 8em;
+    padding-left: 1em;
 }
 .notify-menu-icon{
-    font-size: 20pt;
+    font-size: 26pt;
 }
 .notify-menu-text{
-    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
     max-width: 25em;
     word-wrap: break-word;
 }
@@ -77,4 +80,11 @@
     justify-content: center;
     align-items: center;
     min-height: 8em;
+}
+.notify-menu-btn{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.spacer{
+    width: 1em;
 }
