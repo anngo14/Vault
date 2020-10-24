@@ -8,11 +8,11 @@
     <mat-card-content class='login-content'>
         <mat-form-field appearance='outline' class='login-email-input'>
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" [(ngModel)]='email'>
         </mat-form-field><br>
         <mat-form-field appearance='outline' class='login-pwd-input'>
             <mat-label>Password</mat-label>
-            <input matInput type={{textAttribute}} placeholder="Password">
+            <input matInput type={{textAttribute}} placeholder="Password" [(ngModel)]='password'>
             <mat-icon *ngIf='show; else notShow' matSuffix (click)='toggleShow()'>visibility</mat-icon>
             <ng-template #notShow>
                 <mat-icon matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
@@ -20,7 +20,7 @@
         </mat-form-field><br>
         <div class='button-row-1'>
             <span (click)='redirectToRegister()' class='login-link'>Create Account</span>
-            <button mat-flat-button color='primary'>Login</button>
+            <button mat-flat-button color='primary' (click)='login()'>Login</button>
         </div><br>
         <div class='button-row-2'>
             <span class='login-link'>Forgot Password?</span>

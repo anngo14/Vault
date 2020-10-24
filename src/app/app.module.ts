@@ -33,6 +33,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SettingsComponent } from './settings/settings.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './guard/auth.guard';
+import { TokenService } from './services/token.service';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatDialogModule,
     MatSnackBarModule,
     ClipboardModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   entryComponents: [
@@ -78,7 +82,13 @@ import { SettingsComponent } from './settings/settings.component';
     AddAccountComponent,
     ConfirmComponent
   ],
-  providers: [],
+  providers: [AuthGuard, 
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenService,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

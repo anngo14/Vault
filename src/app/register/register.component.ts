@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +13,11 @@ export class RegisterComponent implements OnInit {
   textAttribute2: string = "password";
   show: boolean = true;
   show2: boolean = true;
+  email: string = "";
+  password: string = "";
+  confirmPassword: string = "";
   
-  constructor(private r: Router) { }
+  constructor(private r: Router, private u: UserService) { }
 
   ngOnInit() {
   }
@@ -26,7 +30,22 @@ export class RegisterComponent implements OnInit {
     this.show2 = !this.show2;
     this.textAttribute2 = this.show2 ? "password" : "text";
   }
+  register(){
+    this.u.registerUser(this.email, this.password).subscribe(res => {
+      if(res.token !== undefined){
+        localStorage.setItem('token', res.token);
+        this.redirectToLogin();
+      }
+    });
+  }
   redirectToLogin(){
     this.r.navigate(['/login']);
   }
+  validatePwd(){
+    if(this.password === this.confirmPassword && this.password !== ""){
+      return true;
+    } else{
+      return false;
+    }
+  } 
 }

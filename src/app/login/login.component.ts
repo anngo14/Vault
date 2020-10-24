@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,10 @@ export class LoginComponent implements OnInit {
 
   textAttribute: string = "password";
   show: boolean = true;
-  constructor(private elementRef: ElementRef, private r: Router) { }
+  email: string = "";
+  password: string = "";
+
+  constructor(private elementRef: ElementRef, private r: Router, private u: UserService) { }
 
   ngOnInit() {
     //this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#202124';
@@ -21,5 +25,17 @@ export class LoginComponent implements OnInit {
   }
   redirectToRegister(){
     this.r.navigate(['/register']);
+  }
+  login(){
+    this.u.loginuser(this.email, this.password).subscribe(data => {
+      console.log(data);
+      if(data.token !== undefined){
+        localStorage.setItem('token', data.token);
+        this.redirectToHome();
+      }
+    });
+  }
+  redirectToHome(){
+    this.r.navigate(['/home']);
   }
 }
