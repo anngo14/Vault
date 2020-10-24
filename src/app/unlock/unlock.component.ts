@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-unlock',
@@ -8,7 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class UnlockComponent implements OnInit {
 
-  constructor(public unlockRef: MatDialogRef<UnlockComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  pass: string = "";
+  constructor(public unlockRef: MatDialogRef<UnlockComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private u: UserService) { }
 
   ngOnInit() {
   }
@@ -17,6 +19,11 @@ export class UnlockComponent implements OnInit {
     this.unlockRef.close(false);
   }
   confirm(){
-    this.unlockRef.close(true);
+    let email = localStorage.getItem('email');
+    this.u.loginuser(email, this.pass).subscribe(data => {
+      if(data.token !== undefined){
+        this.unlockRef.close(true);
+      }
+    });
   }
 }
