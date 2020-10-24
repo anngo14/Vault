@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 var fs = require('fs');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
+const { exit } = require('process');
 const PORT = process.env.PORT || 5000;
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://anngo14:powermacg5@vault-cluster.qcnmp.mongodb.net/test";
@@ -40,18 +41,18 @@ app.post('/login', (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;
 
-    collection.find({email: email}).toArray((err, result) => {
+    collection.findOne({email: email}, (err, result) => {
         if(err) throw err;
-        if(result.length > 0){
-            if(bcrypt.compareSync(pass, result[0].password)){
-                let payload = { subject: result[0]._id }
-                let token = jwt.sign(payload, 'secret');
-                res.status(200).send({token});
-            } else{
-                res.send({status: "Invalid Password"});
-            }
-        } else{
+        if(result === null){
             res.send({status: "Invalid Email"});
+            return;
+        }
+        if(bcrypt.compareSync(pass, result.password)){
+            let payload = { subject: result._id }
+            let token = jwt.sign(payload, 'secret');
+            res.status(200).send({token});
+        } else{
+            res.send({status: "Invalid Password"});
         }
     });
 });
@@ -64,6 +65,11 @@ app.post('/register', async (req, res) => {
     let user = {
         email: email,
         password: hashedPassword
+    }
+    var existing = collection.findOne({email: email});
+    if(existing !== null){
+        res.status(400).send({status: "Existing Account"});
+        return;
     }
     collection.insertOne(user, (err, result) => {
         if(err){

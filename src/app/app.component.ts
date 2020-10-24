@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { notifications } from './models/notifications';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -65,7 +66,7 @@ export class AppComponent {
     }
   ];
 
-  constructor(public dialog: MatDialog, private r: Router) {}
+  constructor(public dialog: MatDialog, private r: Router, public u: UserService) {}
 
   redirectToLogin(){
     this.r.navigate(['/login']);
@@ -79,6 +80,9 @@ export class AppComponent {
   redirectToSettings(){
     this.r.navigate(['/settings']);
   }
+  redirectToRegister(){
+    this.r.navigate(['/register']);
+  }
   clearAllNotifications(){
     this.notifications = [];
   }
@@ -91,5 +95,8 @@ export class AppComponent {
   closeNotification(n: notifications){
     let index = this.notifications.indexOf(n);
     this.notifications.splice(index, 1);
+  }
+  logout(){
+    this.u.logout();
   }
 }

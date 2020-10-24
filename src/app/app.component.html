@@ -6,22 +6,31 @@
         <span id='title'>Vault</span>
     </div>
     <div class='toolbar-action-buttons'>
-        <button mat-icon-button *ngIf='notifications.length > 0; else hideBadge' [matMenuTriggerFor]='notifyMenu'>
+        <button mat-icon-button *ngIf='notifications.length > 0 && u.loggedIn(); else hideBadge' [matMenuTriggerFor]='notifyMenu'>
             <mat-icon matBadge={{notifications.length}} matBadgeColor='warn'>notifications</mat-icon>
         </button>
         <ng-template #hideBadge>
-            <button mat-icon-button [matMenuTriggerFor]='notifyMenu'>
+            <button mat-icon-button [matMenuTriggerFor]='notifyMenu' *ngIf='u.loggedIn()'>
                 <mat-icon>notifications</mat-icon>
             </button>
         </ng-template>
-        <button mat-icon-button [matMenuTriggerFor]='userMenu'>
+        <button mat-icon-button [matMenuTriggerFor]='userMenu' *ngIf='u.loggedIn(); else basicMenu'>
             <mat-icon>account_circle</mat-icon>
         </button>
+        <ng-template #basicMenu>
+            <button mat-icon-button [matMenuTriggerFor]='basic'>
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </ng-template>
     </div>
 </mat-toolbar>
 <mat-menu #userMenu='matMenu'>
     <button mat-menu-item (click)='redirectToSettings()'>Account Settings</button>
-    <button mat-menu-item (click)='redirectToLogin()'>Log out</button>
+    <button mat-menu-item (click)='logout()'>Log out</button>
+</mat-menu>
+<mat-menu #basic='matMenu'>
+    <button mat-menu-item (click)='redirectToLogin()'>Sign In</button>
+    <button mat-menu-item (click)='redirectToRegister()'>Register</button>
 </mat-menu>
 <mat-menu #notifyMenu='matMenu'>
     <div class='notify-menu-header'>

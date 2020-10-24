@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class UserService {
   registerUrl: string = "http://localhost:5000/register";
   loginUrl: string = "http://localhost:5000/login";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private r: Router) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -38,5 +39,9 @@ export class UserService {
   }
   getToken(){
     return localStorage.getItem('token');
+  }
+  logout(){
+    localStorage.removeItem('token');
+    this.r.navigate(['/login']);
   }
 }
