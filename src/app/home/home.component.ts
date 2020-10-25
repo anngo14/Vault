@@ -7,6 +7,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { account } from '../models/account';
 import { password } from '../models/password';
+import { PasswordService } from '../services/password.service';
 import { UnlockComponent } from '../unlock/unlock.component';
 
 @Component({
@@ -22,104 +23,22 @@ export class HomeComponent implements OnInit {
   secretLock: boolean = true;
   otherLock: boolean = true;
 
-  personalTest: password[] = [
-    {
-      category: 0,
-      label: "Website",
-      website: "https://www.google.com",
-      accounts: [
-        {
-          user: "Account",
-          pwd: "password",
-          strength: 120,
-          showPwd: false,
-          notify: true,
-          created: "October 1, 2020",
-          refresh: true,
-          interval: 30,
-          history: [
-            {
-              date: "October 10, 2020",
-              pwd: "password"
-            },
-            {
-              date: "October 5, 2020",
-              pwd: "test"
-            },
-            {
-              date: "October 1, 2020",
-              pwd: "pwd"
-            }
-          ]
-        }
-      ]
-    }
-  ];
-  secretTest: password[] = [
-    {
-      category: 0,
-      label: "Gmail",
-      website: "https://www.gmail.com",
-      accounts: [
-        {
-          user: "user",
-          pwd: "test",
-          strength: 120,
-          showPwd: false,
-          notify: true,
-          created: "October 5, 2020",
-          refresh: true,
-          interval: 30,
-          history: [
-            {
-              date: "October 7, 2020",
-              pwd: "test"
-            },
-            {
-              date: "October 5, 2020",
-              pwd: "pwd"
-            }
-          ]
-        }
-      ]
-    }
-  ];
-  otherTest: password[] = [
-    {
-      category: 0,
-      label: "YouTube",
-      website: "https://www.youtube.com",
-      accounts: [
-        {
-          user: "username",
-          pwd: "password",
-          strength: 120,
-          showPwd: false,
-          notify: true,
-          created: "October 1, 2020",
-          refresh: true,
-          interval: 30,
-          history: [
-            {
-              date: "October 10, 2020",
-              pwd: "password"
-            },
-            {
-              date: "October 5, 2020",
-              pwd: "test"
-            },
-            {
-              date: "October 1, 2020",
-              pwd: "pwd"
-            }
-          ]
-        }
-      ]
-    }
-  ];
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService) { }
+  personal: password[] = [];
+  secret: password[] = [];
+  other: password[] = [];
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService) { }
 
   ngOnInit() {
+    let email = localStorage.getItem('email');
+    this.p.getPersonal(email).subscribe(data => {
+      this.personal = data.result.personalArray;
+    })
+    this.p.getSecret(email).subscribe(data => {
+      this.secret = data.result.secretArray;
+    })
+    this.p.getOther(email).subscribe(data => {
+      this.other = data.result.otherArray;
+    })
   }
   unlockCategory(c: string){
     const unlockDialogRef = this.dialog.open(UnlockComponent, {

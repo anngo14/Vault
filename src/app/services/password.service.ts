@@ -9,6 +9,9 @@ export class PasswordService {
 
   insertUrl: string = 'http://localhost:5000/api/insert';
   checkUrl: string = 'http://localhost:5000/api/check';
+  personalUrl: string = 'http://localhost:5000/api/personal';
+  secretUrl: string = 'http://localhost:5000/api/secret';
+  otherUrl: string = 'http://localhost:5000/api/other';
 
   constructor(private http: HttpClient) { }
 
@@ -33,5 +36,23 @@ export class PasswordService {
       category: c
     };
     return this.http.post(this.checkUrl, json, this.httpOptions);
+  }
+  getPersonal(e: string): any{
+    let json = {
+      email: e
+    };
+    return this.http.post(this.personalUrl, json, this.httpOptions);
+  }
+  getSecret(e: string): any{
+    let json = {
+      email: e
+    };
+    return this.http.post(this.secretUrl, json, this.httpOptions);
+  }
+  getOther(e: string): any{
+    let json = {
+      email: e
+    };
+    return this.http.post(this.otherUrl, json, this.httpOptions);
   }
 }

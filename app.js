@@ -36,7 +36,27 @@ function verifyToken(req, res, next) {
     req.userId = payload.subject;
     next();
 }
-
+app.post('/api/personal', (req, res) => {
+    let email = req.body.email;
+    collection.findOne({email: email}, { projection: { _id: 0, personalArray: 1}}, (err, result) => {
+        if(err) throw err;
+        res.send({result});
+    });
+});
+app.post('/api/secret', (req, res) => {
+    let email = req.body.email;
+    collection.findOne({email: email}, { projection: { _id: 0, secretArray: 1}}, (err, result) => {
+        if(err) throw err;
+        res.send({result});
+    });
+});
+app.post('/api/other', (req, res) => {
+    let email = req.body.email;
+    collection.findOne({email: email}, { projection: { _id: 0, otherArray: 1}}, (err, result) => {
+        if(err) throw err;
+        res.send({result});
+    });
+});
 app.post('/api/login', (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;
@@ -99,12 +119,36 @@ app.post('/api/check', (req, res) => {
                 return;
             }
             res.send({status: 200});
-            console.log("existing");
+            console.log("existing password");
         });
     } else if (c == 1){
-        collection.findOne({email: email, secretArray: { label: label }});
+        collection.findOne({email: email, "secretArray.label": label}, (err, result) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(result);
+            if(result === null){
+                res.send({status: 404});
+                return;
+            }
+            res.send({status: 200});
+            console.log("existing password");
+        });
     } else{
-        collection.findOne({email: email, otherArray: { label: label }});
+        collection.findOne({email: email, "otherArray.label": label}, (err, result) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(result);
+            if(result === null){
+                res.send({status: 404});
+                return;
+            }
+            res.send({status: 200});
+            console.log("existing password");
+        });
     }    
 });
 app.post('/api/insert', (req, res) => {

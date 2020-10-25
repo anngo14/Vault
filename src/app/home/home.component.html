@@ -24,7 +24,7 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion>
-                    <mat-expansion-panel [disabled]='personalLock' *ngFor='let p of personalTest'>
+                    <mat-expansion-panel [disabled]='personalLock' *ngFor='let p of personal'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>{{p.label}}</span>
@@ -102,7 +102,7 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion>
-                    <mat-expansion-panel [disabled]='secretLock' *ngFor='let s of secretTest'>
+                    <mat-expansion-panel [disabled]='secretLock' *ngFor='let s of secret'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>{{s.label}}</span>
@@ -180,7 +180,7 @@
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion >
-                    <mat-expansion-panel [disabled]='otherLock' *ngFor='let o of otherTest'>
+                    <mat-expansion-panel [disabled]='otherLock' *ngFor='let o of other'>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span>{{o.label}}</span>
