@@ -37,7 +37,7 @@ function verifyToken(req, res, next) {
     next();
 }
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;
 
@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
         }
     });
 });
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;
 
@@ -81,6 +81,80 @@ app.post('/register', async (req, res) => {
         let token = jwt.sign(payload, 'secret');
         res.status(200).send({token});
     });
+});
+app.post('/api/check', (req, res) => {
+    let email = req.body.email;
+    let label = req.body.label;
+    let c = req.body.category;
+    var doc;
+    if(c == 0){
+        collection.findOne({email: email, "personalArray.label": label}, (err, result) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(result);
+            if(result === null){
+                res.send({status: 404});
+                return;
+            }
+            res.send({status: 200});
+            console.log("existing");
+        });
+    } else if (c == 1){
+        collection.findOne({email: email, secretArray: { label: label }});
+    } else{
+        collection.findOne({email: email, otherArray: { label: label }});
+    }    
+});
+app.post('/api/insert', (req, res) => {
+    let email = req.body.email;
+    let c = req.body.category;
+    let password = req.body.password;
+    var pass; 
+    if(c == 0){
+        pass = collection.updateOne({email: email}, 
+            {
+                $push: {
+                    personalArray: {
+                        label: password.label,
+                        website: password.website,
+                        accounts: password.accounts
+                    }
+                }
+        }).catch((err) => {
+            if(err) console.log(err);
+        });
+        res.status(200).send({status: 200});
+    } else if(c == 1){
+        pass = collection.updateOne({email: email}, 
+            {
+                $push: {
+                    secretArray: {
+                        label: password.label,
+                        website: password.website,
+                        accounts: password.accounts
+                    }
+                }
+        }).catch((err) => {
+            if(err) console.log(err);
+        });
+        res.status(200).send({status: 200});
+    } else{
+        pass = collection.updateOne({email: email}, 
+            {
+                $push: {
+                    otherArray: {
+                        label: password.label,
+                        website: password.website,
+                        accounts: password.accounts
+                    }
+                }
+        }).catch((err) => {
+            if(err) console.log(err);
+        });
+        res.status(200).send({status: 200});
+    }
 });
 
 client.close();

@@ -106,7 +106,10 @@
             </div>
         </div>
         <div class='generator-save-row'>
-            <button mat-flat-button color='accent' id='save-btn'>SAVE</button>
+            <button mat-flat-button color='accent' id='save-btn' (click)='save()' *ngIf='valid(); else disable'>SAVE</button>
+            <ng-template #disable>
+                <button mat-flat-button color='accent' id='save-btn' disabled>SAVE</button>
+            </ng-template>
         </div>
     </div>   
 </mat-card>
