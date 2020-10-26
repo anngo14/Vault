@@ -293,9 +293,19 @@ app.post('/api/updateAccount', (req, res) => {
         });
         res.send({status: 200});
     } else if(c == 1){
-
+        collection.updateOne({email: email, "secretArray.label": label}, {
+            $set: {
+                "secretArray.$.accounts": accounts
+            }
+        });
+        res.send({status: 200});
     } else{
-
+        collection.updateOne({email: email, "otherArray.label": label}, {
+            $set: {
+                "otherArray.$.accounts": accounts
+            }
+        });
+        res.send({status: 200});
     }
 });
 client.close();

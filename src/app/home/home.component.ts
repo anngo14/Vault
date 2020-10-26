@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       data: account
     });
     detailedDialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if(result && !this.checkExisting(p, a)){
         if(account.pwd !== a.pwd){
 
         } else{
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
       data: newAccount
     });
     accountDialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if(result && !this.checkExisting(p, newAccount)){
         this.a.addAccount(this.email, p.category, p.label, newAccount).subscribe(data => {
           if(data.status === 200){
             p.accounts.push(newAccount);
@@ -147,5 +147,11 @@ export class HomeComponent implements OnInit {
         });
       }
     });
+  }
+  checkExisting(p: password, a: account){
+    for(let i = 0; i < p.accounts.length; i++){
+      if(p.accounts[i].user === a.user) return true;
+    }
+    return false;
   }
 }
