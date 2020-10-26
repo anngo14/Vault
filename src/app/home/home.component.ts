@@ -7,6 +7,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { account } from '../models/account';
 import { password } from '../models/password';
+import { AccountService } from '../services/account.service';
 import { PasswordService } from '../services/password.service';
 import { UnlockComponent } from '../unlock/unlock.component';
 
@@ -17,6 +18,7 @@ import { UnlockComponent } from '../unlock/unlock.component';
 })
 export class HomeComponent implements OnInit {
 
+  email: string = "";
   showPwd: boolean = false;
   pwd: string = "test";
   personalLock: boolean = true;
@@ -26,17 +28,17 @@ export class HomeComponent implements OnInit {
   personal: password[] = [];
   secret: password[] = [];
   other: password[] = [];
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService) { }
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { }
 
   ngOnInit() {
-    let email = localStorage.getItem('email');
-    this.p.getPersonal(email).subscribe(data => {
+    this.email = localStorage.getItem('email');
+    this.p.getPersonal(this.email).subscribe(data => {
       this.personal = data.result.personalArray;
     })
-    this.p.getSecret(email).subscribe(data => {
+    this.p.getSecret(this.email).subscribe(data => {
       this.secret = data.result.secretArray;
     })
-    this.p.getOther(email).subscribe(data => {
+    this.p.getOther(this.email).subscribe(data => {
       this.other = data.result.otherArray;
     })
   }
@@ -50,13 +52,39 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  openDetailed(a: account){
+  openDetailed(p: password, a: account){
+    let account: account = {
+      user: a.user,
+      pwd: a.pwd,
+      strength: a.strength,
+      showPwd: false,
+      notify: a.notify,
+      created: a.created,
+      refresh: a.refresh,
+      interval: a.interval,
+      history: a.history
+    };
     const detailedDialogRef = this.dialog.open(DetailedComponent, {
-      data: a
+      data: account
     });
     detailedDialogRef.afterClosed().subscribe(result => {
-  
+      if(result){
+        if(account.pwd !== a.pwd){
+
+        } else{
+          
+        }
+        this.updateAccount(p, a, account);
+        this.a.updateAccount(this.email, p.category, p.label, p.accounts).subscribe(data => {
+          console.log(data);
+        });
+      }
     });
+  }
+  updateAccount(password: password, original: account, update: account){
+    let index = password.accounts.indexOf(original);
+    password.accounts[index] = update;
+    password.accounts[index].showPwd = false;
   }
   openAccount(p: password){
     let newAccount: account = {
@@ -75,7 +103,11 @@ export class HomeComponent implements OnInit {
     });
     accountDialogRef.afterClosed().subscribe(result => {
       if(result){
-        p.accounts.push(newAccount);
+        this.a.addAccount(this.email, p.category, p.label, newAccount).subscribe(data => {
+          if(data.status === 200){
+            p.accounts.push(newAccount);
+          }
+        });
       }
     });
   }
@@ -107,8 +139,12 @@ export class HomeComponent implements OnInit {
     const confirmRef = this.dialog.open(ConfirmComponent);
     confirmRef.afterClosed().subscribe(result => {
       if(result){
-        let index = p.accounts.indexOf(a);
-        p.accounts.splice(index, 1);
+        this.a.removeAccount(this.email, p.category, p.label, a.user).subscribe(data => {
+          if(data.status === 200){
+            let index = p.accounts.indexOf(a);
+            p.accounts.splice(index, 1);
+          }
+        });
       }
     });
   }

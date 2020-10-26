@@ -87,12 +87,23 @@ export class AddAccountComponent implements OnInit {
     }
     return entropy;
   }
+  verify(){
+    if(this.account.user.length > 0 && this.account.pwd.length > 0){
+      console.log(this.account.interval);
+      if(this.account.refresh && this.account.interval === null){
+        return false;;
+      } 
+      return true;
+    }
+    return false;
+  }
   cancel(){
     this.accountRef.close(false);
   }
   save(){
     this.account.created = this.today;
     this.account.strength = this.calculateEntropy();
+    this.account.history.push({date: this.today, pwd: this.account.pwd});
     this.accountRef.close(true);
   }
 }

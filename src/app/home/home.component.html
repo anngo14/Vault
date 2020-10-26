@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='personalLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(p, a)' [disabled]='personalLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
                                         <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(p, a)' [disabled]='personalLock'>

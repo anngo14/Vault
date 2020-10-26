@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 var fs = require('fs');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
-const { exit } = require('process');
+const { APP_ID } = require('@angular/core');
 const PORT = process.env.PORT || 5000;
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://anngo14:powermacg5@vault-cluster.qcnmp.mongodb.net/test";
@@ -163,6 +163,7 @@ app.post('/api/insert', (req, res) => {
                     personalArray: {
                         label: password.label,
                         website: password.website,
+                        category: c,
                         accounts: password.accounts
                     }
                 }
@@ -177,6 +178,7 @@ app.post('/api/insert', (req, res) => {
                     secretArray: {
                         label: password.label,
                         website: password.website,
+                        category: c,
                         accounts: password.accounts
                     }
                 }
@@ -191,6 +193,7 @@ app.post('/api/insert', (req, res) => {
                     otherArray: {
                         label: password.label,
                         website: password.website,
+                        category: c,
                         accounts: password.accounts
                     }
                 }
@@ -200,7 +203,101 @@ app.post('/api/insert', (req, res) => {
         res.status(200).send({status: 200});
     }
 });
+app.post('/api/delete');
+app.post('/api/addAccount', (req, res) => {
+    let email = req.body.email;
+    let c = req.body.category;
+    let label = req.body.label;
+    let newAccount = req.body.account;
 
+    if(c == 0){
+        collection.updateOne({email: email, "personalArray.label": label}, {
+            $push:
+            {
+                "personalArray.$.accounts": newAccount
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    } else if (c == 1){
+        collection.updateOne({email: email, "secretArray.label": label}, {
+            $push:
+            {
+                "secretArray.$.accounts": newAccount
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    } else{
+        collection.updateOne({email: email, "otherArray.label": label}, {
+            $push:
+            {
+                "otherArray.$.accounts": newAccount
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    }
+});
+app.post('/api/removeAccount', (req, res) => {
+    let email = req.body.email;
+    let label = req.body.label;
+    let c = req.body.category;
+    let user = req.body.user;
+
+    if(c == 0){
+        collection.updateOne({email: email, "personalArray.label": label}, {
+            $pull:
+            {
+                "personalArray.$.accounts": { user: user }
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    } else if(c == 1){
+        collection.updateOne({email: email, "secretArray.label": label}, {
+            $pull:
+            {
+                "secretArray.$.accounts": { user: user }
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    } else{
+        collection.updateOne({email: email, "otherArray.label": label}, {
+            $pull:
+            {
+                "otherArray.$.accounts": { user: user }
+            }
+        }, (err, result) => {
+            if(err) throw err;
+        });
+        res.send({status: 200});
+    }
+});
+app.post('/api/updateAccount', (req, res) => {
+    let email = req.body.email;
+    let label = req.body.label;
+    let accounts = req.body.accounts;
+    let c = req.body.category;
+    if(c == 0){
+        collection.updateOne({email: email, "personalArray.label": label}, {
+            $set: {
+                "personalArray.$.accounts": accounts
+            }
+        });
+        res.send({status: 200});
+    } else if(c == 1){
+
+    } else{
+
+    }
+});
 client.close();
 
 app.listen(PORT, () => {

@@ -115,4 +115,7 @@ export class DetailedComponent implements OnInit {
   cancel(){
     this.detailedRef.close(false);
   }
+  save(){
+    this.detailedRef.close(true);
+  }
 }

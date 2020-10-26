@@ -76,5 +76,8 @@
 </div>
 <div class='button-row'>
     <button mat-stroked-button (click)='cancel()'>Cancel</button>
-    <button mat-stroked-button color='primary' (click)='save()'>Save</button>
+    <button mat-stroked-button color='primary' (click)='save()' *ngIf='verify(); else disable'>Save</button>
+    <ng-template #disable>
+        <button mat-stroked-button color='primary' disabled>Save</button>
+    </ng-template>
 </div>
