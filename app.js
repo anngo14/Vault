@@ -203,7 +203,33 @@ app.post('/api/insert', (req, res) => {
         res.status(200).send({status: 200});
     }
 });
-app.post('/api/delete');
+app.post('/api/delete', (req, res) => {
+    let email = req.body.email;
+    let c = req.body.category;
+    let label = req.body.label;
+    if(c == 0){
+        collection.updateOne({email: email}, {
+            $pull: {
+                personalArray: { label: label } 
+            }
+        });
+        res.send({status: 200});
+    } else if(c == 1){
+        collection.updateOne({email: email}, {
+            $pull: {
+                secretArray: { label: label } 
+            }
+        });
+        res.send({status: 200});
+    } else{
+        collection.updateOne({email: email}, {
+            $pull: {
+                otherArray: { label: label } 
+            }
+        });
+        res.send({status: 200});
+    }
+});
 app.post('/api/addAccount', (req, res) => {
     let email = req.body.email;
     let c = req.body.category;

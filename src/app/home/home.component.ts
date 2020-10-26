@@ -139,14 +139,40 @@ export class HomeComponent implements OnInit {
     const confirmRef = this.dialog.open(ConfirmComponent);
     confirmRef.afterClosed().subscribe(result => {
       if(result){
+        let index = this.getPasswordIndex(p.category, p);
         this.a.removeAccount(this.email, p.category, p.label, a.user).subscribe(data => {
           if(data.status === 200){
-            let index = p.accounts.indexOf(a);
-            p.accounts.splice(index, 1);
+            let ai = p.accounts.indexOf(a);
+            p.accounts.splice(ai, 1);
+            if(p.accounts.length === 0){
+              this.deletePassword(index, p.category);
+              this.p.delete(this.email, p.category, p.label).subscribe(data => {
+              });
+            }
           }
         });
       }
     });
+  }
+  getPasswordIndex(c: number, p: password): number{
+    let index;
+    if(c == 0){
+      index = this.personal.indexOf(p);
+    } else if(c == 1){
+      index = this.secret.indexOf(p);
+    } else{
+      index = this.other.indexOf(p);
+    }
+    return index;
+  }
+  deletePassword(i: number, c: number){
+    if(c == 0){
+      this.personal.splice(i, 1);
+    } else if(c == 1){
+      this.secret.splice(i, 1);
+    } else{
+      this.other.splice(i, 1);
+    }
   }
   checkExisting(p: password, a: account){
     for(let i = 0; i < p.accounts.length; i++){

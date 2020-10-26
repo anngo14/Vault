@@ -8,6 +8,7 @@ import { password } from '../models/password';
 export class PasswordService {
 
   insertUrl: string = 'http://localhost:5000/api/insert';
+  deleteUrl: string = 'http://localhost:5000/api/delete';
   checkUrl: string = 'http://localhost:5000/api/check';
   personalUrl: string = 'http://localhost:5000/api/personal';
   secretUrl: string = 'http://localhost:5000/api/secret';
@@ -54,5 +55,13 @@ export class PasswordService {
       email: e
     };
     return this.http.post(this.otherUrl, json, this.httpOptions);
+  }
+  delete(e: string, c: number, l: string): any{
+    let json = {
+      email: e,
+      category: c,
+      label: l
+    };
+    return this.http.post(this.deleteUrl, json, this.httpOptions);
   }
 }
