@@ -130,12 +130,7 @@ export class GeneratorComponent implements OnInit {
           created: this.today,
           refresh: this.refresh,
           interval: this.interval,
-          history: [
-            {
-              date: this.today,
-              pwd: this.pwd
-            }
-          ]
+          history: []
         }
       ]
     };

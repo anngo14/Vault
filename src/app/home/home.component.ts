@@ -24,11 +24,17 @@ export class HomeComponent implements OnInit {
   personalLock: boolean = true;
   secretLock: boolean = true;
   otherLock: boolean = true;
+  today: string = "";
 
   personal: password[] = [];
   secret: password[] = [];
   other: password[] = [];
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { }
+  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { 
+    let d = new Date();
+    this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+  }
 
   ngOnInit() {
     this.email = localStorage.getItem('email');
@@ -68,12 +74,10 @@ export class HomeComponent implements OnInit {
       data: account
     });
     detailedDialogRef.afterClosed().subscribe(result => {
-      if(result && !this.checkExisting(p, a)){
+      if(result && !this.checkOneExistingUser(p, account.user, p.accounts.indexOf(a))){
         if(account.pwd !== a.pwd){
-
-        } else{
-          
-        }
+          account.history.unshift({date: this.today, pwd: a.pwd});
+        } 
         this.updateAccount(p, a, account);
         this.a.updateAccount(this.email, p.category, p.label, p.accounts).subscribe(data => {
           console.log(data);
@@ -102,7 +106,7 @@ export class HomeComponent implements OnInit {
       data: newAccount
     });
     accountDialogRef.afterClosed().subscribe(result => {
-      if(result && !this.checkExisting(p, newAccount)){
+      if(result && !this.checkExistingUser(p, newAccount.user)){
         this.a.addAccount(this.email, p.category, p.label, newAccount).subscribe(data => {
           if(data.status === 200){
             p.accounts.push(newAccount);
@@ -174,9 +178,16 @@ export class HomeComponent implements OnInit {
       this.other.splice(i, 1);
     }
   }
-  checkExisting(p: password, a: account){
+  checkExistingUser(p: password, u: string){
     for(let i = 0; i < p.accounts.length; i++){
-      if(p.accounts[i].user === a.user) return true;
+      if(p.accounts[i].user === u) return true;
+    }
+    return false;
+  }
+  checkOneExistingUser(p: password, u: string, index: number){
+    let count = 0;
+    for(let i = 0; i < p.accounts.length; i++){
+      if(p.accounts[i].user === u && i != index) return true;
     }
     return false;
   }
