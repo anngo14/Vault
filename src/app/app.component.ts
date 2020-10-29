@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { account } from './models/account';
 import { notifications } from './models/notifications';
+import { PasswordService } from './services/password.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -11,62 +13,32 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title: string = "Vault";
-  notifications: notifications[] = [
-    {
-      label: "Website",
-      account: 
-      {
-        user: "Account",
-        pwd: "password",
-        strength: 120,
-        showPwd: false,
-        notify: true,
-        created: "October 1, 2020",
-        refresh: true,
-        interval: 30,
-        history: [
-          {
-            date: "October 10, 2020",
-            pwd: "password"
-          },
-          {
-            date: "October 5, 2020",
-            pwd: "test"
-          },
-          {
-            date: "October 1, 2020",
-            pwd: "pwd"
-          }
-        ]
-      }
-    }, 
-    {
-      label: "Gmail",
-      account: 
-      {
-        user: "user",
-        pwd: "test",
-        strength: 120,
-        showPwd: false,
-        notify: true,
-        created: "October 5, 2020",
-        refresh: true,
-        interval: 30,
-        history: [
-          {
-            date: "October 7, 2020",
-            pwd: "test"
-          },
-          {
-            date: "October 5, 2020",
-            pwd: "pwd"
-          }
-        ]
-      }
-    }
-  ];
+  notifications: notifications[] = [];
+  rnotifications: notifications[] = [];
+  email: string = "";
+  today: string = "";
 
-  constructor(public dialog: MatDialog, private r: Router, public u: UserService) {}
+  constructor(public dialog: MatDialog, private r: Router, public u: UserService, private p: PasswordService) {
+    let d = new Date();
+    this.today = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
+    if(u.loggedIn()){
+      this.email = localStorage.getItem('email');
+      this.u.checkLastUpdate(this.email).subscribe((data) => {
+        if(data.result.lastUpdate !== this.today){
+          this.getNotifications();
+        }
+      });
+      setInterval(() => {
+        let d = new Date();
+        let time = d.getHours() + ":" + d.getMinutes();
+        if(time === "0:0"){
+          this.notifications = [];
+          this.rnotifications = [];
+          this.getNotifications();
+        }
+      }, 60000);
+    }
+  }
 
   redirectToLogin(){
     this.r.navigate(['/login']);
@@ -85,6 +57,7 @@ export class AppComponent {
   }
   clearAllNotifications(){
     this.notifications = [];
+    this.rnotifications = [];
   }
   ignore(n: notifications){
     this.closeNotification(n);
@@ -95,6 +68,70 @@ export class AppComponent {
   closeNotification(n: notifications){
     let index = this.notifications.indexOf(n);
     this.notifications.splice(index, 1);
+  }
+  getNotifications(){
+    this.p.getPersonal(this.email).subscribe(data => {
+      let pA = data.result.personalArray;
+      for(let i = 0; i < pA.length; i++){
+        for(let j = 0; j < pA[i].accounts.length; j++){
+          if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === false && this.diffDate(pA[i].accounts[j], this.today)){
+            this.notifications.push({label: pA[i].label, account: pA[i].accounts[j]});
+          } else if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === true && this.diffDate(pA[i].accounts[j], this.today)){
+            this.rnotifications.push({label: pA[i].label, account: pA[i].accounts[j]});
+          }
+        }
+      }
+    });
+    this.p.getSecret(this.email).subscribe(data => {
+      let sA = data.result.secretArray;
+      for(let i = 0; i < sA.length; i++){
+        for(let j = 0; j < sA[i].accounts.length; j++){
+          if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === false && this.diffDate(sA[i].accounts[j], this.today)){
+            this.notifications.push({label: sA[i].label, account: sA[i].accounts[j]});
+          } else if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === true && this.diffDate(sA[i].accounts[j], this.today)){
+            this.rnotifications.push({label: sA[i].label, account: sA[i].accounts[j]});
+          }
+        }
+      }
+    });
+    this.p.getOther(this.email).subscribe(data => {
+      let oA = data.result.otherArray;
+      for(let i = 0; i < oA.length; i++){
+        for(let j = 0; j < oA[i].accounts.length; j++){
+          if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === false && this.diffDate(oA[i].accounts[j], this.today)){
+            this.notifications.push({label: oA[i].label, account: oA[i].accounts[j]});
+          } else if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === true && this.diffDate(oA[i].accounts[j], this.today)){
+            this.rnotifications.push({label: oA[i].label, account: oA[i].accounts[j]});
+          }
+        }
+      }
+    })
+  }
+  diffDate(a: account, d2: string): boolean{
+    let d1 = "";
+    let diff = a.interval;
+    if(diff === null) diff = 30;
+
+    let count = 0;
+    if(a.history.length === 0){
+      d1 = a.created;
+    } else{
+      d1 = a.history[0].date;
+    }
+    d1 = this.formatDate(d1);
+    let date1 = new Date(d1);
+    let date2 = new Date(d2);
+    count = date2.getTime() - date1.getTime();
+    count = count / (1000 * 3600 * 24);
+    return count >= diff;
+  }
+  formatDate(d: string){
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let s = d.split(" ");
+    let month = months.indexOf(s[0]);
+    let day = s[1].substring(0, s[1].length - 1);
+    let year = s[2];
+    return month + "-" + day + "-" + year;
   }
   logout(){
     this.u.logout();

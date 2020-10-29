@@ -98,8 +98,8 @@ export class HomeComponent implements OnInit {
       showPwd: false,
       notify: true,
       created: "",
-      refresh: true,
-      interval: null,
+      refresh: false,
+      interval: 30,
       history: []
     };
     const accountDialogRef = this.dialog.open(AddAccountComponent, {

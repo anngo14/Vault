@@ -103,7 +103,6 @@ export class AddAccountComponent implements OnInit {
   save(){
     this.account.created = this.today;
     this.account.strength = this.calculateEntropy();
-    this.account.history.push({date: this.today, pwd: this.account.pwd});
     this.accountRef.close(true);
   }
 }

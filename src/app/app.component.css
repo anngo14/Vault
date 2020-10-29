@@ -57,6 +57,11 @@
     max-height: 30em;
     overflow-y: auto;
     max-width: 40em;
+    -ms-overflow-style: none; 
+     scrollbar-width: none;
+}
+.notify-menu-content::-webkit-scrollbar {
+    display: none;
 }
 .notify-menu-item{
     display: flex;
@@ -87,4 +92,7 @@
 }
 .spacer{
     width: 1em;
+}
+.vertical-spacer{
+    height: 0.5em;
 }

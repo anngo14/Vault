@@ -18,7 +18,7 @@ export class GeneratorComponent implements OnInit {
   Numerical: boolean = false;
   Special: boolean = false;
   notify: boolean = true;
-  refresh: boolean = true;
+  refresh: boolean = false;
   label: string = "";
   link: string = "";
   user: string = "";

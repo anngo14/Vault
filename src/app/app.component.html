@@ -6,8 +6,8 @@
         <span id='title'>Vault</span>
     </div>
     <div class='toolbar-action-buttons'>
-        <button mat-icon-button *ngIf='notifications.length > 0 && u.loggedIn(); else hideBadge' [matMenuTriggerFor]='notifyMenu'>
-            <mat-icon matBadge={{notifications.length}} matBadgeColor='warn'>notifications</mat-icon>
+        <button mat-icon-button *ngIf='notifications.length + rnotifications.length > 0 && u.loggedIn(); else hideBadge' [matMenuTriggerFor]='notifyMenu'>
+            <mat-icon matBadge={{rnotifications.length}} matBadgeColor='warn'>notifications</mat-icon>
         </button>
         <ng-template #hideBadge>
             <button mat-icon-button [matMenuTriggerFor]='notifyMenu' *ngIf='u.loggedIn()'>
@@ -41,15 +41,28 @@
     </div>
     <mat-divider></mat-divider>
     <div class='notify-menu-content'>
-        <div *ngIf='notifications.length === 0' class='notify-menu-empty'>
+        <div *ngIf='notifications.length === 0 && rnotifications.length === 0' class='notify-menu-empty'>
             <span class='notify-menu-empty-text'>No New Notifications</span>
+        </div>
+        <div class='notify-menu-item' *ngFor='let a of rnotifications'>
+            <mat-icon class='notify-menu-icon'>announcement</mat-icon>
+            <div class='spacer'></div>
+            <div class='spacer'></div>
+            <div class='notify-menu-text'>
+                <span>{{a.account.user | uppercase}} for {{a.label | uppercase}} has automatically refreshed.</span>
+                <span>Make sure your accounts match the new password.</span>
+            </div>
+            <div style='flex: 1 1 auto'></div>
+            <div class='notify-menu-btn'>
+                <button mat-stroked-button color='primary'>Clear</button>
+            </div>
         </div>
         <div class='notify-menu-item' *ngFor='let n of notifications'>
             <mat-icon class='notify-menu-icon'>warning</mat-icon>
             <div class='spacer'></div>
             <div class='spacer'></div>
             <div class='notify-menu-text'>
-                <span>"{{n.account.user}}" for {{n.label}} has an expired password.</span>
+                <span>{{n.account.user | uppercase}} for {{n.label | uppercase}} has an expired password.</span>
                 <span>A password refresh is suggested.</span>
             </div>
             <div class='spacer'></div>
@@ -60,6 +73,8 @@
             </div>
         </div>
     </div>
+    <mat-divider></mat-divider>
+    <div class='vertical-spacer'></div>
 </mat-menu>
 <mat-drawer-container class='main-container'>
     <mat-drawer #drawer mode="side" class='sidenav'>

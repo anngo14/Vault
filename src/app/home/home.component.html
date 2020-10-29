@@ -150,7 +150,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='secretLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(s, a)' [disabled]='secretLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
                                         <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(s, a)' [disabled]='secretLock'>
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(a)' [disabled]='otherLock'>
+                                        <button mat-icon-button matTooltip='More Information' [matTooltipPosition]="'left'" (click)='openDetailed(o, a)' [disabled]='otherLock'>
                                             <mat-icon>info</mat-icon>
                                         </button>
                                         <button mat-icon-button matTooltip='Remove Saved Account' [matTooltipPosition]="'above'" (click)='openConfirm(o, a)' [disabled]='otherLock'>
