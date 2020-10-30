@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   secretLock: boolean = true;
   otherLock: boolean = true;
   today: string = "";
+  todayf: string = "";
 
   personal: password[] = [];
   secret: password[] = [];
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { 
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    this.todayf = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
   }
 
   ngOnInit() {
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit {
       strength: a.strength,
       showPwd: false,
       notify: a.notify,
+      lastUpdate: a.lastUpdate,
       created: a.created,
       refresh: a.refresh,
       interval: a.interval,
@@ -78,6 +81,7 @@ export class HomeComponent implements OnInit {
         if(account.pwd !== a.pwd){
           account.history.unshift({date: this.today, pwd: a.pwd});
         } 
+        account.lastUpdate = this.todayf;
         this.updateAccount(p, a, account);
         this.a.updateAccount(this.email, p.category, p.label, p.accounts).subscribe(data => {
           console.log(data);
@@ -97,7 +101,8 @@ export class HomeComponent implements OnInit {
       strength: -1,
       showPwd: false,
       notify: true,
-      created: "",
+      lastUpdate: this.todayf,
+      created: this.today,
       refresh: false,
       interval: 30,
       history: []

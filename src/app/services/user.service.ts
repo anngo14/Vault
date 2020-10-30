@@ -9,7 +9,6 @@ export class UserService {
 
   registerUrl: string = "http://localhost:5000/api/register";
   loginUrl: string = "http://localhost:5000/api/login";
-  checkUpdateUrl: string = "http://localhost:5000/api/checkLastUpdate";
 
   constructor(private http: HttpClient, private r: Router) { }
 
@@ -35,13 +34,6 @@ export class UserService {
     return this.http.post(this.loginUrl, user, this.httpOptions);
   }
 
-  checkLastUpdate(email: string) : any{
-    let user = {
-      "email": email
-    };
-    
-    return this.http.post(this.checkUpdateUrl, user, this.httpOptions);
-  }
   loggedIn(){
     return !!localStorage.getItem('token');
   }

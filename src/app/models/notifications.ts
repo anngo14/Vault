@@ -1,6 +1,7 @@
 import { account } from './account';
+import { password } from './password';
 
 export interface notifications{
-    label: string,
+    password: password,
     account: account
 }

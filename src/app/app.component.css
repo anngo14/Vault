@@ -89,6 +89,7 @@
 .notify-menu-btn{
     display: flex;
     flex-direction: column-reverse;
+    width: 5em;
 }
 .spacer{
     width: 1em;

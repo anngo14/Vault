@@ -57,13 +57,6 @@ app.post('/api/other', (req, res) => {
         res.send({result});
     });
 });
-app.post('/api/checkLastUpdate', (req, res) => {
-    let email = req.body.email;
-    collection.findOne({email: email}, { projection: { _id: 0, lastUpdate: 1}}, (err, result) => {
-        if(err) throw err;
-        res.send({result});
-    });
-});
 app.post('/api/login', (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;

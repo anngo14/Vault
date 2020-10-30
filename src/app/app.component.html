@@ -7,7 +7,7 @@
     </div>
     <div class='toolbar-action-buttons'>
         <button mat-icon-button *ngIf='notifications.length + rnotifications.length > 0 && u.loggedIn(); else hideBadge' [matMenuTriggerFor]='notifyMenu'>
-            <mat-icon matBadge={{rnotifications.length}} matBadgeColor='warn'>notifications</mat-icon>
+            <mat-icon matBadge={{rnotifications.length+notifications.length}} matBadgeColor='warn'>notifications</mat-icon>
         </button>
         <ng-template #hideBadge>
             <button mat-icon-button [matMenuTriggerFor]='notifyMenu' *ngIf='u.loggedIn()'>
@@ -49,12 +49,12 @@
             <div class='spacer'></div>
             <div class='spacer'></div>
             <div class='notify-menu-text'>
-                <span>{{a.account.user | uppercase}} for {{a.label | uppercase}} has automatically refreshed.</span>
+                <span>{{a.account.user | uppercase}} for {{a.password.label | uppercase}} has automatically refreshed.</span>
                 <span>Make sure your accounts match the new password.</span>
             </div>
             <div style='flex: 1 1 auto'></div>
             <div class='notify-menu-btn'>
-                <button mat-stroked-button color='primary'>Clear</button>
+                <button mat-stroked-button color='primary' (click)='closeNotification(a, 1)'>Clear</button>
             </div>
         </div>
         <div class='notify-menu-item' *ngFor='let n of notifications'>
@@ -62,7 +62,7 @@
             <div class='spacer'></div>
             <div class='spacer'></div>
             <div class='notify-menu-text'>
-                <span>{{n.account.user | uppercase}} for {{n.label | uppercase}} has an expired password.</span>
+                <span>{{n.account.user | uppercase}} for {{n.password.label | uppercase}} has an expired password.</span>
                 <span>A password refresh is suggested.</span>
             </div>
             <div class='spacer'></div>

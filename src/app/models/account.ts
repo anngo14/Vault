@@ -6,6 +6,7 @@ export interface account{
     strength: number,
     showPwd: boolean,
     notify: boolean,
+    lastUpdate: string, 
     created: string,
     refresh: boolean,
     interval: number,
