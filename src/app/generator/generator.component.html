@@ -11,6 +11,11 @@
         </div>
     </mat-card-header>
     <mat-divider></mat-divider>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em'></div>
+        <span>{{errorMsg}}</span>
+    </div>
     <div class='generator-container'>
         <div class='generator-category'>
             <span>Password Type: </span>

@@ -26,6 +26,8 @@ export class GeneratorComponent implements OnInit {
   today: string = "";
   todayf: string = "";
   strength: string = "";
+  error: boolean = false;
+  errorMsg: string = "Existing Password with the same label was found. Password labels must be unique in the same Category. Correct and Try Again!";
   pwdTypes: string[] = ["Personal", "Secret", "Other"];  
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -104,6 +106,8 @@ export class GeneratorComponent implements OnInit {
             window.location.reload();
           }
         });
+      } else{
+        this.error = true;
       }
     });
   }
