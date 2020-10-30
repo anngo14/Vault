@@ -10,9 +10,10 @@
     font-weight: 200;
 }
 .spacer{
-    height: 2em;
+    height: 1em;
 }
 .pwd-input{
+    margin-top: 1em;
     width: 100%;
 }
 .btn-row{
@@ -20,4 +21,15 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+.error-msg{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: #F37171;
+    border-radius: 5px;
+    color: white;
 }

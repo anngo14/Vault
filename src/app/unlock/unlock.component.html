@@ -3,6 +3,11 @@
     <span id='unlock-subheader'>Master password is needed to view or edit the passwords in this category</span>
 </div>
 <div class='spacer'></div>
+<div *ngIf='error' class='error-msg'>
+    <mat-icon>cancel</mat-icon>
+    <div style='width: 0.5em;'></div>
+    <span>{{errorMsg}}</span>
+</div>
 <mat-form-field appearance='outline' class='pwd-input'>
     <mat-label>Enter your Master Password</mat-label>
     <input type="password" matInput [(ngModel)]='pass'>

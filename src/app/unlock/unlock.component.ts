@@ -10,6 +10,8 @@ import { UserService } from '../services/user.service';
 export class UnlockComponent implements OnInit {
 
   pass: string = "";
+  error: boolean = false;
+  errorMsg: string = "Incorrect Password! Please Try Again!";
   constructor(public unlockRef: MatDialogRef<UnlockComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private u: UserService) { }
 
   ngOnInit() {
@@ -23,6 +25,8 @@ export class UnlockComponent implements OnInit {
     this.u.loginuser(email, this.pass).subscribe(data => {
       if(data.token !== undefined){
         this.unlockRef.close(true);
+      } else{
+        this.error = true;
       }
     });
   }
