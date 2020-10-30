@@ -1,6 +1,11 @@
 <div>
     <span id='main-header'>Add Account</span>
 </div>
+<div *ngIf='error' class='error-msg'>
+    <mat-icon>cancel</mat-icon>
+    <div style='width: 0.5em;'></div>
+    <span>{{errorMsg}}</span>
+</div>
 <div class='vertical-spacer'></div>
 <div class='pwd-header'>
     <mat-form-field appearance='outline' id='account-select'>

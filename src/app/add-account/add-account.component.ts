@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { account } from '../models/account';
+import { password } from '../models/password';
 import { PasswordService } from '../services/password.service';
 
 @Component({
@@ -18,9 +19,11 @@ export class AddAccountComponent implements OnInit {
   today: string = "";
   strength: string = "N/A";
   account: account;
+  error: boolean = false;
+  errorMsg: string = "Existing Account with the same Username was found! Account Users for the same Password must be Unique. Please Try Again!";
 
   constructor(public accountRef: MatDialogRef<AddAccountComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private p: PasswordService) { 
-    this.account = this.data;
+    this.account = this.data.newAccount;
     this.today = this.account.created;
 
     for(let i = 3; i < 45; i++){
@@ -59,6 +62,16 @@ export class AddAccountComponent implements OnInit {
   }
   save(){
     this.account.strength = this.calculateEntropy();
+    if(this.checkExistingUser(this.data.pwd, this.account.user)){
+      this.error = true;
+      return;
+    }
     this.accountRef.close(true);
+  }
+  checkExistingUser(p: password, u: string){
+    for(let i = 0; i < p.accounts.length; i++){
+      if(p.accounts[i].user === u) return true;
+    }
+    return false;
   }
 }

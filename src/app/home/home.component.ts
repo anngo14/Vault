@@ -108,10 +108,10 @@ export class HomeComponent implements OnInit {
       history: []
     };
     const accountDialogRef = this.dialog.open(AddAccountComponent, {
-      data: newAccount
+      data: {newAccount: newAccount, pwd: p}
     });
     accountDialogRef.afterClosed().subscribe(result => {
-      if(result && !this.checkExistingUser(p, newAccount.user)){
+      if(result){
         this.a.addAccount(this.email, p.category, p.label, newAccount).subscribe(data => {
           if(data.status === 200){
             p.accounts.push(newAccount);
@@ -183,14 +183,7 @@ export class HomeComponent implements OnInit {
       this.other.splice(i, 1);
     }
   }
-  checkExistingUser(p: password, u: string){
-    for(let i = 0; i < p.accounts.length; i++){
-      if(p.accounts[i].user === u) return true;
-    }
-    return false;
-  }
   checkOneExistingUser(p: password, u: string, index: number){
-    let count = 0;
     for(let i = 0; i < p.accounts.length; i++){
       if(p.accounts[i].user === u && i != index) return true;
     }
