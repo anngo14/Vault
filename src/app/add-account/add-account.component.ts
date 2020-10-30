@@ -49,7 +49,7 @@ export class AddAccountComponent implements OnInit {
     return entropy;
   }
   verify(){
-    if(this.account.user.length > 0 && this.account.pwd.length > 0 && this.account.interval !== null){ 
+    if(this.account.user.length > 0 && this.account.pwd.length > 0 && this.account.interval > 0){ 
       return true;
     }
     return false;
