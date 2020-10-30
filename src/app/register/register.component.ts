@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
   textAttribute2: string = "password";
   show: boolean = true;
   show2: boolean = true;
+  error: boolean = false;
+  errorMsg: string = "Existing Account Found! Please Try Again!";
   email: string = "";
   password: string = "";
   confirmPassword: string = "";
@@ -35,6 +37,8 @@ export class RegisterComponent implements OnInit {
       if(res.token !== undefined){
         localStorage.setItem('token', res.token);
         this.redirectToLogin();
+      } else if(res.status === "Existing Account"){
+        this.error = true;
       }
     });
   }

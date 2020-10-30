@@ -88,13 +88,13 @@ app.post('/api/register', async (req, res) => {
     }
     var existing = collection.findOne({email: email});
     if(existing !== null){
-        res.status(400).send({status: "Existing Account"});
+        res.send({status: "Existing Account"});
         return;
     }
     collection.insertOne(user, (err, result) => {
         if(err){
             console.log(err);
-            res.status(400).send({status: 400});
+            res.send({status: 400});
             return;
         }
         let payload = { subject: user._id };

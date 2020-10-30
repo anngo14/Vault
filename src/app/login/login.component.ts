@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   show: boolean = true;
   email: string = "";
   password: string = "";
+  error: boolean = false;
+  errorMsg: string = "Invalid Credentials! Please Try Again!";
 
   constructor(private elementRef: ElementRef, private r: Router, private u: UserService, private d: DataService) { }
 
@@ -33,7 +35,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data.token);
         localStorage.setItem('email', this.email);
         this.redirectToHome();
-      }
+      } else if(data.status === "Invalid Email" || data.status === "Invalid Password"){
+        this.error = true;
+      } 
     });
   }
   redirectToHome(){

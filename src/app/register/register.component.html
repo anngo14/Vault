@@ -4,6 +4,11 @@
         <mat-card-title id='register-card-title'>Create a New Account</mat-card-title>
         <mat-card-subtitle id='register-card-subtitle'>Enter your email and password</mat-card-subtitle>
     </mat-card-header>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em;'></div>
+        <span>{{errorMsg}}</span>
+    </div>
     <div class='spacer'></div>
     <mat-card-content class='register-content'>
         <mat-form-field appearance='outline' class='register-email-input'>

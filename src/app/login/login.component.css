@@ -1,6 +1,6 @@
 .login-card{
     width: 25em;
-    height: 30em;
+    height: 32em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,4 +37,15 @@
 .login-link{
     color: blue;
     cursor: pointer;
+}
+.error-msg{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: #F37171;
+    border-radius: 5px;
+    color: white;
 }
