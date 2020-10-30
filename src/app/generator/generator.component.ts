@@ -12,7 +12,7 @@ export class GeneratorComponent implements OnInit {
 
   length: number;
   lengths: number[] = [];
-  interval: number;
+  interval: number = 30;
   category: string = "";
   Alpha: boolean = false;
   Numerical: boolean = false;
@@ -71,10 +71,7 @@ export class GeneratorComponent implements OnInit {
     return c;
   }
   valid(){
-    if(this.user.length > 0 && this.pwd.length > 0 && this.label.length > 0 && this.link.length > 0){
-      if(this.refresh && this.interval === undefined){
-        return false;;
-      } 
+    if(this.user.length > 0 && this.pwd.length > 0 && this.label.length > 0 && this.link.length > 0 && this.interval > 0 && this.category !== ""){
       return true;
     }
     return false;
