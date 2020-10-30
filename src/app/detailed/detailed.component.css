@@ -61,3 +61,15 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.error-msg{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    width: 40em;
+    background-color: #F37171;
+    border-radius: 5px;
+    color: white;
+}

@@ -15,6 +15,11 @@
         <span id='pwd-creation-date'>{{account.created}}</span>
     </div>
 </div>
+<div *ngIf='error' class='error-msg'>
+    <mat-icon>cancel</mat-icon>
+    <div style='width: 0.5em;'></div>
+    <span>{{errorMsg}}</span>
+</div>
 <div class='vertical-spacer'></div>
 <div class='detailed-pwd'>
     <mat-form-field class='pwd-content'>

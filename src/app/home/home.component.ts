@@ -74,10 +74,10 @@ export class HomeComponent implements OnInit {
       history: a.history
     };
     const detailedDialogRef = this.dialog.open(DetailedComponent, {
-      data: account
+      data: {account: account, pwd: p, original: a}
     });
     detailedDialogRef.afterClosed().subscribe(result => {
-      if(result && !this.checkOneExistingUser(p, account.user, p.accounts.indexOf(a))){
+      if(result){
         if(account.pwd !== a.pwd){
           account.history.unshift({date: this.today, pwd: a.pwd});
         } 
@@ -182,11 +182,5 @@ export class HomeComponent implements OnInit {
     } else{
       this.other.splice(i, 1);
     }
-  }
-  checkOneExistingUser(p: password, u: string, index: number){
-    for(let i = 0; i < p.accounts.length; i++){
-      if(p.accounts[i].user === u && i != index) return true;
-    }
-    return false;
   }
 }

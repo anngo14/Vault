@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { account } from '../models/account';
+import { password } from '../models/password';
 import { PasswordService } from '../services/password.service';
 
 @Component({
@@ -15,9 +16,11 @@ export class DetailedComponent implements OnInit {
   textAttribute: string = "password";
   strength: string = "N/A";
   account: account;
+  error: boolean = false;
+  errorMsg: string = "Existing Account with the same Username was found! Account Users for the same Password must be Unique. Please Try Again!";
 
   constructor(public detailedRef: MatDialogRef<DetailedComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService) { 
-    this.account = this.data;
+    this.account = this.data.account;
     this.calculateEntropy();
   }
 
@@ -63,6 +66,16 @@ export class DetailedComponent implements OnInit {
     this.detailedRef.close(false);
   }
   save(){
+    if(this.checkOneExistingUser(this.data.pwd, this.account.user, this.data.pwd.accounts.indexOf(this.data.original))){
+      this.error = true;
+      return;
+    }
     this.detailedRef.close(true);
+  }
+  checkOneExistingUser(p: password, u: string, index: number){
+    for(let i = 0; i < p.accounts.length; i++){
+      if(p.accounts[i].user === u && i != index) return true;
+    }
+    return false;
   }
 }
