@@ -21,6 +21,11 @@
                 </button>
             </ng-template>
         </div>
+        <div *ngIf='personal === undefined || personal.length === 0' class='empty-container'>
+            <mat-card class='empty-card'>
+                <span>No Personal Password Records Found!</span>
+            </mat-card>
+        </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion>
@@ -99,6 +104,11 @@
                 </button>
             </ng-template>
         </div>
+        <div *ngIf='secret === undefined || secret.length === 0' class='empty-container'>
+            <mat-card class='empty-card'>
+                <span>No Secret Password Records Found!</span>
+            </mat-card>
+        </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>
                 <mat-accordion>
@@ -176,6 +186,11 @@
                     <mat-icon>lock_open</mat-icon>
                 </button>
             </ng-template>
+        </div>
+        <div *ngIf='other === undefined || other.length === 0' class='empty-container'>
+            <mat-card class='empty-card'>
+                <span>No Other Password Records Found!</span>
+            </mat-card>
         </div>
         <div class='pwd-list-container'>
             <div class='pwd-list'>

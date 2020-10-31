@@ -91,3 +91,13 @@
     display: flex;
     flex-direction: row;
 }
+.empty-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14pt;
+}
+.empty-card{
+    text-align: center;
+    width: 35em;
+}
