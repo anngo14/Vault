@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
         this.redirectToHome();
       } else if(data.status === "Invalid Email" || data.status === "Invalid Password"){
         this.error = true;
+        this.email = "";
+        this.password = "";
       } 
     });
   }

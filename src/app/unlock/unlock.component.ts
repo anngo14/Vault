@@ -27,6 +27,7 @@ export class UnlockComponent implements OnInit {
         this.unlockRef.close(true);
       } else{
         this.error = true;
+        this.pass = "";
       }
     });
   }

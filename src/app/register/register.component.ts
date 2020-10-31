@@ -43,6 +43,9 @@ export class RegisterComponent implements OnInit {
         });
       } else if(data.status === 200){
         this.error = true;
+        this.email = "";
+        this.password = "";
+        this.confirmPassword = "";
       }
     })
   }

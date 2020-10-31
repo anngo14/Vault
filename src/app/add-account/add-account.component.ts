@@ -64,6 +64,9 @@ export class AddAccountComponent implements OnInit {
     this.account.strength = this.calculateEntropy();
     if(this.checkExistingUser(this.data.pwd, this.account.user)){
       this.error = true;
+      this.account.user = "";
+      this.account.pwd = "";
+      this.strength = "N/A";
       return;
     }
     this.accountRef.close(true);

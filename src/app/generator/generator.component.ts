@@ -108,6 +108,7 @@ export class GeneratorComponent implements OnInit {
         });
       } else{
         this.error = true;
+        this.label = "";
       }
     });
   }
