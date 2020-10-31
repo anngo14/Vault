@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(private elementRef: ElementRef, private r: Router, private u: UserService, private d: DataService) { }
 
   ngOnInit() {
-    //this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#202124';
   }
   toggleShow(){
     this.show = !this.show;

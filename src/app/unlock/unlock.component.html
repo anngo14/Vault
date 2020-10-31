@@ -10,7 +10,7 @@
 </div>
 <mat-form-field appearance='outline' class='pwd-input'>
     <mat-label>Enter your Master Password</mat-label>
-    <input type="password" matInput [(ngModel)]='pass'>
+    <input type="password" matInput [(ngModel)]='pass' (keydown.enter)='confirm()'>
 </mat-form-field>
 <div class='btn-row'>
     <button mat-stroked-button (click)='cancel()'>Cancel</button>

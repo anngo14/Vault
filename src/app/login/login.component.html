@@ -13,11 +13,11 @@
     <mat-card-content class='login-content'>
         <mat-form-field appearance='outline' class='login-email-input'>
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" [(ngModel)]='email'>
+            <input matInput placeholder="Email" [(ngModel)]='email' (keydown.enter)='login()'>
         </mat-form-field><br>
         <mat-form-field appearance='outline' class='login-pwd-input'>
             <mat-label>Password</mat-label>
-            <input matInput type={{textAttribute}} placeholder="Password" [(ngModel)]='password'>
+            <input matInput type={{textAttribute}} placeholder="Password" [(ngModel)]='password' (keydown.enter)='login()'>
             <mat-icon *ngIf='show; else notShow' matSuffix (click)='toggleShow()'>visibility</mat-icon>
             <ng-template #notShow>
                 <mat-icon matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
