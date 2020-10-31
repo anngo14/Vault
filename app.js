@@ -112,6 +112,23 @@ app.post('/api/checkExistingUser', (req, res) => {
         }
     });
 })
+app.post('/api/wipeData', (req, res) => {
+    let email = req.body.email;
+    collection.updateOne({email: email}, {
+        $unset: {
+            personalArray: "",
+            secretArray: "",
+            otherArray: ""
+        }
+    }, (err, result) => {
+        if(err){
+            console.log(err);
+            res.send({status: 400});
+            return;
+        }
+        res.send({status: 200});
+    })
+});
 app.post('/api/check', (req, res) => {
     let email = req.body.email;
     let label = req.body.label;

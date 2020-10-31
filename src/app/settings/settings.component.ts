@@ -56,7 +56,13 @@ export class SettingsComponent implements OnInit {
     const confirmRef = this.dialog.open(ConfirmComponent);
     confirmRef.afterClosed().subscribe(result => {
       if(result){
-        
+        this.u.wipeUser(this.email).subscribe(data => {
+          if(data.status === 200){
+            this.openSnackbar("Vault has been wiped!");
+          } else{
+            this.openSnackbar("Something Went Wrong! Please Try Again!");
+          }
+        })
       }
     });
   }

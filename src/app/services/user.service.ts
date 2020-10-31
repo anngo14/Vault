@@ -12,6 +12,7 @@ export class UserService {
   changePasswordUrl: string = "http://localhost:5000/api/changeMasterPassword";
   deleteUserUrl: string = "http://localhost:5000/api/deleteUser";
   checkUserUrl: string = "http://localhost:5000/api/checkExistingUser";
+  wipeDataUrl: string = "http://localhost:5000/api/wipeData";
 
   constructor(private http: HttpClient, private r: Router) { }
 
@@ -54,6 +55,12 @@ export class UserService {
       email: email
     };
     return this.http.post(this.deleteUserUrl, json, this.httpOptions);
+  }
+  wipeUser(email: string): any {
+    let json = {
+      email: email
+    };
+    return this.http.post(this.wipeDataUrl, json, this.httpOptions);
   }
   loggedIn(){
     return !!localStorage.getItem('token');
