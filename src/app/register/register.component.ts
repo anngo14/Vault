@@ -33,14 +33,18 @@ export class RegisterComponent implements OnInit {
     this.textAttribute2 = this.show2 ? "password" : "text";
   }
   register(){
-    this.u.registerUser(this.email, this.password).subscribe(res => {
-      if(res.token !== undefined){
-        localStorage.setItem('token', res.token);
-        this.redirectToLogin();
-      } else if(res.status === "Existing Account"){
+    this.u.checkUser(this.email).subscribe(data => {
+      if(data.status === 404){
+        this.u.registerUser(this.email, this.password).subscribe(result => {
+          if(result.token !== undefined){
+            localStorage.setItem('token', result.token);
+            this.redirectToLogin();
+          } 
+        });
+      } else if(data.status === 200){
         this.error = true;
       }
-    });
+    })
   }
   redirectToLogin(){
     this.r.navigate(['/login']);

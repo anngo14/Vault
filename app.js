@@ -86,11 +86,6 @@ app.post('/api/register', async (req, res) => {
         email: email,
         password: hashedPassword
     }
-    var existing = collection.findOne({email: email});
-    if(existing !== null){
-        res.send({status: "Existing Account"});
-        return;
-    }
     collection.insertOne(user, (err, result) => {
         if(err){
             console.log(err);
@@ -102,6 +97,21 @@ app.post('/api/register', async (req, res) => {
         res.status(200).send({token});
     });
 });
+app.post('/api/checkExistingUser', (req, res) => {
+    let email = req.body.email;
+    collection.findOne({email: email}, (err, result) => {
+        if(err){
+            console.log(err);
+            res.send({status: 400});
+            return;
+        }
+        if(result === null){
+            res.send({status: 404});
+        } else{
+            res.send({status: 200});
+        }
+    });
+})
 app.post('/api/check', (req, res) => {
     let email = req.body.email;
     let label = req.body.label;
@@ -161,11 +171,23 @@ app.post('/api/changeMasterPassword', async (req, res) => {
     }, (err, result) => {
         if(err){
             console.log(err);
-            throw err;
+            res.send({status: 400});
+            return;
         }
         let payload = { subject: result._id };
         let token = jwt.sign(payload, 'secret');
         res.status(200).send({token});
+    });
+});
+app.post('/api/deleteUser', (req, res) => {
+    let email = req.body.email;
+    collection.deleteOne({email: email}, (err, result) => {
+        if(err){
+            console.log(err);
+            res.send({status: 400});
+            return;
+        }
+        res.send({status: 200});
     });
 });
 app.post('/api/insert', (req, res) => {

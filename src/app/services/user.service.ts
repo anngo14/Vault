@@ -10,6 +10,8 @@ export class UserService {
   registerUrl: string = "http://localhost:5000/api/register";
   loginUrl: string = "http://localhost:5000/api/login";
   changePasswordUrl: string = "http://localhost:5000/api/changeMasterPassword";
+  deleteUserUrl: string = "http://localhost:5000/api/deleteUser";
+  checkUserUrl: string = "http://localhost:5000/api/checkExistingUser";
 
   constructor(private http: HttpClient, private r: Router) { }
 
@@ -26,6 +28,12 @@ export class UserService {
 
     return this.http.post(this.registerUrl, user, this.httpOptions);
   }
+  checkUser(email: string): any{
+    let user = {
+      email: email
+    };
+    return this.http.post(this.checkUserUrl, user, this.httpOptions);
+  }
   loginuser(email: string, pass: string): any{
     let user = {
       "email": email,
@@ -40,6 +48,12 @@ export class UserService {
       pass: pass
     };
     return this.http.post(this.changePasswordUrl, json, this.httpOptions);
+  }
+  deleteuser(email: string): any{
+    let json = {
+      email: email
+    };
+    return this.http.post(this.deleteUserUrl, json, this.httpOptions);
   }
   loggedIn(){
     return !!localStorage.getItem('token');

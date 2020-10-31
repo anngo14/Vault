@@ -1,6 +1,9 @@
 import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { ConfirmComponent } from '../confirm/confirm.component';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,7 +20,7 @@ export class SettingsComponent implements OnInit {
   error: boolean = false;
   errorMsg: string = "Incorrect Credentials! Please Try Again!";
 
-  constructor(private u: UserService, private snackbar: MatSnackBar) { 
+  constructor(private u: UserService, private snackbar: MatSnackBar, public dialog: MatDialog, private r: Router) { 
     this.email = localStorage.getItem('email');
   }
 
@@ -50,10 +53,23 @@ export class SettingsComponent implements OnInit {
     });
   }
   wipeData(){
-
+    const confirmRef = this.dialog.open(ConfirmComponent);
+    confirmRef.afterClosed().subscribe(result => {
+      if(result){
+        
+      }
+    });
   }
   deleteAccount(){
-
+    const confirmRef = this.dialog.open(ConfirmComponent);
+    confirmRef.afterClosed().subscribe(result => {
+      if(result){
+        this.u.deleteuser(this.email).subscribe(data => {
+          localStorage.clear();
+          this.r.navigate(['/login']);
+        });
+      }
+    });
   }
   openSnackbar(msg: string){
     this.snackbar.open(msg, null, {
