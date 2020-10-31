@@ -9,6 +9,7 @@ export class UserService {
 
   registerUrl: string = "http://localhost:5000/api/register";
   loginUrl: string = "http://localhost:5000/api/login";
+  changePasswordUrl: string = "http://localhost:5000/api/changeMasterPassword";
 
   constructor(private http: HttpClient, private r: Router) { }
 
@@ -33,7 +34,13 @@ export class UserService {
 
     return this.http.post(this.loginUrl, user, this.httpOptions);
   }
-
+  changeMaster(email: string, pass: string): any{
+    let json = {
+      email: email,
+      pass: pass
+    };
+    return this.http.post(this.changePasswordUrl, json, this.httpOptions);
+  }
   loggedIn(){
     return !!localStorage.getItem('token');
   }

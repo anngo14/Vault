@@ -1,4 +1,7 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,11 +10,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  notify: boolean = true;
-  
-  constructor() { }
+  oldPassword: string = "";
+  newPassword: string = "";
+  confirmPassword: string = "";
+  email: string = "";
+  error: boolean = false;
+  errorMsg: string = "Incorrect Credentials! Please Try Again!";
+
+  constructor(private u: UserService, private snackbar: MatSnackBar) { 
+    this.email = localStorage.getItem('email');
+  }
 
   ngOnInit() {
   }
 
+  verify(){
+    if(this.oldPassword.length > 0 && this.newPassword.length > 0 && this.newPassword === this.confirmPassword){
+      return true;
+    }
+    return false;
+  }
+
+  changeMasterPassword(){
+    this.u.loginuser(this.email, this.oldPassword).subscribe(data => {
+      if(data.token !== undefined){
+        this.u.changeMaster(this.email, this.newPassword).subscribe(d => {
+          if(d.token !== undefined){
+            localStorage.setItem('token', d.token);
+            this.oldPassword = "";
+            this.newPassword = "";
+            this.confirmPassword = "";
+            this.error = false;
+            this.openSnackbar("Master Password has been Changed")
+          }
+        });
+      } else if(data.status === "Invalid Email" || data.status === "Invalid Password"){
+        this.error = true;
+      }
+    });
+  }
+  wipeData(){
+
+  }
+  deleteAccount(){
+
+  }
+  openSnackbar(msg: string){
+    this.snackbar.open(msg, null, {
+      duration: 1500
+    });
+  }
 }

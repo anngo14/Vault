@@ -13,31 +13,32 @@
     <mat-divider></mat-divider>
     <div class='vertical-spacer'></div>
     <div class='subheader'>
-        <span>Notifications</span>
-    </div>
-    <div class='notifications-content'>
-        <span>All Notifications: &nbsp;</span>
-        <mat-slide-toggle [(ngModel)]='notify'></mat-slide-toggle>
-    </div>
-    <div class='subheader'>
         <span>Master Password</span>
+    </div>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em;'></div>
+        <span>{{errorMsg}}</span>
     </div>
     <div class='password-content'>
         <span>Change Master Password</span>
         <div class='vertical-spacer'></div>
         <mat-form-field appearance='outline' id='password-input'>
             <mat-label>Enter your Current Master Password</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]='oldPassword'>
         </mat-form-field>
         <mat-form-field appearance='outline' id='password-input'>
             <mat-label>Enter a New Master Password</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]='newPassword'>
         </mat-form-field>
         <mat-form-field appearance='outline' id='password-input'>
             <mat-label>Confirm New Master Password</mat-label>
-            <input type="password" matInput>
+            <input type="password" matInput [(ngModel)]='confirmPassword'>
         </mat-form-field>
-        <button mat-stroked-button color='primary' id='password-submit'>SUBMIT</button>
+        <button mat-stroked-button color='primary' id='password-submit' *ngIf='verify(); else disabled' (click)='changeMasterPassword()'>SUBMIT</button>
+        <ng-template #disabled>
+            <button mat-stroked-button color='primary' id='password-submit' disabled>SUBMIT</button>
+        </ng-template>
     </div>
     <div class='subheader'>
         <span>Account</span>
@@ -45,10 +46,10 @@
     <div class='account-content'>
         <span>Wipe Data</span>
         <div class='vertical-spacer'></div>
-        <button mat-flat-button class='account-btn' color='primary'>Clear Account</button>
+        <button mat-flat-button class='account-btn' color='primary' (click)='wipeData()'>Clear Account</button>
         <div class='vertical-spacer'></div>
         <span>Delete Account</span>
         <div class='vertical-spacer'></div>
-        <button mat-flat-button color='warn' class='account-btn'>Delete</button>
+        <button mat-flat-button color='warn' class='account-btn' (click)='deleteAccount()'>Delete</button>
     </div>
 </mat-card>

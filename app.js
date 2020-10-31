@@ -151,6 +151,23 @@ app.post('/api/check', (req, res) => {
         });
     }    
 });
+app.post('/api/changeMasterPassword', async (req, res) => {
+    let email = req.body.email;
+    let pass = req.body.pass;
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(pass, salt);
+    collection.updateOne({email: email}, {
+        $set: { password: hashedPassword }
+    }, (err, result) => {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        let payload = { subject: result._id };
+        let token = jwt.sign(payload, 'secret');
+        res.status(200).send({token});
+    });
+});
 app.post('/api/insert', (req, res) => {
     let email = req.body.email;
     let c = req.body.category;

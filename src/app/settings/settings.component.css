@@ -47,3 +47,14 @@
 .account-btn{
     width: 15em;
 }
+.error-msg{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: #F37171;
+    border-radius: 5px;
+    color: white;
+}
