@@ -33,6 +33,7 @@
         </mat-form-field><br>
         <div class='button-row-1'>
             <span (click)='redirectToLogin()' class='register-link'>Already have an account?</span>
+            <div id='special'></div>
             <button mat-flat-button color='primary' disabled *ngIf='!validatePwd(); else registerBtn'>Create Account</button>
             <ng-template #registerBtn>
                 <button mat-flat-button color='primary' (click)='register()'>Create Account</button>

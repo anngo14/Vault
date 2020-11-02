@@ -48,3 +48,22 @@
     border-radius: 5px;
     color: white;
 }
+@media(max-width: 470px){
+    .register-card{
+        width: 80%;
+    }
+}
+@media(max-width: 382px){
+    .button-row-1{
+        flex-direction: column;
+        align-items: center;
+    }
+    #special{
+        height: 1em;
+    }
+}
+@media(max-width: 376px){
+    .register-card{
+        height: 35em;
+    }
+}
