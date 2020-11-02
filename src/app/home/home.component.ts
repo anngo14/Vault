@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { 
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-    this.todayf = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
+    this.todayf = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
   }
 
   ngOnInit() {

@@ -34,7 +34,7 @@ export class GeneratorComponent implements OnInit {
   constructor(private p: PasswordService, private r: Router) {
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-    this.todayf = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
+    this.todayf = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
     for(let i = 3; i < 45; i++){
       this.lengths.push(i + 1);
     }

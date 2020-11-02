@@ -23,7 +23,7 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog, private r: Router, public u: UserService, private p: PasswordService, private a: AccountService) {
     let d = new Date();
-    this.today = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
+    this.today = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
     this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     if(u.loggedIn()){
       this.email = localStorage.getItem('email');
@@ -154,14 +154,12 @@ export class AppComponent {
     let count = 0;
     let date1 = new Date(d1);
     let date2 = new Date(d2);
-
     count = Math.abs(date2.getTime() - date1.getTime());
     count = count / (1000 * 3600 * 24);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
-    let d1 = a.history[0].date;
-    if(d1 === null) d1 = a.created;
+    let d1 = (a.history.length === 0) ? a.created : a.history[0].date;
     let diff = a.interval;
     let count = 0;
     d1 = this.formatDate(d1);
@@ -170,6 +168,7 @@ export class AppComponent {
 
     count = Math.abs(date2.getTime() - date1.getTime());
     count = count / (1000 * 3600 * 24);
+
     return count >= diff;
   }
   formatDate(d: string){
