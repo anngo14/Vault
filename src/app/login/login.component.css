@@ -49,3 +49,8 @@
     border-radius: 5px;
     color: white;
 }
+@media(max-width: 470px){
+    .login-card{
+        width: 80%;
+    }
+}
