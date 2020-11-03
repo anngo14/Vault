@@ -33,3 +33,19 @@
     border-radius: 5px;
     color: white;
 }
+
+@media(max-width: 708px){
+    #unlock-subheader{
+        text-align: center;
+    }
+}
+@media(max-width: 556px){
+    #unlock-header{
+        text-align: center;
+    }
+}
+@media(max-width: 474px){
+    #unlock-header{
+        font-size: 16pt;
+    }
+}
