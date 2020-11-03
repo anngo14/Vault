@@ -155,7 +155,9 @@ export class AppComponent {
     let date1 = new Date(d1);
     let date2 = new Date(d2);
     count = Math.abs(date2.getTime() - date1.getTime());
-    count = count / (1000 * 3600 * 24);
+    count = Math.floor(count / (1000 * 3600 * 24));
+    console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
+
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -167,13 +169,13 @@ export class AppComponent {
     let date2 = new Date(d2);
 
     count = Math.abs(date2.getTime() - date1.getTime());
-    count = count / (1000 * 3600 * 24);
-
+    count = Math.floor(count / (1000 * 3600 * 24));
+    console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
     return count >= diff;
   }
   formatDate(d: string){
     let s = d.split(" ");
-    let month = this.months.indexOf(s[0]);
+    let month = this.months.indexOf(s[0]) + 1;
     let day = s[1];
     day = day.substring(0, day.length - 1);
     let year = s[2];
