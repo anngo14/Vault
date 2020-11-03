@@ -23,3 +23,30 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+@media(max-width: 674px){
+    #confirm-header{
+        font-size: 18pt;
+    }
+    .confirm-content{
+        font-size: 14pt;
+    }
+}
+@media(max-width: 562px){
+    #confirm-header{
+        font-size: 14pt;
+    }
+    .confirm-content{
+        font-size: 12pt;
+    }
+}
+@media(max-width: 456px){
+    #confirm-header{
+        text-align: center;
+    }
+}
+@media(max-width: 322px){
+    .confirm-content{
+        text-align: center;
+    }
+}
