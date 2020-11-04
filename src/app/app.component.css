@@ -124,17 +124,20 @@
 @media(max-width: 408px){
     .notify-menu-item{
         flex-direction: column;
+        min-height: 15em;
+        margin-bottom: 1em;
+        margin-top: 1em;
     }
     .notify-menu-text{
         font-size: 12pt;
         max-width: 100%;
+        text-align: center;
     }
     .notify-menu-btn{
         width: 100%;
         margin-top: 0.5em;
     }
     .notify-menu-icon{
-        margin-top: 1em;
         margin-bottom: 0.5em;
     }
     .notify-menu-content{

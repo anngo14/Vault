@@ -58,3 +58,36 @@
     border-radius: 5px;
     color: white;
 }
+
+@media(max-width: 602px){
+    #password-input{
+        width: 25em;
+    }
+}
+@media(max-width: 492px){
+    #password-input{
+        width: 20em;
+    }
+}
+@media(max-width: 394px){
+    .settings-card{
+        width: 85%;
+    }
+    .password-content{
+        padding-left: 0em;
+        align-items: center;
+    }
+    #password-input{
+        width: 100%;
+    }
+    .account-content{
+        padding-left: 0;
+        align-items: center;
+    }
+}
+@media(max-width: 300px){
+    .subheader{
+        padding-left: 0;
+        text-align: center;
+    }
+}
