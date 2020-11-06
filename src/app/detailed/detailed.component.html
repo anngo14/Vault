@@ -46,14 +46,18 @@
 <div class='vertical-spacer'></div>
 <div class='vertical-spacer'></div>
 <div>
-    <span>Automatic Refresh: </span>
-    <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
-    <div>
+    <div class='refresh-container'>
+        <span>Automatic Refresh: </span>
+        <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
+    </div>
+    <div class='refresh-container'>
         <span>Refresh Interval: </span>
-        <mat-form-field id='refresh-input'>
-            <input type="number" matInput [(ngModel)]='account.interval'>
-        </mat-form-field>
-        <span>days</span>
+        <div class='refresh-input-container'>
+            <mat-form-field id='refresh-input'>
+                <input type="number" matInput [(ngModel)]='account.interval'>
+            </mat-form-field>
+            <span>days</span>
+        </div>
     </div>
 </div>
 <div class='pwd-history-header'>
@@ -62,8 +66,8 @@
     <div>
         <div class='pwd-list-item' *ngFor='let c of account.history'>
             <span>{{c.date}}</span>
-            <span>{{c.pwd}}</span>
-            <span></span>
+            <span id='pwd-pwd'>{{c.pwd}}</span>
+            <span id='empty-span'></span>
         </div>
     </div>
 </div>
