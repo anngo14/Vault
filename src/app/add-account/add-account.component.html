@@ -1,62 +1,65 @@
-<div>
-    <span id='main-header'>Add Account</span>
-</div>
-<div *ngIf='error' class='error-msg'>
-    <mat-icon>cancel</mat-icon>
-    <div style='width: 0.5em;'></div>
-    <span>{{errorMsg}}</span>
-</div>
-<div class='vertical-spacer'></div>
-<div class='pwd-header'>
-    <mat-form-field appearance='outline' id='account-select'>
-        <mat-label>Length</mat-label>
-        <mat-select [(value)]='length' required>
-            <mat-option *ngFor='let l of lengths' [value]='l'>{{l}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <div class='spacer'></div>
-    <mat-checkbox [(ngModel)]='Alpha'>Alphabetical (A-Z)</mat-checkbox>
-    <div class='spacer'></div>
-    <mat-checkbox [(ngModel)]='Numerical'>Numerical (0-9)</mat-checkbox>
-    <div class='spacer'></div>
-    <mat-checkbox [(ngModel)]='Special'>Special Characters (!,@,#,$)</mat-checkbox>
-</div>
-<div class='pwd-content'>
-    <mat-form-field appearance='outline' id='account-input'>
-        <mat-label>Username</mat-label>
-        <input type="text" matInput [(ngModel)]='account.user'>
-    </mat-form-field>
-    <div class='spacer'></div>
-    <mat-form-field appearance='outline' id='account-input'> 
-        <mat-label>Password</mat-label>
-        <input type="text" matInput [(ngModel)]='account.pwd'>
-    </mat-form-field>
-</div>
-<div class='pwd-btn-row'>
-    <button mat-flat-button color='primary' id='generate-btn' *ngIf='length === undefined || (Alpha === false && Numerical === false && Special === false); else showGenerate' disabled>GENERATE</button>
-    <ng-template #showGenerate>
-        <button mat-flat-button color='primary' id='generate-btn' (click)='generatePassword()'>GENERATE</button>
-    </ng-template>
-    <div class='spacer'></div>
-    <button mat-flat-button color='accent' id='entropy-btn' *ngIf='account.pwd.length === 0; else showEntropy' disabled>CHECK PASSWORD</button>
-    <ng-template #showEntropy>
-        <button mat-flat-button color='accent' id='entropy-btn' (click)='calculateEntropy()'>CHECK PASSWORD</button>
-    </ng-template>
-</div>
-<div class='vertical-spacer'></div>
-<div class='pwd-details'>
+<mat-dialog-content class='main-container'> 
     <div>
-        <span>Date Created: </span>
-        <span id='pwd-detail'>{{today}}</span>
+        <span id='main-header'>Add Account</span>
     </div>
-    <div class='spacer'></div>
-    <div>
-        <span>Password Strength: </span>
-        <span id='pwd-detail'>{{strength}}</span>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em;'></div>
+        <span>{{errorMsg}}</span>
     </div>
-</div>
-<div class='pwd-notification-container'>
-    <div>
+    <div class='vertical-spacer'></div>
+    <div class='pwd-header'>
+        <mat-form-field appearance='outline' id='account-select'>
+            <mat-label>Length</mat-label>
+            <mat-select [(value)]='length' required>
+                <mat-option *ngFor='let l of lengths' [value]='l'>{{l}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class='spacer'></div>
+        <mat-checkbox [(ngModel)]='Alpha'>Alphabetical (A-Z)</mat-checkbox>
+        <div class='spacer'></div>
+        <mat-checkbox [(ngModel)]='Numerical'>Numerical (0-9)</mat-checkbox>
+        <div class='spacer'></div>
+        <mat-checkbox [(ngModel)]='Special'>Special Characters (!,@,#,$)</mat-checkbox>
+        <div id='special-vertical'></div>
+    </div>
+    <div class='pwd-content'>
+        <mat-form-field appearance='outline' id='account-input'>
+            <mat-label>Username</mat-label>
+            <input type="text" matInput [(ngModel)]='account.user'>
+        </mat-form-field>
+        <div class='spacer'></div>
+        <mat-form-field appearance='outline' id='account-input'> 
+            <mat-label>Password</mat-label>
+            <input type="text" matInput [(ngModel)]='account.pwd'>
+        </mat-form-field>
+    </div>
+    <div class='pwd-btn-row'>
+        <button mat-flat-button color='primary' id='generate-btn' *ngIf='length === undefined || (Alpha === false && Numerical === false && Special === false); else showGenerate' disabled>GENERATE</button>
+        <ng-template #showGenerate>
+            <button mat-flat-button color='primary' id='generate-btn' (click)='generatePassword()'>GENERATE</button>
+        </ng-template>
+        <div class='spacer'></div>
+        <button mat-flat-button color='accent' id='entropy-btn' *ngIf='account.pwd.length === 0; else showEntropy' disabled>CHECK PASSWORD</button>
+        <ng-template #showEntropy>
+            <button mat-flat-button color='accent' id='entropy-btn' (click)='calculateEntropy()'>CHECK PASSWORD</button>
+        </ng-template>
+    </div>
+    <div class='vertical-spacer'></div>
+    <div class='pwd-details'>
+        <div class='pwd-date-created'>
+            <span>Date Created: </span>
+            <span id='pwd-detail'>{{today}}</span>
+        </div>
+        <div class='spacer'></div>
+        <div id='special-vertical'></div>
+        <div class='pwd-strength'>
+            <span>Password Strength: </span>
+            <span id='pwd-detail'>{{strength}}</span>
+        </div>
+    </div>
+    <div id='special-vertical'></div>
+    <div class='pwd-notification-container'>
         <span>Notifications:</span>
         <button mat-icon-button matTooltip='Mute Notifications' *ngIf='account.notify; else showBell' [matTooltipPosition]="'above'" (click)='toggleNotify()'>
             <mat-icon>notifications_off</mat-icon>
@@ -67,22 +70,27 @@
             </button>
         </ng-template>
     </div>
-</div>
-<div>
-    <span>Automatic Refresh: </span>
-    <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
     <div>
-        <span>Refresh Interval: </span>
-        <mat-form-field id='refresh-input'>
-            <input type="number" matInput [(ngModel)]='account.interval'>
-        </mat-form-field>
-        <span>days</span>
+        <div class='refresh-container'> 
+            <span>Automatic Refresh: </span>
+            <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
+        </div>
+        <div id='special-vertical'></div>
+        <div class='refresh-container'>
+            <span>Refresh Interval: </span>
+            <div class='refresh-input-container'>
+                <mat-form-field id='refresh-input'>
+                    <input type="number" matInput [(ngModel)]='account.interval'>
+                </mat-form-field>
+                <span>days</span>
+            </div>
+        </div>
     </div>
-</div>
-<div class='button-row'>
-    <button mat-stroked-button (click)='cancel()'>Cancel</button>
-    <button mat-stroked-button color='primary' (click)='save()' *ngIf='verify(); else disable'>Save</button>
-    <ng-template #disable>
-        <button mat-stroked-button color='primary' disabled>Save</button>
-    </ng-template>
-</div>
+    <div class='button-row'>
+        <button mat-stroked-button (click)='cancel()'>Cancel</button>
+        <button mat-stroked-button color='primary' (click)='save()' *ngIf='verify(); else disable'>Save</button>
+        <ng-template #disable>
+            <button mat-stroked-button color='primary' disabled>Save</button>
+        </ng-template>
+    </div>
+</mat-dialog-content>

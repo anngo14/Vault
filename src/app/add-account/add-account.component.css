@@ -70,3 +70,95 @@
     border-radius: 5px;
     color: white;
 }
+.refresh-container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+@media(max-width: 1284px){
+    #account-input{
+        width: 25em;
+    }
+}
+@media(max-width: 1108px){
+    #account-input{
+        width: 20em;
+    }
+}
+@media(max-width: 902px){
+    .pwd-content{
+        flex-direction: column;
+    }
+    #account-input{
+        width: 100%;
+    }
+    .pwd-header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #special-vertical{
+        height: 1em;
+    }
+}
+@media(max-width: 610px){
+    .pwd-details{
+        flex-direction: column;
+    }
+}
+@media(max-width: 508px){
+    .pwd-btn-row{
+        flex-direction: column;
+    }
+    #account-input{
+        width: 18em;
+    }
+    #generate-btn{
+        width: 100%;
+    }
+    #entropy-btn{
+        width: 100%;
+    }
+}
+@media(max-width: 424px){
+    #account-input{
+        width: 15em;
+    }
+}
+@media(max-width: 364px){
+    .pwd-date-created{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .pwd-strength{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .pwd-notification-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .refresh-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #refresh-input{
+        width: 2em;
+    }
+    #account-input{
+        width: 100%
+    }
+    .pwd-header{
+        font-size: 10pt;
+    }
+}
+@media(max-height: 890px){
+    .main-container{
+        overflow-y: auto;
+    }
+}

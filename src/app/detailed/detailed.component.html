@@ -1,79 +1,81 @@
-<div class='detailed-header'>
-    <div class='detailed-main-header'>
-        <span>More Information</span>
-        <button mat-icon-button matTooltip='Mute Notifications' *ngIf='account.notify; else showNotify' [matTooltipPosition]="'right'" (click)='toggleNotify()'> 
-            <mat-icon>notifications_off</mat-icon>
-        </button>
-        <ng-template #showNotify>
-            <button mat-icon-button matTooltip='Turn Notifications On' [matTooltipPosition]="'right'" (click)='toggleNotify()'>
-                <mat-icon>notifications_active</mat-icon>
+<mat-dialog-content class='main-container'>
+    <div class='detailed-header'>
+        <div class='detailed-main-header'>
+            <span>More Information</span>
+            <button mat-icon-button matTooltip='Mute Notifications' *ngIf='account.notify; else showNotify' [matTooltipPosition]="'right'" (click)='toggleNotify()'> 
+                <mat-icon>notifications_off</mat-icon>
             </button>
-        </ng-template>
-    </div>
-    <div class='detailed-pwd-header'>
-        <span>Password Created On: </span>
-        <span id='pwd-creation-date'>{{account.created}}</span>
-    </div>
-</div>
-<div *ngIf='error' class='error-msg'>
-    <mat-icon>cancel</mat-icon>
-    <div style='width: 0.5em;'></div>
-    <span>{{errorMsg}}</span>
-</div>
-<div class='vertical-spacer'></div>
-<div class='detailed-pwd'>
-    <mat-form-field class='pwd-content'>
-        <mat-label>Username</mat-label>
-        <input type="text" matInput [(ngModel)]='account.user'>
-    </mat-form-field>
-    <div class='small-spacer'></div>
-    <div class='pwd-content-row'>
-        <mat-form-field class='pwd-content'>
-            <mat-label>Password</mat-label>
-            <input matInput type={{textAttribute}} [(ngModel)]='account.pwd'>
-            <mat-icon *ngIf='account.showPwd; else notShow' matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
-            <ng-template #notShow>
-                <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+            <ng-template #showNotify>
+                <button mat-icon-button matTooltip='Turn Notifications On' [matTooltipPosition]="'right'" (click)='toggleNotify()'>
+                    <mat-icon>notifications_active</mat-icon>
+                </button>
             </ng-template>
-        </mat-form-field>
-    </div>
-</div>
-<div class='pwd-button-row'>
-    <button mat-stroked-button color='primary' class='pwd-button' (click)='copyToClipboard()'>Copy Password</button>
-    <div class='small-spacer'></div>
-    <button mat-stroked-button color='accent' class='pwd-button' (click)='refreshPassword()'>Refresh Password</button>
-</div>
-<div class='vertical-spacer'></div>
-<div class='vertical-spacer'></div>
-<div>
-    <div class='refresh-container'>
-        <span>Automatic Refresh: </span>
-        <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
-    </div>
-    <div class='refresh-container'>
-        <span>Refresh Interval: </span>
-        <div class='refresh-input-container'>
-            <mat-form-field id='refresh-input'>
-                <input type="number" matInput [(ngModel)]='account.interval'>
-            </mat-form-field>
-            <span>days</span>
+        </div>
+        <div class='detailed-pwd-header'>
+            <span>Password Created On: </span>
+            <span id='pwd-creation-date'>{{account.created}}</span>
         </div>
     </div>
-</div>
-<div class='pwd-history-header'>
-    <span>Recent Password History</span>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em;'></div>
+        <span>{{errorMsg}}</span>
+    </div>
+    <div class='vertical-spacer'></div>
+    <div class='detailed-pwd'>
+        <mat-form-field class='pwd-content'>
+            <mat-label>Username</mat-label>
+            <input type="text" matInput [(ngModel)]='account.user'>
+        </mat-form-field>
+        <div class='small-spacer'></div>
+        <div class='pwd-content-row'>
+            <mat-form-field class='pwd-content'>
+                <mat-label>Password</mat-label>
+                <input matInput type={{textAttribute}} [(ngModel)]='account.pwd'>
+                <mat-icon *ngIf='account.showPwd; else notShow' matSuffix (click)='toggleShow()'>visibility_off</mat-icon>
+                <ng-template #notShow>
+                    <mat-icon matSuffix (click)='toggleShow()'>visibility</mat-icon>
+                </ng-template>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class='pwd-button-row'>
+        <button mat-stroked-button color='primary' class='pwd-button' (click)='copyToClipboard()'>Copy Password</button>
+        <div class='small-spacer'></div>
+        <button mat-stroked-button color='accent' class='pwd-button' (click)='refreshPassword()'>Refresh Password</button>
+    </div>
+    <div class='vertical-spacer'></div>
     <div class='vertical-spacer'></div>
     <div>
-        <div class='pwd-list-item' *ngFor='let c of account.history'>
-            <span>{{c.date}}</span>
-            <span id='pwd-pwd'>{{c.pwd}}</span>
-            <span id='empty-span'></span>
+        <div class='refresh-container'>
+            <span>Automatic Refresh: </span>
+            <mat-slide-toggle [(ngModel)]='account.refresh'>{{Refresh}}</mat-slide-toggle>
+        </div>
+        <div class='refresh-container'>
+            <span>Refresh Interval: </span>
+            <div class='refresh-input-container'>
+                <mat-form-field id='refresh-input'>
+                    <input type="number" matInput [(ngModel)]='account.interval'>
+                </mat-form-field>
+                <span>days</span>
+            </div>
         </div>
     </div>
-</div>
-<div class='vertical-spacer'></div>
-<div class='vertical-spacer'></div>
-<div class='btn-row'>
-    <button mat-stroked-button (click)='cancel()'>Cancel</button>
-    <button mat-stroked-button color='primary' (click)='save()'>Save</button>
-</div>
+    <div class='pwd-history-header'>
+        <span>Recent Password History</span>
+        <div class='vertical-spacer'></div>
+        <div>
+            <div class='pwd-list-item' *ngFor='let c of account.history'>
+                <span>{{c.date}}</span>
+                <span id='pwd-pwd'>{{c.pwd}}</span>
+                <span id='empty-span'></span>
+            </div>
+        </div>
+    </div>
+    <div class='vertical-spacer'></div>
+    <div class='vertical-spacer'></div>
+    <div class='btn-row'>
+        <button mat-stroked-button (click)='cancel()'>Cancel</button>
+        <button mat-stroked-button color='primary' (click)='save()'>Save</button>
+    </div>
+</mat-dialog-content>
