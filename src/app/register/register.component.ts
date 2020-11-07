@@ -36,6 +36,10 @@ export class RegisterComponent implements OnInit {
     this.textAttribute2 = this.show2 ? "password" : "text";
   }
   register(){
+    if(!this.validatePwd()){
+      this.showError();
+      return;
+    }
     this.u.checkUser(this.email).subscribe(data => {
       if(data.status === 404){
         this.u.registerUser(this.email, this.password).subscribe(result => {
