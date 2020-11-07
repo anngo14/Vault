@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
       if(data.status === 404){
         this.u.registerUser(this.email, this.password).subscribe(result => {
           if(result.token !== undefined){
-            localStorage.setItem('token', result.token);
             this.redirectToLogin();
           } 
         });
@@ -68,7 +67,7 @@ export class RegisterComponent implements OnInit {
     return false;
   }
   checkPwd(): boolean{
-    if(this.password.length >= 8 && this.password.match(/.*[!@#$%^&*()-_+={}[\]~<>,\./?:;].*/))
+    if(this.password.length >= 8 && this.password.match(/.*[!@#$%^&*()-_+={}[\]~<>,\./?:;].*/)) return true;
     return false;
   }
   checkMatch(): boolean{
@@ -87,13 +86,19 @@ export class RegisterComponent implements OnInit {
     if(!this.checkEmail()){
       this.errorMsg += "Invalid Email Format! ";
       this.email = "";
-    } 
-    if(this.checkPwd()){
-      this.errorMsg += "Password must be at least 8 Characters and Contain a Special Character! ";
       this.password = "";
+      this.confirmPassword = "";
+    } 
+    if(!this.checkPwd()){
+      this.errorMsg += "Password must be at least 8 Characters and Contain a Special Character! ";
+      this.email = "";
+      this.password = "";
+      this.confirmPassword = "";
     } 
     if(!this.checkMatch()){
       this.errorMsg += "Passwords Do Not Match! ";
+      this.email = "";
+      this.password = "";
       this.confirmPassword = "";
     }
     this.error = true;
