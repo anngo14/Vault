@@ -71,5 +71,6 @@ export class UserService {
   logout(){
     localStorage.removeItem('token');
     this.r.navigate(['/login']);
+    setTimeout(() => { window.location.reload() }, 100);
   }
 }

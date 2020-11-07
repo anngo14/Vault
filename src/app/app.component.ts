@@ -37,6 +37,14 @@ export class AppComponent {
           this.getNotifications();
         }
       }, 60000);
+    } else{
+      const checkLogin = setInterval(() => {
+        if(u.loggedIn()){
+          clearInterval(checkLogin);
+          this.getNotifications();
+          setTimeout(() => { window.location.reload();}, 100);
+        }
+      }, 1000);
     }
   }
 
@@ -146,7 +154,7 @@ export class AppComponent {
           }
         }
       }
-    })
+    });
   }
   diffDate(a: account, d2: string): boolean{
     let d1 = a.lastUpdate;
@@ -156,8 +164,7 @@ export class AppComponent {
     let date2 = new Date(d2);
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
-    console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
-
+    //console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -170,7 +177,7 @@ export class AppComponent {
 
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
-    console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
+    //console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
     return count >= diff;
   }
   formatDate(d: string){
