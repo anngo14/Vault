@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  registerUrl: string = "http://localhost:5000/api/register";
-  loginUrl: string = "http://localhost:5000/api/login";
-  changePasswordUrl: string = "http://localhost:5000/api/changeMasterPassword";
-  deleteUserUrl: string = "http://localhost:5000/api/deleteUser";
-  checkUserUrl: string = "http://localhost:5000/api/checkExistingUser";
-  wipeDataUrl: string = "http://localhost:5000/api/wipeData";
+  registerUrl: string = "https://pwdvault.herokuapp.com/api/register";
+  loginUrl: string = "https://pwdvault.herokuapp.com/api/login";
+  changePasswordUrl: string = "https://pwdvault.herokuapp.com/api/changeMasterPassword";
+  deleteUserUrl: string = "https://pwdvault.herokuapp.com/api/deleteUser";
+  checkUserUrl: string = "https://pwdvault.herokuapp.com/api/checkExistingUser";
+  wipeDataUrl: string = "https://pwdvault.herokuapp.com/api/wipeData";
 
   constructor(private http: HttpClient, private r: Router) { }
 

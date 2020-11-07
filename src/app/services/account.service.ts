@@ -7,9 +7,9 @@ import { account } from '../models/account';
 })
 export class AccountService {
 
-  insertUrl: string = "http://localhost:5000/api/addAccount";
-  removeUrl: string = "http://localhost:5000/api/removeAccount";
-  updateUrl: string = "http://localhost:5000/api/updateAccount";
+  insertUrl: string = "https://pwdvault.herokuapp.com/api/addAccount";
+  removeUrl: string = "https://pwdvault.herokuapp.com/api/removeAccount";
+  updateUrl: string = "https://pwdvault.herokuapp.com/api/updateAccount";
 
   constructor(private http: HttpClient) { }
 

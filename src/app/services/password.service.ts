@@ -7,12 +7,12 @@ import { password } from '../models/password';
 })
 export class PasswordService {
 
-  insertUrl: string = 'http://localhost:5000/api/insert';
-  deleteUrl: string = 'http://localhost:5000/api/delete';
-  checkUrl: string = 'http://localhost:5000/api/check';
-  personalUrl: string = 'http://localhost:5000/api/personal';
-  secretUrl: string = 'http://localhost:5000/api/secret';
-  otherUrl: string = 'http://localhost:5000/api/other';
+  insertUrl: string = 'https://pwdvault.herokuapp.com/api/insert';
+  deleteUrl: string = 'https://pwdvault.herokuapp.com/api/delete';
+  checkUrl: string = 'https://pwdvault.herokuapp.com/api/check';
+  personalUrl: string = 'https://pwdvault.herokuapp.com/api/personal';
+  secretUrl: string = 'https://pwdvault.herokuapp.com/api/secret';
+  otherUrl: string = 'https://pwdvault.herokuapp.com/api/other';
 
   alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   alphaUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
