@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
           } 
         });
       } else if(data.status === 200){
+        this.errorMsg = "Existing Account Found! Please Try Again!";
         this.error = true;
         this.email = "";
         this.password = "";
@@ -58,11 +59,39 @@ export class RegisterComponent implements OnInit {
   redirectToHome(){
     this.r.navigate(['/home']);
   }
+  checkEmail(): boolean{
+    if(this.email.match(/.+@.+\..+/)) return true;
+    return false;
+  }
+  checkPwd(): boolean{
+    if(this.password.length >= 8 && this.password.match(/.*[!@#$%^&*()-_+={}[\]~<>,\./?:;].*/))
+    return false;
+  }
+  checkMatch(): boolean{
+    if(this.password === this.confirmPassword) return true;
+    return false;
+  }
   validatePwd(){
-    if(this.password === this.confirmPassword && this.password !== ""){
+    if(this.checkEmail() && this.checkPwd() && this.checkMatch()){
       return true;
     } else{
       return false;
     }
   } 
+  showError(){
+    this.errorMsg = "";
+    if(!this.checkEmail()){
+      this.errorMsg += "Invalid Email Format! ";
+      this.email = "";
+    } 
+    if(this.checkPwd()){
+      this.errorMsg += "Password must be at least 8 Characters and Contain a Special Character! ";
+      this.password = "";
+    } 
+    if(!this.checkMatch()){
+      this.errorMsg += "Passwords Do Not Match! ";
+      this.confirmPassword = "";
+    }
+    this.error = true;
+  }
 }
