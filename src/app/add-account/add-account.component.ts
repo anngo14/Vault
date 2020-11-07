@@ -26,7 +26,7 @@ export class AddAccountComponent implements OnInit {
     this.account = this.data.newAccount;
     this.today = this.account.created;
 
-    for(let i = 3; i < 45; i++){
+    for(let i = 3; i < 32; i++){
       this.lengths.push(i + 1);
     }
   }

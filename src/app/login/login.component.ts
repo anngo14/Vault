@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(private elementRef: ElementRef, private r: Router, private u: UserService, private d: DataService) { }
 
   ngOnInit() {
+    if(this.u.loggedIn()){
+      this.redirectToHome();
+    }
   }
   toggleShow(){
     this.show = !this.show;

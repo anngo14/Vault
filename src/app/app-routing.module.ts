@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'generator', component: GeneratorComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

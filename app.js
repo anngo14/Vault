@@ -12,9 +12,12 @@ const uri = "mongodb+srv://anngo14:powermacg5@vault-cluster.qcnmp.mongodb.net/te
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var app = express();
+app.use(express.static(path.join(__dirname, 'dist/Vault')));
 app.use(express.json());
 app.use(bodyparser.json());
 app.use(cors());
+const angularEntry = path.join(__dirname, 'dist/Vault/index.html');
+
 client.connect(err => {
     if(err) throw err;
     console.log("Connected to MongoDB");
@@ -389,6 +392,30 @@ app.post('/api/updateAccount', (req, res) => {
         });
         res.send({status: 200});
     }
+});
+app.get('/login', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
+});
+app.get('/register', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
+});
+app.get('/home', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
+});
+app.get('/generator', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
+});
+app.get('/settings', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
+});
+app.get('*', (req, res) => {
+    let urlPath = req.url;
+    res.sendFile(angularEntry);
 });
 client.close();
 

@@ -22,6 +22,9 @@ export class RegisterComponent implements OnInit {
   constructor(private r: Router, private u: UserService) { }
 
   ngOnInit() {
+    if(this.u.loggedIn()){
+      this.redirectToHome();
+    }
   }
 
   toggleShow(){
@@ -51,6 +54,9 @@ export class RegisterComponent implements OnInit {
   }
   redirectToLogin(){
     this.r.navigate(['/login']);
+  }
+  redirectToHome(){
+    this.r.navigate(['/home']);
   }
   validatePwd(){
     if(this.password === this.confirmPassword && this.password !== ""){
