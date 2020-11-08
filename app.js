@@ -28,10 +28,12 @@ client.connect(err => {
 });
 
 function verifyToken(req, res, next) {
+    console.log("verify");
     if(!req.headers.authorization){
         return res.status(401).send({status: "Unauthorized" });
     }
     let token = req.headers.authorization.split(' ')[1];
+    console.log(token);
     if(token === 'null'){
         return res.status(401).send({status: "Unauthorized" });
     }
@@ -42,21 +44,21 @@ function verifyToken(req, res, next) {
     req.userId = payload.subject;
     next();
 }
-app.post('/api/personal', (req, res) => {
+app.post('/api/personal', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, personalArray: 1}}, (err, result) => {
         if(err) throw err;
         res.send({result});
     });
 });
-app.post('/api/secret', (req, res) => {
+app.post('/api/secret', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, secretArray: 1}}, (err, result) => {
         if(err) throw err;
         res.send({result});
     });
 });
-app.post('/api/other', (req, res) => {
+app.post('/api/other', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, otherArray: 1}}, (err, result) => {
         if(err) throw err;
@@ -118,7 +120,7 @@ app.post('/api/checkExistingUser', (req, res) => {
         }
     });
 })
-app.post('/api/wipeData', (req, res) => {
+app.post('/api/wipeData', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.updateOne({email: email}, {
         $unset: {
@@ -135,7 +137,7 @@ app.post('/api/wipeData', (req, res) => {
         res.send({status: 200});
     })
 });
-app.post('/api/check', (req, res) => {
+app.post('/api/check', verifyToken, (req, res) => {
     let email = req.body.email;
     let label = req.body.label;
     let c = req.body.category;
@@ -184,7 +186,7 @@ app.post('/api/check', (req, res) => {
         });
     }    
 });
-app.post('/api/changeMasterPassword', async (req, res) => {
+app.post('/api/changeMasterPassword', verifyToken, async (req, res) => {
     let email = req.body.email;
     let pass = req.body.pass;
     const salt = await bcrypt.genSalt();
@@ -202,7 +204,7 @@ app.post('/api/changeMasterPassword', async (req, res) => {
         res.status(200).send({token});
     });
 });
-app.post('/api/deleteUser', (req, res) => {
+app.post('/api/deleteUser', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.deleteOne({email: email}, (err, result) => {
         if(err){
@@ -213,7 +215,7 @@ app.post('/api/deleteUser', (req, res) => {
         res.send({status: 200});
     });
 });
-app.post('/api/insert', (req, res) => {
+app.post('/api/insert', verifyToken, (req, res) => {
     let email = req.body.email;
     let c = req.body.category;
     let password = req.body.password;
@@ -265,7 +267,7 @@ app.post('/api/insert', (req, res) => {
         res.status(200).send({status: 200});
     }
 });
-app.post('/api/delete', (req, res) => {
+app.post('/api/delete', verifyToken, (req, res) => {
     let email = req.body.email;
     let c = req.body.category;
     let label = req.body.label;
@@ -292,7 +294,7 @@ app.post('/api/delete', (req, res) => {
         res.send({status: 200});
     }
 });
-app.post('/api/addAccount', (req, res) => {
+app.post('/api/addAccount', verifyToken, (req, res) => {
     let email = req.body.email;
     let c = req.body.category;
     let label = req.body.label;
@@ -330,7 +332,7 @@ app.post('/api/addAccount', (req, res) => {
         res.send({status: 200});
     }
 });
-app.post('/api/removeAccount', (req, res) => {
+app.post('/api/removeAccount', verifyToken, (req, res) => {
     let email = req.body.email;
     let label = req.body.label;
     let c = req.body.category;
@@ -368,7 +370,7 @@ app.post('/api/removeAccount', (req, res) => {
         res.send({status: 200});
     }
 });
-app.post('/api/updateAccount', (req, res) => {
+app.post('/api/updateAccount', verifyToken, (req, res) => {
     let email = req.body.email;
     let label = req.body.label;
     let accounts = req.body.accounts;

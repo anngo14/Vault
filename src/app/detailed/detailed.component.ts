@@ -72,6 +72,12 @@ export class DetailedComponent implements OnInit {
     }
     this.detailedRef.close(true);
   }
+  verify(){
+    if(this.account.user.length > 0 && this.account.pwd.length > 0 && this.account.interval > 0){ 
+      return true;
+    }
+    return false;
+  }
   checkOneExistingUser(p: password, u: string, index: number){
     for(let i = 0; i < p.accounts.length; i++){
       if(p.accounts[i].user === u && i != index) return true;
