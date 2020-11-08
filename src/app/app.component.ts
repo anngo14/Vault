@@ -82,6 +82,7 @@ export class AppComponent {
     n.account.strength = this.p.calculateEntropy(n.account.pwd);
     n.account.history.unshift({date: this.todayF, pwd: old});
     this.closeNotification(n, 0);
+    setTimeout(() => { window.location.reload() }, 100);
   }
   refreshWithoutClose(n: notifications){
     let old = n.account.pwd;

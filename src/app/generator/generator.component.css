@@ -102,6 +102,11 @@
     width: 5em;
     text-align: center;
 }
+.refresh-content{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
 .refresh-content-interval{
     display: flex;
     flex-direction: row;
