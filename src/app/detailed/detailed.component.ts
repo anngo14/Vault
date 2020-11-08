@@ -48,7 +48,7 @@ export class DetailedComponent implements OnInit {
     });
   }
   refreshPassword(){
-    this.p.refreshPassword(this.account.pwd);
+    this.account.pwd = this.p.refreshPassword(this.account.pwd);
     this.calculateEntropy();
     this.openSnackbar("Password Refreshed");
   }
