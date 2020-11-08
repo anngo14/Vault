@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { ConfirmComponent } from '../confirm/confirm.component';
@@ -32,7 +34,7 @@ export class HomeComponent implements OnInit {
   other: password[] = [];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService) { 
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService, private r: Router) { 
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     this.todayf = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
@@ -42,13 +44,28 @@ export class HomeComponent implements OnInit {
     this.email = localStorage.getItem('email');
     this.p.getPersonal(this.email).subscribe(data => {
       this.personal = data.result.personalArray;
-    })
+    }, 
+    err => {
+      if(err instanceof HttpErrorResponse){
+        this.r.navigate(['/error']);
+      }
+    });
     this.p.getSecret(this.email).subscribe(data => {
       this.secret = data.result.secretArray;
-    })
+    },
+    err => {
+      if(err instanceof HttpErrorResponse){
+        this.r.navigate(['/error']);
+      }
+    });
     this.p.getOther(this.email).subscribe(data => {
       this.other = data.result.otherArray;
-    })
+    },
+    err => {
+      if(err instanceof HttpErrorResponse){
+        this.r.navigate(['/error']);
+      }
+    });
   }
   unlockCategory(c: string){
     const unlockDialogRef = this.dialog.open(UnlockComponent, {
@@ -85,6 +102,11 @@ export class HomeComponent implements OnInit {
         this.updateAccount(p, a, account);
         this.a.updateAccount(this.email, p.category, p.label, p.accounts).subscribe(data => {
           console.log(data);
+        },
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
+          }
         });
       }
     });
@@ -115,6 +137,11 @@ export class HomeComponent implements OnInit {
         this.a.addAccount(this.email, p.category, p.label, newAccount).subscribe(data => {
           if(data.status === 200){
             p.accounts.push(newAccount);
+          }
+        }, 
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
           }
         });
       }
@@ -156,8 +183,18 @@ export class HomeComponent implements OnInit {
             if(p.accounts.length === 0){
               this.deletePassword(index, p.category);
               this.p.delete(this.email, p.category, p.label).subscribe(data => {
+              },
+              err => {
+                if(err instanceof HttpErrorResponse){
+                  this.r.navigate(['/error']);
+                }
               });
             }
+          }
+        },
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
           }
         });
       }

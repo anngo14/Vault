@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,6 +47,11 @@ export class SettingsComponent implements OnInit {
             this.error = false;
             this.openSnackbar("Master Password has been Changed")
           }
+        },
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
+          }
         });
       } else if(data.status === "Invalid Email" || data.status === "Invalid Password"){
         this.error = true;
@@ -62,6 +68,11 @@ export class SettingsComponent implements OnInit {
           } else{
             this.openSnackbar("Something Went Wrong! Please Try Again!");
           }
+        }, 
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
+          }
         })
       }
     });
@@ -73,6 +84,11 @@ export class SettingsComponent implements OnInit {
         this.u.deleteuser(this.email).subscribe(data => {
           localStorage.clear();
           this.r.navigate(['/login']);
+        },
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
+          }
         });
       }
     });

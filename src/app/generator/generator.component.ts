@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { password } from '../models/password';
@@ -104,6 +105,11 @@ export class GeneratorComponent implements OnInit {
         this.p.addPwd(localStorage.getItem('email'), newPwd.category, newPwd).subscribe(res => {
           if(res.status === 200){
             window.location.reload();
+          }
+        },
+        err => {
+          if(err instanceof HttpErrorResponse){
+            this.r.navigate(['/error']);
           }
         });
       } else{
