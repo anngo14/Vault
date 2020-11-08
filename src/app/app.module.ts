@@ -36,6 +36,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guard/auth.guard';
 import { TokenService } from './services/token.service';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TokenService } from './services/token.service';
     DetailedComponent,
     AddAccountComponent,
     ConfirmComponent,
-    SettingsComponent
+    SettingsComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

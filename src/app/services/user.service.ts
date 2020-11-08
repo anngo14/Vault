@@ -70,6 +70,7 @@ export class UserService {
   }
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     this.r.navigate(['/login']);
     setTimeout(() => { window.location.reload() }, 100);
   }

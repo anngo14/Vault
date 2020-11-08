@@ -1,0 +1,45 @@
+.error-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30em;
+}
+.error-header{
+    width: 7em;
+}
+#error-icon{
+    font-size: 80pt;
+}
+.error-subheader{
+    display: flex;
+    flex-direction: column;
+}
+#error-sub{
+    font-size: 20pt;
+    font-weight: 600;
+}
+@media(max-width: 500px){
+    .error-container{
+        flex-direction: column;
+        width: 25em;
+    }
+    .error-subheader{
+        align-items: center;
+        text-align: center
+    }
+}
+@media(max-width: 416px){
+    .error-container{
+        width: 15em;
+    }
+}
+@media(max-width: 264px){
+    #error-sub{
+        font-size: 16pt;
+    }
+}
