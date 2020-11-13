@@ -37,6 +37,7 @@ export class AppComponent {
           this.getNotifications();
         }
       }, 60000);
+      if(this.rnotifications.length > 0) setTimeout(() => window.location.reload(), 1000);
     } else{
       const checkLogin = setInterval(() => {
         if(u.loggedIn()){
@@ -63,26 +64,28 @@ export class AppComponent {
   redirectToRegister(){
     this.r.navigate(['/register']);
   }
-  clearAllNotifications(){
+  clearAllNotifications($event: any){
+    if($event !== null) $event.stopPropagation();
     for(let i = 0; i < this.notifications.length; i++){
-      this.closeNotification(this.notifications[i], 0);
+      this.closeNotification(this.notifications[i], 0, null);
     }
     for(let i = 0; i < this.rnotifications.length; i++){
-      this.closeNotification(this.rnotifications[i], 0);
+      this.closeNotification(this.rnotifications[i], 0, null);
     }
     this.notifications = [];
     this.rnotifications = [];
   }
-  ignore(n: notifications){
-    this.closeNotification(n, 0);
+  ignore(n: notifications, $event: any){
+    if($event !== null) $event.stopPropagation();
+    this.closeNotification(n, 0, null);
   }
-  refresh(n: notifications){
+  refresh(n: notifications, $event: any){
+    if($event !== null) $event.stopPropagation();
     let old = n.account.pwd;
     n.account.pwd = this.p.refreshPassword(n.account.pwd);
     n.account.strength = this.p.calculateEntropy(n.account.pwd);
     n.account.history.unshift({date: this.todayF, pwd: old});
-    this.closeNotification(n, 0);
-    setTimeout(() => { window.location.reload() }, 100);
+    this.closeNotification(n, 0, null);
   }
   refreshWithoutClose(n: notifications){
     let old = n.account.pwd;
@@ -93,7 +96,8 @@ export class AppComponent {
       console.log(data);
     });
   }
-  closeNotification(n: notifications, t: number){
+  closeNotification(n: notifications, t: number, $event: any){
+    if($event !== null) $event.stopPropagation();
     n.account.lastUpdate = this.today;
     this.a.updateAccount(this.email, n.password.category, n.password.label, n.password.accounts).subscribe(data => {
       console.log(data);

@@ -35,16 +35,16 @@
 <mat-menu #notifyMenu='matMenu'>
     <div class='notify-menu-header'>
         <span>Notifications</span>
-        <button mat-icon-button (click)='clearAllNotifications()'>
+        <button mat-icon-button (click)='clearAllNotifications($event)'>
             <mat-icon>clear_all</mat-icon>
         </button>
     </div>
     <mat-divider></mat-divider>
     <div class='notify-menu-content'>
-        <div *ngIf='notifications.length === 0 && rnotifications.length === 0' class='notify-menu-empty'>
+        <div *ngIf='notifications.length === 0 && rnotifications.length === 0' class='notify-menu-empty' (click)='$event.stopPropagation();'>
             <span class='notify-menu-empty-text'>No New Notifications</span>
         </div>
-        <div class='notify-menu-item' *ngFor='let a of rnotifications'>
+        <div class='notify-menu-item' *ngFor='let a of rnotifications' (click)='$event.stopPropagation();'>
             <mat-icon class='notify-menu-icon'>announcement</mat-icon>
             <div class='spacer'></div>
             <div class='spacer'></div>
@@ -54,10 +54,10 @@
             </div>
             <div style='flex: 1 1 auto'></div>
             <div class='notify-menu-btn'>
-                <button mat-stroked-button color='primary' (click)='closeNotification(a, 1)'>Clear</button>
+                <button mat-stroked-button color='primary' (click)='closeNotification(a, 1, $event)'>Clear</button>
             </div>
         </div>
-        <div class='notify-menu-item' *ngFor='let n of notifications'>
+        <div class='notify-menu-item' *ngFor='let n of notifications' (click)='$event.stopPropagation();'>
             <mat-icon class='notify-menu-icon'>warning</mat-icon>
             <div class='spacer'></div>
             <div class='spacer'></div>
@@ -68,8 +68,8 @@
             <div class='spacer'></div>
             <div style='flex: 1 1 auto'></div>
             <div class='notify-menu-btn'>
-                <button mat-stroked-button color='warn' (click)='ignore(n)'>Ignore</button>
-                <button mat-stroked-button color='primary' (click)='refresh(n)'>Refresh</button>
+                <button mat-stroked-button color='warn' (click)='ignore(n, $event)'>Ignore</button>
+                <button mat-stroked-button color='primary' (click)='refresh(n, $event)'>Refresh</button>
             </div>
         </div>
     </div>
