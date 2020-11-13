@@ -8,8 +8,11 @@ var jwt = require('jsonwebtoken');
 const { APP_ID } = require('@angular/core');
 const PORT = process.env.PORT || 5000;
 const MongoClient = require('mongodb').MongoClient;
-const mongo = "mongodb+srv://anngo14:powermacg5@vault-cluster.qcnmp.mongodb.net/Vault-DB?retryWrites=true&w=majority";
-const uri = "mongodb+srv://anngo14:powermacg5@vault-cluster.qcnmp.mongodb.net/test";
+require('dotenv').config();
+const mongo_user = process.env.MONGO_USER;
+const mongo_key = process.env.MONGO_KEY;
+
+const uri = `mongodb+srv://${mongo_user}:${mongo_key}@vault-cluster.qcnmp.mongodb.net/test`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var app = express();
