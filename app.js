@@ -5,14 +5,18 @@ var bcrypt = require('bcrypt');
 var fs = require('fs');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
+var cryptr = require('cryptr');
 const { APP_ID } = require('@angular/core');
+const Cryptr = require('cryptr');
 const PORT = process.env.PORT || 5000;
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 const mongo_user = process.env.MONGO_USER;
 const mongo_key = process.env.MONGO_KEY;
+const token_secret = process.env.TOKEN;
+const crypt_secret = process.env.CRYPT;
 
-const uri = `mongodb+srv://${mongo_user}:${mongo_key}@vault-cluster.qcnmp.mongodb.net/test`;
+const uri = `mongodb+srv://${mongo_user}:${mongo_key}@vault-cluster.qcnmp.mongodb.net/Vault-DB?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var app = express();
@@ -40,12 +44,19 @@ function verifyToken(req, res, next) {
     if(token === 'null'){
         return res.status(401).send({status: "Unauthorized" });
     }
-    let payload = jwt.verify(token, 'secret');
+    let payload = jwt.verify(token, `${token_secret}`);
     if(!payload){
         return res.status(401).send({status: "Unauthorized" });
     }
     req.userId = payload.subject;
     next();
+}
+function encrypt(s){
+    cryptr = new Cryptr(`${crypt_secret}`);
+    return cryptr.encrypt(s);
+}
+function decrypt(s){
+    return cryptr.decrypt(s);
 }
 app.post('/api/personal', verifyToken, (req, res) => {
     let email = req.body.email;
@@ -80,7 +91,7 @@ app.post('/api/login', (req, res) => {
         }
         if(bcrypt.compareSync(pass, result.password)){
             let payload = { subject: result._id }
-            let token = jwt.sign(payload, 'secret');
+            let token = jwt.sign(payload, `${token_secret}`);
             res.status(200).send({token});
         } else{
             res.send({status: "Invalid Password"});
@@ -104,7 +115,7 @@ app.post('/api/register', async (req, res) => {
             return;
         }
         let payload = { subject: user._id };
-        let token = jwt.sign(payload, 'secret');
+        let token = jwt.sign(payload, `${token_secret}`);
         res.status(200).send({token});
     });
 });
@@ -203,7 +214,7 @@ app.post('/api/changeMasterPassword', verifyToken, async (req, res) => {
             return;
         }
         let payload = { subject: result._id };
-        let token = jwt.sign(payload, 'secret');
+        let token = jwt.sign(payload, `${token_secret}`);
         res.status(200).send({token});
     });
 });
@@ -223,6 +234,7 @@ app.post('/api/insert', verifyToken, (req, res) => {
     let c = req.body.category;
     let password = req.body.password;
     var pass; 
+    console.log(password.accounts);
     if(c == 0){
         pass = collection.updateOne({email: email}, 
             {
