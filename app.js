@@ -20,6 +20,7 @@ const uri = `mongodb+srv://${mongo_user}:${mongo_key}@vault-cluster.qcnmp.mongod
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var app = express();
+cryptr = new Cryptr(`${crypt_secret}`);
 app.use(express.static(path.join(__dirname, 'dist/Vault')));
 app.use(express.json());
 app.use(bodyparser.json());
@@ -52,7 +53,6 @@ function verifyToken(req, res, next) {
     next();
 }
 function encrypt(s){
-    cryptr = new Cryptr(`${crypt_secret}`);
     return cryptr.encrypt(s);
 }
 function decrypt(s){
@@ -62,6 +62,16 @@ app.post('/api/personal', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, personalArray: 1}}, (err, result) => {
         if(err) throw err;
+        if(result !== null && result.personalArray !== undefined){
+            for(let i = 0; i < result.personalArray.length; i++){
+                for(let j = 0; j < result.personalArray[i].accounts.length; j++){
+                    result.personalArray[i].accounts[j].pwd = decrypt(result.personalArray[i].accounts[j].pwd);
+                    for(let k = 0; k < result.personalArray[i].accounts[j].history.length; k++){
+                        result.personalArray[i].accounts[j].history[k].pwd = decrypt(result.personalArray[i].accounts[j].history[k].pwd);
+                    }
+                }
+            }
+        } 
         res.send({result});
     });
 });
@@ -69,6 +79,16 @@ app.post('/api/secret', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, secretArray: 1}}, (err, result) => {
         if(err) throw err;
+        if(result !== null && result.secretArray !== undefined){
+            for(let i = 0; i < result.secretArray.length; i++){
+                for(let j = 0; j < result.secretArray[i].accounts.length; j++){
+                    result.secretArray[i].accounts[j].pwd = decrypt(result.secretArray[i].accounts[j].pwd);
+                    for(let k = 0; k < result.secretArray[i].accounts[j].history.length; k++){
+                        result.secretArray[i].accounts[j].history[k].pwd = decrypt(result.secretArray[i].accounts[j].history[k].pwd);
+                    }
+                }
+            }
+        } 
         res.send({result});
     });
 });
@@ -76,6 +96,16 @@ app.post('/api/other', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, otherArray: 1}}, (err, result) => {
         if(err) throw err;
+        if(result !== null && result.otherArray !== undefined){
+            for(let i = 0; i < result.otherArray.length; i++){
+                for(let j = 0; j < result.otherArray[i].accounts.length; j++){
+                    result.otherArray[i].accounts[j].pwd = decrypt(result.otherArray[i].accounts[j].pwd);
+                    for(let k = 0; k < result.otherArray[i].accounts[j].history.length; k++){
+                        result.otherArray[i].accounts[j].history[k].pwd = decrypt(result.otherArray[i].accounts[j].history[k].pwd);
+                    }
+                }
+            }
+        } 
         res.send({result});
     });
 });
@@ -234,7 +264,7 @@ app.post('/api/insert', verifyToken, (req, res) => {
     let c = req.body.category;
     let password = req.body.password;
     var pass; 
-    console.log(password.accounts);
+    password.accounts[0].pwd = encrypt(password.accounts[0].pwd);
     if(c == 0){
         pass = collection.updateOne({email: email}, 
             {
@@ -314,6 +344,7 @@ app.post('/api/addAccount', verifyToken, (req, res) => {
     let c = req.body.category;
     let label = req.body.label;
     let newAccount = req.body.account;
+    newAccount.pwd = encrypt(newAccount.pwd);
 
     if(c == 0){
         collection.updateOne({email: email, "personalArray.label": label}, {
@@ -390,6 +421,13 @@ app.post('/api/updateAccount', verifyToken, (req, res) => {
     let label = req.body.label;
     let accounts = req.body.accounts;
     let c = req.body.category;
+    
+    for(let i = 0; i < accounts.length; i++){
+        accounts[i].pwd = encrypt(accounts[i].pwd);
+        for(let j = 0; j < accounts[i].history.length; j++){
+            accounts[i].history[j].pwd = encrypt(accounts[i].history[j].pwd);
+        }
+    }
     if(c == 0){
         collection.updateOne({email: email, "personalArray.label": label}, {
             $set: {
