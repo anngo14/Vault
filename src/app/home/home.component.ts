@@ -8,8 +8,10 @@ import { AddAccountComponent } from '../add-account/add-account.component';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { DetailedComponent } from '../detailed/detailed.component';
 import { account } from '../models/account';
+import { notifications } from '../models/notifications';
 import { password } from '../models/password';
 import { AccountService } from '../services/account.service';
+import { DataService } from '../services/data.service';
 import { PasswordService } from '../services/password.service';
 import { UnlockComponent } from '../unlock/unlock.component';
 
@@ -33,8 +35,9 @@ export class HomeComponent implements OnInit {
   secret: password[] = [];
   other: password[] = [];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  notification: notifications = null;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService, private r: Router) { 
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService, private r: Router, private ds: DataService) { 
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     this.todayf = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
@@ -42,6 +45,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.email = localStorage.getItem('email');
+    this.ds.new_notify.subscribe(data => {
+      this.notification = data;
+      if(this.notification !== null) this.updateNotification(this.notification);
+    })
     this.p.getPersonal(this.email).subscribe(data => {
       this.personal = data.result.personalArray;
     }, 
@@ -219,5 +226,38 @@ export class HomeComponent implements OnInit {
     } else{
       this.other.splice(i, 1);
     }
+  }
+  updateNotification(n: notifications){
+    let index = -1;
+    let account_index = -1;
+    switch(n.password.category){  
+      case 0:
+        index = this.findPassword(this.personal, n.password);
+        account_index = this.findAccount(this.personal[index].accounts, n.account);
+        this.personal[index].accounts[account_index] = n.account;
+        break;
+      case 1:
+        index = this.findPassword(this.secret, n.password);
+        account_index = this.findAccount(this.secret[index].accounts, n.account);
+        this.secret[index].accounts[account_index] = n.account;
+        break;
+      case 2:
+        index = this.findPassword(this.other, n.password);
+        account_index = this.findAccount(this.other[index].accounts, n.account);
+        this.other[index].accounts[account_index] = n.account;
+        break;
+    }
+  }
+  findPassword(a: password[], p: password):number {
+    for(let i = 0; i < a.length; i++){
+      if(a[i].label === p.label) return i;
+    }
+    return -1;
+  }
+  findAccount(a: account[], account: account):number {
+    for(let i = 0; i < a.length; i++){
+      if(a[i].user === account.user) return i;
+    }
+    return -1;
   }
 }

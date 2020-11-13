@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { account } from './models/account';
 import { notifications } from './models/notifications';
 import { AccountService } from './services/account.service';
+import { DataService } from './services/data.service';
 import { PasswordService } from './services/password.service';
 import { UserService } from './services/user.service';
 
@@ -21,7 +22,7 @@ export class AppComponent {
   todayF: string = "";
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  constructor(public dialog: MatDialog, private r: Router, public u: UserService, private p: PasswordService, private a: AccountService) {
+  constructor(public dialog: MatDialog, private r: Router, public u: UserService, private p: PasswordService, private a: AccountService, private ds: DataService) {
     let d = new Date();
     this.today = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
     this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
@@ -86,6 +87,7 @@ export class AppComponent {
     n.account.strength = this.p.calculateEntropy(n.account.pwd);
     n.account.history.unshift({date: this.todayF, pwd: old});
     this.closeNotification(n, 0, null);
+    this.ds.setNotify(n);
   }
   refreshWithoutClose(n: notifications){
     let old = n.account.pwd;

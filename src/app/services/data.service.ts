@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { notifications } from '../models/notifications';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private email = new BehaviorSubject("");
-  user = this.email.asObservable();
+  private notification = new BehaviorSubject(null);
+  new_notify = this.notification.asObservable();
 
   constructor() { }
 
-  setUser(e: string){
-    this.email.next(e);
+  setNotify(n: notifications){
+    this.notification.next(n);
   }
 }
