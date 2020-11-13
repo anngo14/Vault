@@ -38,13 +38,12 @@ export class AppComponent {
           this.getNotifications();
         }
       }, 60000);
-      if(this.rnotifications.length > 0) setTimeout(() => window.location.reload(), 1000);
     } else{
       const checkLogin = setInterval(() => {
         if(u.loggedIn()){
           clearInterval(checkLogin);
           this.getNotifications();
-          setTimeout(() => { window.location.reload();}, 100);
+          setTimeout(() => window.location.reload(), 100);
         }
       }, 1000);
     }
@@ -96,6 +95,7 @@ export class AppComponent {
     n.account.history.unshift({date: this.todayF, pwd: old});
     this.a.updateAccount(this.email, n.password.category, n.password.label, n.password.accounts).subscribe(data => {
       console.log(data);
+      this.ds.setNotify(n);
     });
   }
   closeNotification(n: notifications, t: number, $event: any){
