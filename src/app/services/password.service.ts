@@ -8,6 +8,7 @@ import { password } from '../models/password';
 export class PasswordService {
 
   insertUrl: string = 'https://pwdvault.herokuapp.com/api/insert';
+  updateUrl: string = 'http://localhost:5000/api/update';
   deleteUrl: string = 'https://pwdvault.herokuapp.com/api/delete';
   checkUrl: string = 'https://pwdvault.herokuapp.com/api/check';
   personalUrl: string = 'https://pwdvault.herokuapp.com/api/personal';
@@ -34,6 +35,14 @@ export class PasswordService {
       password: pwd
     };
     return this.http.post(this.insertUrl, json, this.httpOptions);
+  }
+  updatePwd(e: string, c: number, pwd: password[]): any{
+    let json = {
+      email: e,
+      category: c,
+      passwords: pwd
+    };
+    return this.http.post(this.updateUrl, json, this.httpOptions);
   }
   checkExisting(e: string, l: string, c: number): any{
     let json = {

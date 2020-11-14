@@ -1,0 +1,28 @@
+<mat-dialog-content>
+    <div>
+        <span id='edit-header'>Edit Password</span>
+    </div>
+    <div *ngIf='error' class='error-msg'>
+        <mat-icon>cancel</mat-icon>
+        <div style='width: 0.5em;'></div>
+        <span>{{errorMsg}}</span>
+    </div>
+    <div class='vertical-spacer'></div>
+    <div class='edit-content'>
+        <mat-form-field appearance='outline' class='input-form'>
+            <mat-label>Label</mat-label>
+            <input type="text" matInput required [(ngModel)]='password.label'>
+        </mat-form-field>
+        <mat-form-field appearance='outline' class='input-form'>
+            <mat-label>Website</mat-label>
+            <input type="text" matInput required [(ngModel)]='password.website'>
+        </mat-form-field>
+    </div>
+    <div class='button-row'>
+        <button mat-stroked-button (click)='cancel()'>Cancel</button>
+        <button mat-stroked-button (click)='save()' *ngIf='valid(); else disable'>Save</button>
+        <ng-template #disable> 
+            <button mat-stroked-button disabled>Save</button>
+        </ng-template>
+    </div>
+</mat-dialog-content>

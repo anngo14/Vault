@@ -62,7 +62,7 @@ app.post('/api/personal', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, personalArray: 1}}, (err, result) => {
         if(err) throw err;
-        if(result !== null && result.personalArray !== undefined){
+        if(result !== null && result.personalArray !== undefined && result.personalArray !== null){
             for(let i = 0; i < result.personalArray.length; i++){
                 for(let j = 0; j < result.personalArray[i].accounts.length; j++){
                     result.personalArray[i].accounts[j].pwd = decrypt(result.personalArray[i].accounts[j].pwd);
@@ -79,7 +79,7 @@ app.post('/api/secret', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, secretArray: 1}}, (err, result) => {
         if(err) throw err;
-        if(result !== null && result.secretArray !== undefined){
+        if(result !== null && result.secretArray !== undefined && result.secretArray !== null){
             for(let i = 0; i < result.secretArray.length; i++){
                 for(let j = 0; j < result.secretArray[i].accounts.length; j++){
                     result.secretArray[i].accounts[j].pwd = decrypt(result.secretArray[i].accounts[j].pwd);
@@ -96,7 +96,7 @@ app.post('/api/other', verifyToken, (req, res) => {
     let email = req.body.email;
     collection.findOne({email: email}, { projection: { _id: 0, otherArray: 1}}, (err, result) => {
         if(err) throw err;
-        if(result !== null && result.otherArray !== undefined){
+        if(result !== null && result.otherArray !== undefined && result.otherArray !== null){
             for(let i = 0; i < result.otherArray.length; i++){
                 for(let j = 0; j < result.otherArray[i].accounts.length; j++){
                     result.otherArray[i].accounts[j].pwd = decrypt(result.otherArray[i].accounts[j].pwd);
@@ -311,6 +311,43 @@ app.post('/api/insert', verifyToken, (req, res) => {
         });
         res.status(200).send({status: 200});
     }
+});
+app.post('/api/update', verifyToken, (req, res) => {
+    let email = req.body.email;
+    let c = req.body.category;
+    let passwords = req.body.passwords;
+
+    for(let i = 0; i < passwords.length; i++){
+        for(let j = 0; j < passwords[i].accounts.length; j++){
+            passwords[i].accounts[j].pwd = encrypt(passwords[i].accounts[j].pwd);
+            for(let k = 0; k < passwords[i].accounts[i].history.length; k++){
+                passwords[i].accounts[j].history[k].pwd = encrypt(passwords[i].accounts[j].history[k].pwd);
+            }
+        }
+    }
+    if(c == 0){
+        collection.updateOne({email: email}, {
+            $set: {
+                "personalArray": passwords
+            }
+        });
+        res.send({status: 200});
+    } else if(c == 1){
+        collection.updateOne({email: email}, {
+            $set: {
+                "secretArray": passwords
+            }
+        });
+        res.send({status: 200});
+    } else{
+        collection.updateOne({email: email}, {
+            $set: {
+                "otherArray": passwords
+            }
+        });
+        res.send({status: 200});
+    }
+    
 });
 app.post('/api/delete', verifyToken, (req, res) => {
     let email = req.body.email;

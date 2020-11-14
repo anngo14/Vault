@@ -7,6 +7,7 @@ import { ClipboardService } from 'ngx-clipboard';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { DetailedComponent } from '../detailed/detailed.component';
+import { EditComponent } from '../edit/edit.component';
 import { account } from '../models/account';
 import { notifications } from '../models/notifications';
 import { password } from '../models/password';
@@ -262,5 +263,32 @@ export class HomeComponent implements OnInit {
   }
   redirectToGenerator(){
     this.r.navigate(['/generator']);
+  }
+  openEditPassword(p: password){
+    let pwd: password = {
+      category: p.category,
+      label: p.label,
+      website: p.website,
+      accounts: p.accounts
+    };
+    let array = (p.category === 0) ? this.personal : (p.category === 1) ? this.secret : this.other;
+    console.log(array);
+    let index = this.getPasswordIndex(p.category, p);
+    const editDialog = this.dialog.open(EditComponent, {
+      data: { 
+        password: pwd,
+        index: index,
+        array: array
+       }
+    });
+    editDialog.afterClosed().subscribe(result => {
+      if(result && pwd !== p){
+        p.label = pwd.label;
+        p.website = pwd.website;
+        this.p.updatePwd(localStorage.getItem("email"), p.category, array).subscribe(data => {
+          console.log(data);
+        });
+      }
+    });
   }
 }

@@ -37,10 +37,20 @@
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
-                                <button mat-icon-button>
-                                    <mat-icon>public</mat-icon>
-                                </button>
-                                <span id='pwd-url' (click)='openLink(p.website)' *ngIf='p.website.length > 0'>{{p.website}}</span>
+                                <div class='pwd-header-1' *ngIf='p.website.length > 0; else empty'>
+                                    <button mat-icon-button (click)='openLink(p.website)'>
+                                        <mat-icon>public</mat-icon>
+                                    </button>
+                                    <span id='pwd-url' (click)='openLink(p.website)' >{{p.website}}</span>
+                                </div>
+                                <ng-template #empty>
+                                    <div id='empty-div'></div>
+                                </ng-template>
+                               <div class='pwd-header-2'>
+                                   <button mat-icon-button (click)='openEditPassword(p)'>
+                                        <mat-icon>edit</mat-icon>
+                                   </button>
+                               </div>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>

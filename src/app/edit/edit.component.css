@@ -1,0 +1,40 @@
+#edit-header{
+    font-size: 20pt
+}
+.vertical-spacer{
+    height: 1em;
+}
+.edit-content{
+    display: flex;
+    flex-direction: column;
+}
+.input-form{
+    width: 30em;
+}
+.button-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.error-msg{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    max-width: 28em;
+    background-color: #F37171;
+    border-radius: 5px;
+    color: white;
+}
+@media(max-width: 680px){
+    .input-form{
+        width: 100%;
+    }
+}
+@media(max-width: 364px){
+    #edit-header{
+        font-size: 16pt;
+    }
+}

@@ -37,6 +37,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guard/auth.guard';
 import { TokenService } from './services/token.service';
 import { ErrorComponent } from './error/error.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ErrorComponent } from './error/error.component';
     AddAccountComponent,
     ConfirmComponent,
     SettingsComponent,
-    ErrorComponent
+    ErrorComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import { ErrorComponent } from './error/error.component';
     UnlockComponent,
     DetailedComponent,
     AddAccountComponent,
-    ConfirmComponent
+    ConfirmComponent, 
+    EditComponent
   ],
   providers: [AuthGuard, 
     {
