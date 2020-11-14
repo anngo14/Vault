@@ -272,7 +272,6 @@ export class HomeComponent implements OnInit {
       accounts: p.accounts
     };
     let array = (p.category === 0) ? this.personal : (p.category === 1) ? this.secret : this.other;
-    console.log(array);
     let index = this.getPasswordIndex(p.category, p);
     const editDialog = this.dialog.open(EditComponent, {
       data: { 
