@@ -320,7 +320,8 @@ app.post('/api/update', verifyToken, (req, res) => {
     for(let i = 0; i < passwords.length; i++){
         for(let j = 0; j < passwords[i].accounts.length; j++){
             passwords[i].accounts[j].pwd = encrypt(passwords[i].accounts[j].pwd);
-            for(let k = 0; k < passwords[i].accounts[i].history.length; k++){
+            if(passwords[i].accounts[j].history === undefined) continue;
+            for(let k = 0; k < passwords[i].accounts[j].history.length; k++){
                 passwords[i].accounts[j].history[k].pwd = encrypt(passwords[i].accounts[j].history[k].pwd);
             }
         }
