@@ -130,10 +130,20 @@
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
-                                <button mat-icon-button>
-                                    <mat-icon>public</mat-icon>
-                                </button>
-                                <span id='pwd-url' (click)='openLink(s.website)'>{{s.website}}</span>
+                                <div class='pwd-header-1' *ngIf='s.website.length > 0; else empty'>
+                                    <button mat-icon-button (click)='openLink(s.website)'>
+                                        <mat-icon>public</mat-icon>
+                                    </button>
+                                    <span id='pwd-url' (click)='openLink(s.website)' >{{s.website}}</span>
+                                </div>
+                                <ng-template #empty>
+                                    <div id='empty-div'></div>
+                                </ng-template>
+                               <div class='pwd-header-2'>
+                                   <button mat-icon-button (click)='openEditPassword(s)'>
+                                        <mat-icon>edit</mat-icon>
+                                   </button>
+                               </div>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
@@ -213,10 +223,20 @@
                         </mat-expansion-panel-header>
                         <div class='pwd-container'>
                             <div class='pwd-header'>
-                                <button mat-icon-button>
-                                    <mat-icon>public</mat-icon>
-                                </button>
-                                <span id='pwd-url' (click)='openLink(o.website)'>{{o.website}}</span>
+                                <div class='pwd-header-1' *ngIf='o.website.length > 0; else empty'>
+                                    <button mat-icon-button (click)='openLink(o.website)'>
+                                        <mat-icon>public</mat-icon>
+                                    </button>
+                                    <span id='pwd-url' (click)='openLink(o.website)' >{{o.website}}</span>
+                                </div>
+                                <ng-template #empty>
+                                    <div id='empty-div'></div>
+                                </ng-template>
+                               <div class='pwd-header-2'>
+                                   <button mat-icon-button (click)='openEditPassword(o)'>
+                                        <mat-icon>edit</mat-icon>
+                                   </button>
+                               </div>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
