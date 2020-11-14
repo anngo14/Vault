@@ -32,7 +32,10 @@ export class AppComponent {
       setInterval(() => {
         let d = new Date();
         let time = d.getHours() + ":" + d.getMinutes();
+        console.log(time);
         if(time === "0:0"){
+          console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
+          console.log("party time");
           this.notifications = [];
           this.rnotifications = [];
           this.getNotifications();
@@ -116,6 +119,7 @@ export class AppComponent {
   getNotifications(){
     this.p.getPersonal(this.email).subscribe(data => {
       let pA = data.result.personalArray;
+      if(pA === undefined) return;
       for(let i = 0; i < pA.length; i++){
         for(let j = 0; j < pA[i].accounts.length; j++){
           if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === false && this.diffDate(pA[i].accounts[j], this.today)){
@@ -132,6 +136,7 @@ export class AppComponent {
     });
     this.p.getSecret(this.email).subscribe(data => {
       let sA = data.result.secretArray;
+      if(sA === undefined) return;
       for(let i = 0; i < sA.length; i++){
         for(let j = 0; j < sA[i].accounts.length; j++){
           if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === false && this.diffDate(sA[i].accounts[j], this.today)){
@@ -148,6 +153,7 @@ export class AppComponent {
     });
     this.p.getOther(this.email).subscribe(data => {
       let oA = data.result.otherArray;
+      if(oA === undefined) return;
       for(let i = 0; i < oA.length; i++){
         for(let j = 0; j < oA[i].accounts.length; j++){
           if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === false && this.diffDate(oA[i].accounts[j], this.today)){
