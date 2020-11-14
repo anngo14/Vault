@@ -260,4 +260,7 @@ export class HomeComponent implements OnInit {
     }
     return -1;
   }
+  redirectToGenerator(){
+    this.r.navigate(['/generator']);
+  }
 }

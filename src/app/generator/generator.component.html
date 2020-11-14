@@ -22,7 +22,7 @@
             <span>Password Type: </span>
             <mat-form-field id='pwd-type-select'>
                 <mat-label>Category</mat-label>
-                <mat-select [(value)]='category'>
+                <mat-select [(value)]='category' required>
                     <mat-option *ngFor='let t of pwdTypes' [value]='t'>{{t}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -30,7 +30,7 @@
         <div class='generator-header'>
             <mat-form-field appearance='outline' id='generator-label'>
                 <mat-label>Label</mat-label>
-                <input type="text" matInput [(ngModel)]='label' placeholder="Website Name (Google, YouTube, Gmail, ...)">
+                <input type="text" matInput [(ngModel)]='label' placeholder="Website Name (Google, YouTube, Gmail, ...)" required>
             </mat-form-field>
             <div class='spacer'></div>
             <mat-form-field appearance='outline' id='generator-length'>
@@ -56,12 +56,12 @@
         <div class='generator-subheader'>
             <mat-form-field appearance='outline' class='generator-pwd-label'>
                 <mat-label>Username</mat-label>
-                <input matInput [(ngModel)]='user'>
+                <input matInput [(ngModel)]='user' required>
             </mat-form-field>
             <div class='spacer'></div>
             <mat-form-field appearance='outline' class='generator-pwd-label'>
                 <mat-label>Password</mat-label>
-                <input matInput [(ngModel)]='pwd'>
+                <input matInput [(ngModel)]='pwd' required>
             </mat-form-field>
             <div class='spacer'></div>
             <div class='btn-row'>
@@ -115,7 +115,7 @@
                 <span>Refresh Interval: </span>
                 <div class='refresh-content-interval'>
                     <mat-form-field id='refresh-input'>
-                        <input type="number" matInput [(ngModel)]='interval'>
+                        <input type="number" matInput [(ngModel)]='interval' required>
                     </mat-form-field>
                     <span>days</span>
                 </div>

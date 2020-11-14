@@ -74,7 +74,13 @@ export class GeneratorComponent implements OnInit {
     return c;
   }
   valid(){
-    if(this.user.length > 0 && this.pwd.length > 0 && this.label.length > 0 && this.link.length > 0 && this.interval > 0 && this.category !== ""){
+    if(this.user.length > 0 && this.pwd.length > 0 && this.label.length > 0 && this.interval > 0 && this.category !== "" && this.checkLink()){
+      return true;
+    }
+    return false;
+  }
+  checkLink():boolean {
+    if(this.link.length === 0 || this.link.match(/(http|https):\/\/www\..+\..+/)){
       return true;
     }
     return false;

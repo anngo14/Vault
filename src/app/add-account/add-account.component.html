@@ -26,12 +26,12 @@
     <div class='pwd-content'>
         <mat-form-field appearance='outline' id='account-input'>
             <mat-label>Username</mat-label>
-            <input type="text" matInput [(ngModel)]='account.user'>
+            <input type="text" matInput [(ngModel)]='account.user' required>
         </mat-form-field>
         <div class='spacer'></div>
         <mat-form-field appearance='outline' id='account-input'> 
             <mat-label>Password</mat-label>
-            <input type="text" matInput [(ngModel)]='account.pwd'>
+            <input type="text" matInput [(ngModel)]='account.pwd' required>
         </mat-form-field>
     </div>
     <div class='pwd-btn-row'>
@@ -80,7 +80,7 @@
             <span>Refresh Interval: </span>
             <div class='refresh-input-container'>
                 <mat-form-field id='refresh-input'>
-                    <input type="number" matInput [(ngModel)]='account.interval'>
+                    <input type="number" matInput [(ngModel)]='account.interval' required>
                 </mat-form-field>
                 <span>days</span>
             </div>

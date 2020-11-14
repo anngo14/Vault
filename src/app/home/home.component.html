@@ -22,7 +22,7 @@
             </ng-template>
         </div>
         <div *ngIf='personal === undefined || personal.length === 0' class='empty-container'>
-            <mat-card class='empty-card'>
+            <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Personal Password Records Found!</span>
             </mat-card>
         </div>
@@ -40,7 +40,7 @@
                                 <button mat-icon-button>
                                     <mat-icon>public</mat-icon>
                                 </button>
-                                <span id='pwd-url' (click)='openLink(p.website)'>{{p.website}}</span>
+                                <span id='pwd-url' (click)='openLink(p.website)' *ngIf='p.website.length > 0'>{{p.website}}</span>
                             </div>
                             <div class='pwd-subheader-container'>
                                 <div class='pwd-subheader'>
@@ -105,7 +105,7 @@
             </ng-template>
         </div>
         <div *ngIf='secret === undefined || secret.length === 0' class='empty-container'>
-            <mat-card class='empty-card'>
+            <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Secret Password Records Found!</span>
             </mat-card>
         </div>
@@ -188,7 +188,7 @@
             </ng-template>
         </div>
         <div *ngIf='other === undefined || other.length === 0' class='empty-container'>
-            <mat-card class='empty-card'>
+            <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Other Password Records Found!</span>
             </mat-card>
         </div>
