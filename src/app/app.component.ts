@@ -183,7 +183,7 @@ export class AppComponent {
     console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
-    console.log("Calulation = " + count);
+    console.log("Calulation = " + count + " date2.getTime() = " + date2.getTime() + " date1.getTime() = " + date1.getTime());
 
     count = Math.floor(count / (1000 * 3600 * 24));
     console.log("Math floor = " + count);
@@ -202,7 +202,7 @@ export class AppComponent {
     console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
-    console.log("Calulation = " + count);
+    console.log("Calulation = " + count + " date2.getTime() = " + date2.getTime() + " date1.getTime() = " + date1.getTime());
 
     count = Math.floor(count / (1000 * 3600 * 24));
     console.log("Math floor = " + count);
