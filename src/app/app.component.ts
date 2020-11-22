@@ -180,12 +180,16 @@ export class AppComponent {
     let count: number = 0;
     let date1 = new Date(d1);
     let date2 = new Date(d2);
+    console.log("Initial = " + count);
+
     count = Math.abs(date2.getTime() - date1.getTime());
+    console.log("Calulation = " + count);
+
     count = Math.floor(count / (1000 * 3600 * 24));
+    console.log("Math floor = " + count);
+
     console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
-    console.log(typeof(diff));
-    console.log(typeof(count));
-    console.log(count);
+    console.log("Result = " + count);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -195,13 +199,17 @@ export class AppComponent {
     d1 = this.formatDate(d1);
     let date1 = new Date(d1);
     let date2 = new Date(d2);
+    console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
+    console.log("Calulation = " + count);
+
     count = Math.floor(count / (1000 * 3600 * 24));
+    console.log("Math floor = " + count);
+
     console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
-    console.log(typeof(diff));
-    console.log(typeof(count));
-    console.log(count);
+    console.log("Result = " + count);
+
     return count >= diff;
   }
   formatDate(d: string){
