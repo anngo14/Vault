@@ -183,6 +183,8 @@ export class AppComponent {
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
     console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
+    console.log(typeof(diff));
+    console.log(typeof(count));
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -196,6 +198,8 @@ export class AppComponent {
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
     console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
+    console.log(typeof(diff));
+    console.log(typeof(count));
     return count >= diff;
   }
   formatDate(d: string){

@@ -71,6 +71,6 @@ export class UserService {
   logout(){
     localStorage.clear();
     this.r.navigate(['/login']);
-    //setTimeout(() => { window.location.reload() }, 100);
+    setTimeout(() => { window.location.reload() }, 100);
   }
 }
