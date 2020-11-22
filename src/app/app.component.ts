@@ -32,10 +32,13 @@ export class AppComponent {
       setInterval(() => {
         let d = new Date();
         let time = d.getHours() + ":" + d.getMinutes();
+        this.today = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
+        this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
         console.log(time);
+        console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
         if(time === "0:0"){
-          console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
           console.log("party time");
+          console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
           this.notifications = [];
           this.rnotifications = [];
           this.getNotifications();
@@ -45,7 +48,6 @@ export class AppComponent {
       const checkLogin = setInterval(() => {
         if(u.loggedIn()){
           clearInterval(checkLogin);
-          this.getNotifications();
           setTimeout(() => window.location.reload(), 100);
         }
       }, 1000);
@@ -121,6 +123,7 @@ export class AppComponent {
       let pA = data.result.personalArray;
       if(pA === undefined) return;
       for(let i = 0; i < pA.length; i++){
+        this.ds.setPassword(pA[i]);
         for(let j = 0; j < pA[i].accounts.length; j++){
           if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === false && this.diffDate(pA[i].accounts[j], this.today)){
             this.notifications.push({password: pA[i], account: pA[i].accounts[j]});
@@ -138,6 +141,7 @@ export class AppComponent {
       let sA = data.result.secretArray;
       if(sA === undefined) return;
       for(let i = 0; i < sA.length; i++){
+        this.ds.setPassword(sA[i]);
         for(let j = 0; j < sA[i].accounts.length; j++){
           if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === false && this.diffDate(sA[i].accounts[j], this.today)){
             this.notifications.push({password: sA[i], account: sA[i].accounts[j]});
@@ -155,6 +159,7 @@ export class AppComponent {
       let oA = data.result.otherArray;
       if(oA === undefined) return;
       for(let i = 0; i < oA.length; i++){
+        this.ds.setPassword(oA[i]);
         for(let j = 0; j < oA[i].accounts.length; j++){
           if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === false && this.diffDate(oA[i].accounts[j], this.today)){
             this.notifications.push({password: oA[i], account: oA[i].accounts[j]});
@@ -177,7 +182,7 @@ export class AppComponent {
     let date2 = new Date(d2);
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
-    //console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
+    console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -190,7 +195,7 @@ export class AppComponent {
 
     count = Math.abs(date2.getTime() - date1.getTime());
     count = Math.floor(count / (1000 * 3600 * 24));
-    //console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
+    console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
     return count >= diff;
   }
   formatDate(d: string){

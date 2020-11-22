@@ -49,8 +49,19 @@ export class HomeComponent implements OnInit {
     this.ds.new_notify.subscribe(data => {
       this.notification = data;
       if(this.notification !== null) this.updateNotification(this.notification);
-    })
-    this.p.getPersonal(this.email).subscribe(data => {
+    });
+    this.ds.pwd.subscribe(data => {
+      if(data === null) return;
+      let c = data.category;
+      if(c == 0){
+        this.personal.push(data);
+      } else if(c == 1){
+        this.secret.push(data);
+      } else if(c == 2){
+        this.other.push(data);
+      }
+    });
+    /*this.p.getPersonal(this.email).subscribe(data => {
       this.personal = data.result.personalArray;
     }, 
     err => {
@@ -73,7 +84,7 @@ export class HomeComponent implements OnInit {
       if(err instanceof HttpErrorResponse){
         this.r.navigate(['/error']);
       }
-    });
+    });*/
   }
   unlockCategory(c: string){
     const unlockDialogRef = this.dialog.open(UnlockComponent, {

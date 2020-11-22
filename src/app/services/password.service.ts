@@ -8,7 +8,7 @@ import { password } from '../models/password';
 export class PasswordService {
 
   insertUrl: string = 'https://pwdvault.herokuapp.com/api/insert';
-  updateUrl: string = 'http://localhost:5000/api/update';
+  updateUrl: string = 'https://pwdvault.herokuapp.com/api/update';
   deleteUrl: string = 'https://pwdvault.herokuapp.com/api/delete';
   checkUrl: string = 'https://pwdvault.herokuapp.com/api/check';
   personalUrl: string = 'https://pwdvault.herokuapp.com/api/personal';

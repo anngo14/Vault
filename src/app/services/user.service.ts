@@ -69,9 +69,8 @@ export class UserService {
     return localStorage.getItem('token');
   }
   logout(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
+    localStorage.clear();
     this.r.navigate(['/login']);
-    setTimeout(() => { window.location.reload() }, 100);
+    //setTimeout(() => { window.location.reload() }, 100);
   }
 }
