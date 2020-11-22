@@ -185,6 +185,7 @@ export class AppComponent {
     console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
     console.log(typeof(diff));
     console.log(typeof(count));
+    console.log(count);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -200,6 +201,7 @@ export class AppComponent {
     console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
     console.log(typeof(diff));
     console.log(typeof(count));
+    console.log(count);
     return count >= diff;
   }
   formatDate(d: string){
