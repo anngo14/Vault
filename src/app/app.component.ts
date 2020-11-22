@@ -177,7 +177,7 @@ export class AppComponent {
   diffDate(a: account, d2: string): boolean{
     let d1 = a.lastUpdate;
     let diff = a.interval;
-    let count = 0;
+    let count: number = 0;
     let date1 = new Date(d1);
     let date2 = new Date(d2);
     count = Math.abs(date2.getTime() - date1.getTime());
@@ -188,7 +188,7 @@ export class AppComponent {
   diffDateF(a: account, d2: string): boolean{
     let d1 = (a.history.length === 0) ? a.created : a.history[0].date;
     let diff = a.interval;
-    let count = 0;
+    let count: number = 0;
     d1 = this.formatDate(d1);
     let date1 = new Date(d1);
     let date2 = new Date(d2);
