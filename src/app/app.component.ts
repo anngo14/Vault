@@ -178,8 +178,10 @@ export class AppComponent {
     let d1 = a.lastUpdate;
     let diff = a.interval;
     let count: number = 0;
-    let date1 = new Date(d1);
-    let date2 = new Date(d2);
+    let d1S = d1.split("-");
+    let d2S = d2.split("-");
+    let date1 = new Date(parseInt(d1S[2]), parseInt(d1S[0]) - 1, parseInt(d1S[1]));
+    let date2 = new Date(parseInt(d2S[2]), parseInt(d2S[0]) - 1, parseInt(d2S[1]));
     console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
@@ -197,8 +199,10 @@ export class AppComponent {
     let diff = a.interval;
     let count: number = 0;
     d1 = this.formatDate(d1);
-    let date1 = new Date(d1);
-    let date2 = new Date(d2);
+    let d1S = d1.split("-");
+    let d2S = d2.split("-");
+    let date1 = new Date(parseInt(d1S[2]), parseInt(d1S[0]) - 1, parseInt(d1S[1]));
+    let date2 = new Date(parseInt(d2S[2]), parseInt(d2S[0]) - 1, parseInt(d2S[1]));
     console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
