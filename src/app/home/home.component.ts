@@ -61,30 +61,6 @@ export class HomeComponent implements OnInit {
         this.other.push(data);
       }
     });
-    /*this.p.getPersonal(this.email).subscribe(data => {
-      this.personal = data.result.personalArray;
-    }, 
-    err => {
-      if(err instanceof HttpErrorResponse){
-        this.r.navigate(['/error']);
-      }
-    });
-    this.p.getSecret(this.email).subscribe(data => {
-      this.secret = data.result.secretArray;
-    },
-    err => {
-      if(err instanceof HttpErrorResponse){
-        this.r.navigate(['/error']);
-      }
-    });
-    this.p.getOther(this.email).subscribe(data => {
-      this.other = data.result.otherArray;
-    },
-    err => {
-      if(err instanceof HttpErrorResponse){
-        this.r.navigate(['/error']);
-      }
-    });*/
   }
   unlockCategory(c: string){
     const unlockDialogRef = this.dialog.open(UnlockComponent, {

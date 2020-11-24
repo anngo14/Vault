@@ -28,20 +28,16 @@ export class AppComponent {
     this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     if(u.loggedIn()){
       this.email = localStorage.getItem('email');
-      this.getNotifications();
+      this.getNotifications(true);
       setInterval(() => {
         let d = new Date();
         let time = d.getHours() + ":" + d.getMinutes();
         this.today = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
         this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-        console.log(time);
-        console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
         if(time === "0:0"){
-          console.log("party time");
-          console.log(d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear());
           this.notifications = [];
           this.rnotifications = [];
-          this.getNotifications();
+          this.getNotifications(false);
         }
       }, 60000);
     } else{
@@ -118,12 +114,12 @@ export class AppComponent {
       this.rnotifications.splice(index, 1);
     }
   }
-  getNotifications(){
+  getNotifications(push: boolean){
     this.p.getPersonal(this.email).subscribe(data => {
       let pA = data.result.personalArray;
       if(pA === undefined) return;
       for(let i = 0; i < pA.length; i++){
-        this.ds.setPassword(pA[i]);
+        if(push) this.ds.setPassword(pA[i]);
         for(let j = 0; j < pA[i].accounts.length; j++){
           if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === false && this.diffDate(pA[i].accounts[j], this.today)){
             this.notifications.push({password: pA[i], account: pA[i].accounts[j]});
@@ -141,7 +137,7 @@ export class AppComponent {
       let sA = data.result.secretArray;
       if(sA === undefined) return;
       for(let i = 0; i < sA.length; i++){
-        this.ds.setPassword(sA[i]);
+        if(push) this.ds.setPassword(sA[i]);
         for(let j = 0; j < sA[i].accounts.length; j++){
           if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === false && this.diffDate(sA[i].accounts[j], this.today)){
             this.notifications.push({password: sA[i], account: sA[i].accounts[j]});
@@ -159,7 +155,7 @@ export class AppComponent {
       let oA = data.result.otherArray;
       if(oA === undefined) return;
       for(let i = 0; i < oA.length; i++){
-        this.ds.setPassword(oA[i]);
+        if(push) this.ds.setPassword(oA[i]);
         for(let j = 0; j < oA[i].accounts.length; j++){
           if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === false && this.diffDate(oA[i].accounts[j], this.today)){
             this.notifications.push({password: oA[i], account: oA[i].accounts[j]});
@@ -182,16 +178,9 @@ export class AppComponent {
     let d2S = d2.split("-");
     let date1 = new Date(parseInt(d1S[2]), parseInt(d1S[0]) - 1, parseInt(d1S[1]));
     let date2 = new Date(parseInt(d2S[2]), parseInt(d2S[0]) - 1, parseInt(d2S[1]));
-    console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
-    console.log("Calulation = " + count + " date2.getTime() = " + date2.getTime() + " date1.getTime() = " + date1.getTime());
-
     count = Math.floor(count / (1000 * 3600 * 24));
-    console.log("Math floor = " + count);
-
-    console.log("Date d1 = " + d1 + " d2 = " + d2 + " = " + count);
-    console.log("Result = " + count);
     return count >= diff;
   }
   diffDateF(a: account, d2: string): boolean{
@@ -203,17 +192,9 @@ export class AppComponent {
     let d2S = d2.split("-");
     let date1 = new Date(parseInt(d1S[2]), parseInt(d1S[0]) - 1, parseInt(d1S[1]));
     let date2 = new Date(parseInt(d2S[2]), parseInt(d2S[0]) - 1, parseInt(d2S[1]));
-    console.log("Initial = " + count);
 
     count = Math.abs(date2.getTime() - date1.getTime());
-    console.log("Calulation = " + count + " date2.getTime() = " + date2.getTime() + " date1.getTime() = " + date1.getTime());
-
     count = Math.floor(count / (1000 * 3600 * 24));
-    console.log("Math floor = " + count);
-
-    console.log("DateF d1 = " + d1 + " d2 = " + d2 + " = " + count);
-    console.log("Result = " + count);
-
     return count >= diff;
   }
   formatDate(d: string){
