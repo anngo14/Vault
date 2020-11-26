@@ -6,6 +6,7 @@ var fs = require('fs');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
 var cryptr = require('cryptr');
+var enforce = require('express-sslify');
 const { APP_ID } = require('@angular/core');
 const Cryptr = require('cryptr');
 const PORT = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ cryptr = new Cryptr(`${crypt_secret}`);
 app.use(express.static(path.join(__dirname, 'dist/Vault')));
 app.use(express.json());
 app.use(bodyparser.json());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(cors());
 const angularEntry = path.join(__dirname, 'dist/Vault/index.html');
 

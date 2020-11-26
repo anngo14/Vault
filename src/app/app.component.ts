@@ -71,7 +71,7 @@ export class AppComponent {
       this.closeNotification(this.notifications[i], 0, null);
     }
     for(let i = 0; i < this.rnotifications.length; i++){
-      this.closeNotification(this.rnotifications[i], 0, null);
+      this.closeNotification(this.rnotifications[i], 1, null);
     }
     this.notifications = [];
     this.rnotifications = [];
