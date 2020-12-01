@@ -13,7 +13,7 @@
     <mat-card-content class='login-content'>
         <mat-form-field appearance='outline' class='login-email-input'>
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" [(ngModel)]='email' (keydown.enter)='login()'>
+            <input matInput placeholder="Email" [(ngModel)]='email' (keydown.enter)='login()' type='email'>
         </mat-form-field><br>
         <mat-form-field appearance='outline' class='login-pwd-input'>
             <mat-label>Password</mat-label>

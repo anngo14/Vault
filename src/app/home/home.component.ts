@@ -91,6 +91,9 @@ export class HomeComponent implements OnInit {
     detailedDialogRef.afterClosed().subscribe(result => {
       if(result){
         if(account.pwd !== a.pwd){
+          while(account.history.length >= 10){
+            account.history.splice(account.history.length - 1, 1);
+          }
           account.history.unshift({date: this.today, pwd: a.pwd});
         } 
         account.lastUpdate = this.todayf;

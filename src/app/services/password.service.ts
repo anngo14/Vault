@@ -84,7 +84,6 @@ export class PasswordService {
     let containsNum = false;
     let containsSpecial = false;
     let length = p.length;
-    let available = [];
     
     for(let i = 0; i < p.length; i++){
       let c = p.charAt(i);
@@ -93,16 +92,20 @@ export class PasswordService {
       if(this.numerical.includes(c)) containsNum = true;
       if(this.special.includes(c)) containsSpecial = true;
     }
-
-    if(containsLower) available = available.concat(this.alpha);
-    if(containsUpper) available = available.concat(this.alphaUpper);
-    if(containsNum) available = available.concat(this.numerical);
-    if(containsSpecial) available = available.concat(this.special);
-
-    let refresh = "";
-    for(let i = 0; i < length; i++){
-      let randomIndex = Math.floor(Math.random() * (available.length - 1));
-      refresh += available[randomIndex];
+    let refresh = this.generatePassword((containsLower || containsUpper), containsNum, containsSpecial, length);
+    let pLower = false;
+    let pUpper = false;
+    let pNum = false;
+    let pSpecial = false;
+    while(pLower !== containsLower && pUpper !== containsUpper && pNum !== containsNum && pSpecial !== containsSpecial){
+      refresh = this.generatePassword((containsLower || containsUpper), containsNum, containsSpecial, length);
+      for(let i = 0; i < refresh.length; i++){
+        let c = refresh.charAt(i);
+        if(this.alpha.includes(c)) pLower = true;
+        if(this.alphaUpper.includes(c)) pUpper = true;
+        if(this.numerical.includes(c)) pNum = true;
+        if(this.special.includes(c)) pSpecial = true;
+      }
     }
     return refresh;
   }

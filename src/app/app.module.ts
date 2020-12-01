@@ -38,6 +38,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { TokenService } from './services/token.service';
 import { ErrorComponent } from './error/error.component';
 import { EditComponent } from './edit/edit.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { EditComponent } from './edit/edit.component';
     MatSelectModule,
     MatDividerModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,

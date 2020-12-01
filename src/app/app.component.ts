@@ -67,12 +67,12 @@ export class AppComponent {
   }
   clearAllNotifications($event: any){
     if($event !== null) $event.stopPropagation();
-    for(let i = 0; i < this.notifications.length; i++){
-      this.closeNotification(this.notifications[i], 0, null);
-    }
-    for(let i = 0; i < this.rnotifications.length; i++){
-      this.closeNotification(this.rnotifications[i], 1, null);
-    }
+    this.notifications.forEach((n) => {
+      this.closeNotification(n, 2, null);
+    })
+    this.rnotifications.forEach((n) => {
+      this.closeNotification(n, 2, null);
+    });
     this.notifications = [];
     this.rnotifications = [];
   }
@@ -85,6 +85,9 @@ export class AppComponent {
     let old = n.account.pwd;
     n.account.pwd = this.p.refreshPassword(n.account.pwd);
     n.account.strength = this.p.calculateEntropy(n.account.pwd);
+    while(n.account.history.length >= 10){
+      n.account.history.splice(n.account.history.length - 1, 1);
+    }
     n.account.history.unshift({date: this.todayF, pwd: old});
     this.closeNotification(n, 0, null);
     this.ds.setNotify(n);
@@ -93,6 +96,9 @@ export class AppComponent {
     let old = n.account.pwd;
     n.account.pwd = this.p.refreshPassword(n.account.pwd);
     n.account.strength = this.p.calculateEntropy(n.account.pwd);
+    while(n.account.history.length >= 10){
+      n.account.history.splice(n.account.history.length - 1, 1);
+    }
     n.account.history.unshift({date: this.todayF, pwd: old});
     this.a.updateAccount(this.email, n.password.category, n.password.label, n.password.accounts).subscribe(data => {
       console.log(data);
@@ -109,7 +115,7 @@ export class AppComponent {
     if(t === 0){
       index = this.notifications.indexOf(n);
       this.notifications.splice(index, 1);
-    } else{
+    } else if(t == 1){
       index = this.rnotifications.indexOf(n);
       this.rnotifications.splice(index, 1);
     }
