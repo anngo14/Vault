@@ -73,6 +73,7 @@ export class AppComponent {
     this.rnotifications.forEach((n) => {
       this.closeNotification(n, 2, null);
     });
+    console.log("cleared!");
     this.notifications = [];
     this.rnotifications = [];
   }
@@ -123,7 +124,10 @@ export class AppComponent {
   getNotifications(push: boolean){
     this.p.getPersonal(this.email).subscribe(data => {
       let pA = data.result.personalArray;
-      if(pA === undefined) return;
+      if(pA === undefined){
+        this.ds.setP(false);
+        return;
+      }
       for(let i = 0; i < pA.length; i++){
         if(push) this.ds.setPassword(pA[i]);
         for(let j = 0; j < pA[i].accounts.length; j++){
@@ -138,10 +142,14 @@ export class AppComponent {
           }
         }
       }
+      this.ds.setP(false);
     });
     this.p.getSecret(this.email).subscribe(data => {
       let sA = data.result.secretArray;
-      if(sA === undefined) return;
+      if(sA === undefined){
+        this.ds.setS(false);
+        return;
+      }
       for(let i = 0; i < sA.length; i++){
         if(push) this.ds.setPassword(sA[i]);
         for(let j = 0; j < sA[i].accounts.length; j++){
@@ -156,10 +164,14 @@ export class AppComponent {
           }
         }
       }
+      this.ds.setS(false);
     });
     this.p.getOther(this.email).subscribe(data => {
       let oA = data.result.otherArray;
-      if(oA === undefined) return;
+      if(oA === undefined){
+        this.ds.setO(false);
+        return;
+      }
       for(let i = 0; i < oA.length; i++){
         if(push) this.ds.setPassword(oA[i]);
         for(let j = 0; j < oA[i].accounts.length; j++){
@@ -174,6 +186,7 @@ export class AppComponent {
           }
         }
       }
+      this.ds.setO(false);
     });
   }
   diffDate(a: account, d2: string): boolean{

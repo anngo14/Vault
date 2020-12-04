@@ -21,12 +21,15 @@
                 </button>
             </ng-template>
         </div>
-        <div *ngIf='personal === undefined || personal.length === 0' class='empty-container'>
+        <div class='spinner' *ngIf='personalBuffer'>
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf='personal === undefined || personal.length === 0 && !personalBuffer' class='empty-container'>
             <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Personal Password Records Found!</span>
             </mat-card>
         </div>
-        <div class='pwd-list-container'>
+        <div class='pwd-list-container' *ngIf='!personalBuffer'>
             <div class='pwd-list'>
                 <mat-accordion>
                     <mat-expansion-panel [disabled]='personalLock' *ngFor='let p of personal'>
@@ -114,12 +117,15 @@
                 </button>
             </ng-template>
         </div>
-        <div *ngIf='secret === undefined || secret.length === 0' class='empty-container'>
+        <div class='spinner' *ngIf='secretBuffer'>
+            <mat-spinner color='accent'></mat-spinner>
+        </div>
+        <div *ngIf='secret === undefined || secret.length === 0 && !secretBuffer' class='empty-container'>
             <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Secret Password Records Found!</span>
             </mat-card>
         </div>
-        <div class='pwd-list-container'>
+        <div class='pwd-list-container' *ngIf='!secretBuffer'>
             <div class='pwd-list'>
                 <mat-accordion>
                     <mat-expansion-panel [disabled]='secretLock' *ngFor='let s of secret'>
@@ -207,12 +213,15 @@
                 </button>
             </ng-template>
         </div>
-        <div *ngIf='other === undefined || other.length === 0' class='empty-container'>
+        <div class='spinner' *ngIf='otherBuffer'>
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf='other === undefined || other.length === 0 && !otherBuffer' class='empty-container'>
             <mat-card class='empty-card' (click)='redirectToGenerator()'>
                 <span>No Other Password Records Found!</span>
             </mat-card>
         </div>
-        <div class='pwd-list-container'>
+        <div class='pwd-list-container' *ngIf='!otherBuffer'>
             <div class='pwd-list'>
                 <mat-accordion >
                     <mat-expansion-panel [disabled]='otherLock' *ngFor='let o of other'>

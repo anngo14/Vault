@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit {
   other: password[] = [];
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   notification: notifications = null;
+  personalBuffer: boolean;
+  secretBuffer: boolean;
+  otherBuffer: boolean;
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private cb: ClipboardService, private p: PasswordService, private a: AccountService, private r: Router, private ds: DataService) { 
     let d = new Date();
@@ -61,6 +64,15 @@ export class HomeComponent implements OnInit {
         this.other.push(data);
       }
     });
+    this.ds.p.subscribe(data => {
+      this.personalBuffer = data;
+    });
+    this.ds.s.subscribe(data => {
+      this.secretBuffer = data;
+    });
+    this.ds.o.subscribe(data => {
+      this.otherBuffer = data;
+    })
   }
   unlockCategory(c: string){
     const unlockDialogRef = this.dialog.open(UnlockComponent, {
