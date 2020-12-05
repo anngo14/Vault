@@ -45,6 +45,9 @@ export class HomeComponent implements OnInit {
     let d = new Date();
     this.today = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     this.todayf = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
+    this.ds.setP(true);
+    this.ds.setO(true);
+    this.ds.setS(true);
   }
 
   ngOnInit() {
@@ -53,17 +56,19 @@ export class HomeComponent implements OnInit {
       this.notification = data;
       if(this.notification !== null) this.updateNotification(this.notification);
     });
-    this.ds.pwd.subscribe(data => {
-      if(data === null) return;
-      let c = data.category;
-      if(c == 0){
-        this.personal.push(data);
-      } else if(c == 1){
-        this.secret.push(data);
-      } else if(c == 2){
-        this.other.push(data);
-      }
+    this.p.getPersonal(this.email).subscribe(data => {
+      this.personal = data.result.personalArray;
+      this.ds.setP(false);
     });
+    this.p.getSecret(this.email).subscribe(data => {
+      this.secret = data.result.secretArray;
+      this.ds.setS(false);
+    });
+    this.p.getOther(this.email).subscribe(data => {
+      this.other = data.result.otherArray;
+      this.ds.setO(false);
+    });
+
     this.ds.p.subscribe(data => {
       this.personalBuffer = data;
     });

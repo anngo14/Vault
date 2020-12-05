@@ -39,7 +39,8 @@ import { TokenService } from './services/token.service';
 import { ErrorComponent } from './error/error.component';
 import { EditComponent } from './edit/edit.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDividerModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
@@ -90,12 +92,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ConfirmComponent, 
     EditComponent
   ],
-  providers: [AuthGuard, 
-    {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenService,
-    multi: true
-  }
+  providers: [
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }, 
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
 ],
   bootstrap: [AppComponent]
 })

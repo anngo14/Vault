@@ -22,7 +22,7 @@
             </ng-template>
         </div>
         <div class='spinner' *ngIf='personalBuffer'>
-            <mat-spinner></mat-spinner>
+            <mat-spinner color='accent'></mat-spinner>
         </div>
         <div *ngIf='personal === undefined || personal.length === 0 && !personalBuffer' class='empty-container'>
             <mat-card class='empty-card' (click)='redirectToGenerator()'>
@@ -214,7 +214,7 @@
             </ng-template>
         </div>
         <div class='spinner' *ngIf='otherBuffer'>
-            <mat-spinner></mat-spinner>
+            <mat-spinner color='accent'></mat-spinner>
         </div>
         <div *ngIf='other === undefined || other.length === 0 && !otherBuffer' class='empty-container'>
             <mat-card class='empty-card' (click)='redirectToGenerator()'>

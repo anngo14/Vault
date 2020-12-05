@@ -9,24 +9,21 @@ import { password } from '../models/password';
 export class DataService {
 
   private notification = new BehaviorSubject(null);
-  private password = new BehaviorSubject(null);
   private personal = new BehaviorSubject(true);
   private secret = new BehaviorSubject(true);
   private other = new BehaviorSubject(true);
+  private isLoading = new BehaviorSubject(false);
 
   new_notify = this.notification.asObservable();
-  pwd = this.password.asObservable();
   p = this.personal.asObservable();
   s = this.secret.asObservable();
   o = this.other.asObservable();
+  loading = this.isLoading.asObservable();
 
   constructor() { }
 
   setNotify(n: notifications){
     this.notification.next(n);
-  }
-  setPassword(p: password){
-    this.password.next(p);
   }
   setP(s: boolean){
     this.personal.next(s);
@@ -36,5 +33,8 @@ export class DataService {
   }
   setO(s: boolean){
     this.other.next(s);
+  }
+  setLoading(s: boolean){
+    this.isLoading.next(s);
   }
 }

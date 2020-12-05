@@ -20,15 +20,19 @@ export class AppComponent {
   email: string = "";
   today: string = "";
   todayF: string = "";
+  loading: boolean = false;
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   constructor(public dialog: MatDialog, private r: Router, public u: UserService, private p: PasswordService, private a: AccountService, private ds: DataService) {
     let d = new Date();
     this.today = (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
     this.todayF = this.months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    this.ds.loading.subscribe(data => {
+      this.loading = data;
+    });
     if(u.loggedIn()){
       this.email = localStorage.getItem('email');
-      this.getNotifications(true);
+      this.getNotifications();
       setInterval(() => {
         let d = new Date();
         let time = d.getHours() + ":" + d.getMinutes();
@@ -37,7 +41,7 @@ export class AppComponent {
         if(time === "0:0"){
           this.notifications = [];
           this.rnotifications = [];
-          this.getNotifications(false);
+          this.getNotifications();
         }
       }, 60000);
     } else{
@@ -49,7 +53,6 @@ export class AppComponent {
       }, 1000);
     }
   }
-
   redirectToLogin(){
     this.r.navigate(['/login']);
   }
@@ -121,15 +124,13 @@ export class AppComponent {
       this.rnotifications.splice(index, 1);
     }
   }
-  getNotifications(push: boolean){
+  getNotifications(){
     this.p.getPersonal(this.email).subscribe(data => {
       let pA = data.result.personalArray;
       if(pA === undefined){
-        this.ds.setP(false);
         return;
       }
       for(let i = 0; i < pA.length; i++){
-        if(push) this.ds.setPassword(pA[i]);
         for(let j = 0; j < pA[i].accounts.length; j++){
           if(pA[i].accounts[j].notify === true && pA[i].accounts[j].refresh === false && this.diffDate(pA[i].accounts[j], this.today)){
             this.notifications.push({password: pA[i], account: pA[i].accounts[j]});
@@ -142,16 +143,13 @@ export class AppComponent {
           }
         }
       }
-      this.ds.setP(false);
     });
     this.p.getSecret(this.email).subscribe(data => {
       let sA = data.result.secretArray;
       if(sA === undefined){
-        this.ds.setS(false);
         return;
       }
       for(let i = 0; i < sA.length; i++){
-        if(push) this.ds.setPassword(sA[i]);
         for(let j = 0; j < sA[i].accounts.length; j++){
           if(sA[i].accounts[j].notify === true && sA[i].accounts[j].refresh === false && this.diffDate(sA[i].accounts[j], this.today)){
             this.notifications.push({password: sA[i], account: sA[i].accounts[j]});
@@ -164,16 +162,13 @@ export class AppComponent {
           }
         }
       }
-      this.ds.setS(false);
     });
     this.p.getOther(this.email).subscribe(data => {
       let oA = data.result.otherArray;
       if(oA === undefined){
-        this.ds.setO(false);
         return;
       }
       for(let i = 0; i < oA.length; i++){
-        if(push) this.ds.setPassword(oA[i]);
         for(let j = 0; j < oA[i].accounts.length; j++){
           if(oA[i].accounts[j].notify === true && oA[i].accounts[j].refresh === false && this.diffDate(oA[i].accounts[j], this.today)){
             this.notifications.push({password: oA[i], account: oA[i].accounts[j]});
@@ -186,7 +181,6 @@ export class AppComponent {
           }
         }
       }
-      this.ds.setO(false);
     });
   }
   diffDate(a: account, d2: string): boolean{
