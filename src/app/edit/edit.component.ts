@@ -26,6 +26,7 @@ export class EditComponent implements OnInit {
     this.dialogRef.close(false);
   }
   save(){
+    this.formatLink();
     if(this.hasExistingPassword()){
       this.error = true;
       return;
@@ -37,8 +38,18 @@ export class EditComponent implements OnInit {
     return false;
   }
   checkLink(): boolean{
-    if(this.password.website.length === 0 || this.password.website.match(/(http|https):\/\/www\..+\..+/)) return true;
+    if(this.password.website.length === 0 || this.password.website.match(/.+\..+/)){
+      return true;
+    }
     return false;
+  }
+  formatLink(){
+    if(this.password.website.match(/(http|https):\/\/(www\.)?.+\..+/) || this.password.website.length === 0){
+      return;
+    } else{
+      let header = "https://";
+      this.password.website = header + this.password.website;
+    }
   }
   hasExistingPassword(): boolean{
     for(let i = 0; i < this.data.array.length; i++){

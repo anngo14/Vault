@@ -80,16 +80,24 @@ export class GeneratorComponent implements OnInit {
     return false;
   }
   checkLink():boolean {
-    if(this.link.length === 0 || this.link.match(/(http|https):\/\/www\..+\..+/)){
+    if(this.link.length === 0 || this.link.match(/.+\..+/)){
       return true;
     }
     return false;
+  }
+  formatLink(): string{
+    if(this.link.match(/(http|https):\/\/(www\.)?.+\..+/)){
+      return this.link;
+    } else{
+      let header = "https://";
+      return header + this.link;
+    }
   }
   save(){
     let newPwd: password = {
       category: this.convertCategory(), 
       label: this.label,
-      website: this.link,
+      website: this.formatLink(),
       accounts: [
         {
           user: this.user,
