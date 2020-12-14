@@ -86,7 +86,7 @@ export class GeneratorComponent implements OnInit {
     return false;
   }
   formatLink(): string{
-    if(this.link.match(/(http|https):\/\/(www\.)?.+\..+/)){
+    if(this.link.match(/(http|https):\/\/(www\.)?.+\..+/) || this.link.length === 0){
       return this.link;
     } else{
       let header = "https://";
